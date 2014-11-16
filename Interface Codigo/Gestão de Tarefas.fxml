@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="22.0" layoutY="22.0" prefHeight="270.0" prefWidth="410.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="15.0">
+        <columns>
+          <TableColumn prefWidth="42.89886283874512" text="ID" />
+          <TableColumn prefWidth="119.27878189086914" text="Nome da Tarefa" />
+            <TableColumn prefWidth="200.99998474121094" text="Descrição" />
+        </columns>
+      </TableView>
+      <TableView layoutX="26.0" layoutY="325.0" prefHeight="260.0" prefWidth="410.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="315.0">
+        <columns>
+          <TableColumn prefWidth="29.0" text="Id" />
+          <TableColumn prefWidth="214.8223876953125" text="Nome de Voluntário" />
+            <TableColumn prefWidth="140.0" text="Nº de Horas" />
+        </columns>
+      </TableView>
+      <Label layoutX="450.0" layoutY="20.0" text="Gestão de Tarefas" AnchorPane.rightAnchor="30.0" />
+      <Label layoutX="440.0" layoutY="322.0" text="Gestão de Voluntários" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="322.0" />
+      <Button layoutX="467.0" layoutY="76.0" mnemonicParsing="false" prefWidth="140.0" text="Adicionar Tarefa" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0" />
+      <Button layoutX="467.0" layoutY="117.0" mnemonicParsing="false" prefWidth="140.0" text="Remover Tarefa" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="110.0" />
+      <Button layoutX="434.0" layoutY="362.0" mnemonicParsing="false" prefWidth="140.0" text="Adicionar Voluntário" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0" />
+      <Button layoutX="423.0" layoutY="414.0" mnemonicParsing="false" prefWidth="140.0" text="Remover Voluntário" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="410.0" />
+      <Button layoutX="477.0" layoutY="166.0" mnemonicParsing="false" prefWidth="140.0" text="Editar Tarefa" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0" />
+      <Button layoutX="481.0" layoutY="451.0" mnemonicParsing="false" prefWidth="140.0" text="Editar Voluntário" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="450.0" />
+   </children>
+</AnchorPane>
