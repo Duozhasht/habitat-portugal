@@ -12,6 +12,7 @@ public class Utilizador {
     private SimpleStringProperty password;
     private SimpleIntegerProperty conta;
 
+
     public Utilizador(SimpleStringProperty nome, SimpleStringProperty password, SimpleIntegerProperty conta) {
         this.nome = nome;
         this.password = password;
