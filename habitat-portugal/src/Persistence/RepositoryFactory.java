@@ -40,9 +40,7 @@ public final class RepositoryFactory {
     private static String DATABASE = "testdb";
     
     private static UtilizadorRepository utilizadorRepository;
-    
 
-    
     private RepositoryFactory() { }
 
     public static UtilizadorRepository getUtilizadorRepository() {
