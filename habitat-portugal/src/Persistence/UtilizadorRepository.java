@@ -194,23 +194,24 @@ public class UtilizadorRepository extends AbstractRepository<Utilizador> {
     @Override
     public long count() throws PersistenceException {
         try {
-            int count;
+            long count;
 
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Connection connection = DriverManager.getConnection(url,user,password);
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(COUNT_UTILIZADORES);
 
-            try {
-                count = result.getInt("n");
-            }
-            finally {
+            try (ResultSet resultSet = statement.executeQuery(COUNT_UTILIZADORES)) {
+                if (resultSet.next())
+                    count = resultSet.getLong("n");
+                else
+                    count = -1;
+            } finally {
                 statement.close();
                 connection.close();
             }
 
             return count;
-        }
-        catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             throw new PersistenceException("Error counting users", ex);
         }
     }

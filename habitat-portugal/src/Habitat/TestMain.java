@@ -19,15 +19,10 @@ public class TestMain {
         user1.setId(4);
 
         try {
-            uRepo.delete(user1);
-            System.out.println("Success");
+            System.out.println(uRepo.count());
         } catch (PersistenceException e) {
             e.printStackTrace();
         }
-
-
-
-
 
 /*
         Utilizador u = new Utilizador("test","olá",2);
