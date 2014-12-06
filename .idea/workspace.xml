@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4c8be7d-45ad-4afa-a07d-98c47d606def" name="Default" comment="Muda tipo de dados das variáveis da classe Utilizador">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/habitat-portugal/src/Habitat/TestMain.java" afterPath="$PROJECT_DIR$/habitat-portugal/src/Habitat/TestMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/habitat-portugal/src/Model/Utilizador.java" afterPath="$PROJECT_DIR$/habitat-portugal/src/Model/Utilizador.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="habitat-portugal.iws" />
@@ -33,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Habitat/TestMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20376176" vertical-offset="0" max-vertical-offset="1080">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
               <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -45,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.015673982" vertical-offset="0" max-vertical-offset="957">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -117,8 +116,8 @@
       <file leaf-file-name="Candidatura.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Model/Candidatura.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="525">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,12 +194,12 @@
         <option value="$PROJECT_DIR$/habitat-portugal/src/Persistence/Funcao.java" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/Persistence/RepositoryFactory.java" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/View/ViewLogin.fxml" />
-        <option value="$PROJECT_DIR$/habitat-portugal/src/Model/Candidatura.java" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/Persistence/UtilizadorRepository.java" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/Model/Familiar.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/Habitat/TestMain.java" />
         <option value="$PROJECT_DIR$/habitat-portugal/src/Model/Utilizador.java" />
+        <option value="$PROJECT_DIR$/habitat-portugal/src/Model/Candidatura.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -660,7 +659,7 @@
       <workItem from="1417883046236" duration="809000" />
       <workItem from="1417899571797" duration="1352000" />
       <workItem from="1417901070116" duration="2281000" />
-      <workItem from="1417903363134" duration="336000" />
+      <workItem from="1417903363134" duration="487000" />
     </task>
     <task id="LOCAL-00001" summary="Criação do package Persistance e da classe TestMain; Inicio da classe UtilizadorRepository;">
       <created>1417657863579</created>
@@ -674,11 +673,17 @@
       <option name="project" value="LOCAL" />
       <updated>1417902378477</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Muda tipo de dados das variáveis da classe Utilizador">
+      <created>1417903762073</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1417903762073</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41535000" />
+    <option name="totallyTimeSpent" value="41686000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="12" y="12" width="1892" height="1052" extended-state="0" />
@@ -1322,16 +1327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Model/Candidatura.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Persistence/RepositoryFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
@@ -1364,14 +1359,6 @@
             <marker date="1417901873530" expanded="true" signature="890:912" placeholder="delete from ..." />
             <marker date="1417901873530" expanded="true" signature="970:1006" placeholder="select count..utilizador..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1408,11 +1395,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Habitat/TestMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20376176" vertical-offset="0" max-vertical-offset="1080">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
           <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/habitat-portugal/src/Model/Candidatura.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.015673982" vertical-offset="0" max-vertical-offset="957">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
