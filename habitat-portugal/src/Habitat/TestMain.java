@@ -4,8 +4,8 @@ import Model.Utilizador;
 import Persistence.PersistenceException;
 import Persistence.RepositoryFactory;
 import Persistence.UtilizadorRepository;
-
-import java.util.Properties;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * @author Davide Silva on 04/12/14.
@@ -15,10 +15,16 @@ public class TestMain {
 
         UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
 
-        Utilizador user1 = new Utilizador("test","olá",2);
-        user1.setId(4);
+        SimpleStringProperty nome = new SimpleStringProperty("test");
+        SimpleStringProperty pass = new SimpleStringProperty("1234");
+        SimpleIntegerProperty tipo = new SimpleIntegerProperty(1);
+
+
+        Utilizador user1 = new Utilizador(nome,pass,tipo);
 
         try {
+            System.out.println(uRepo.count());
+            uRepo.save(user1);
             System.out.println(uRepo.count());
         } catch (PersistenceException e) {
             e.printStackTrace();

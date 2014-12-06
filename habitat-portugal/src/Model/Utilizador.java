@@ -4,20 +4,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * Created by Tiago on 27/11/14.
+ * @author Tiago on 27/11/14.
  */
 
 public class Utilizador {
 
     private long id = -1;
-    private String nome;
-    private String password;
-    private Integer conta;
+    private SimpleStringProperty nome;
+    private SimpleStringProperty password;
+    private SimpleIntegerProperty conta;
 
     public Utilizador() {
     }
 
-    public Utilizador(String nome, String password, Integer conta) {
+    public Utilizador(SimpleStringProperty nome, SimpleStringProperty password, SimpleIntegerProperty conta) {
         this.nome = nome;
         this.password = password;
         this.conta = conta;
@@ -32,38 +32,51 @@ public class Utilizador {
     }
 
     public String getNome() {
+        return nome.get();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public SimpleStringProperty nomeProperty() {
         return nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome.set(nome);
     }
 
     public String getPassword() {
+        return password.get();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public SimpleStringProperty passwordProperty() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
     }
 
-    public Integer getConta() {
+    public int getConta() {
+        return conta.get();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public SimpleIntegerProperty contaProperty() {
         return conta;
     }
 
-    public void setConta(Integer conta) {
-        this.conta = conta;
+    public void setConta(int conta) {
+        this.conta.set(conta);
     }
 
     @Override
     public String toString() {
         return "Utilizador{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", password='" + password + '\'' +
+                ", nome=" + nome +
+                ", password=" + password +
                 ", conta=" + conta +
                 '}';
     }
-
-
 }
