@@ -4,7 +4,6 @@ import Model.Utilizador;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  *
@@ -17,12 +16,15 @@ import java.util.HashSet;
 public class UtilizadorRepository extends AbstractRepository<Utilizador> {
 
     private static final String INSERT_UTILIZADOR = "insert into utilizador (nome_utilizador, password, conta) values (?,?,?)";
-
     private static final String UPDATE_UTILIZADOR = "update utilizador set nome_utilizador = ?, password = ?, conta = ? where id = ?";
 
     private static final String SELECT_UTILIZADOR = "select nome_utilizador, password, conta from utilizador where id = ?";
-
     private static final String SELECT_UTILIZADORES = "select id, nome_utilizador, password, conta from utilizador";
+
+    private static final String DELETE_UTILIZADOR = "delete from utilizador where id = ?";
+    private static final String DELETE_UTILIZADORES = "delete from utilizador";
+
+    private static final String COUNT_UTILIZADORES = "select count(*) as n from utilizador";
 
     private final String url;
     private final String user;
@@ -150,16 +152,66 @@ public class UtilizadorRepository extends AbstractRepository<Utilizador> {
 
     @Override
     public void delete(Utilizador utilizador) throws PersistenceException {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(DELETE_UTILIZADOR);
 
+            statement.setLong(1,utilizador.getId());
+
+            try {
+                int rows = statement.executeUpdate();
+                if (rows == 0) {
+                    System.out.println("No users removed");
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error deleting user", ex);
+        }
     }
 
     @Override
     public void deleteAll() throws PersistenceException {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
 
+            try {
+                statement.executeUpdate(DELETE_UTILIZADORES);
+            }
+            finally {
+                statement.close();
+                connection.close();
+            }
+        }
+        catch (SQLException ex) {
+            throw new PersistenceException("Error deleting users", ex);
+        }
     }
 
     @Override
     public long count() throws PersistenceException {
-        return 0;
+        try {
+            int count;
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(COUNT_UTILIZADORES);
+
+            try {
+                count = result.getInt("n");
+            }
+            finally {
+                statement.close();
+                connection.close();
+            }
+
+            return count;
+        }
+        catch (SQLException ex) {
+            throw new PersistenceException("Error counting users", ex);
+        }
     }
 }
