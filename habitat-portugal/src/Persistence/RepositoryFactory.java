@@ -30,8 +30,9 @@ import java.util.Properties;
  *
  * @author Benjamim Sonntag
  */
+@SuppressWarnings("UnusedDeclaration")
 public final class RepositoryFactory {
-    
+
     private static String DB_TYPE = "mysql";
     private static String HOST = "localhost";
     private static String PORT = "3306";
@@ -40,6 +41,7 @@ public final class RepositoryFactory {
     private static String DATABASE = "testdb";
     
     private static UtilizadorRepository utilizadorRepository;
+    private static FamiliarRepository familiarRepository;
 
     private RepositoryFactory() { }
 
@@ -49,7 +51,14 @@ public final class RepositoryFactory {
         }
         return utilizadorRepository;
     }
-    
+
+    public static FamiliarRepository getFamiliarRepository() {
+        if (familiarRepository == null) {
+            familiarRepository = new FamiliarRepository(getURL(),USER,PASSWORD);
+        }
+        return familiarRepository;
+    }
+
     public static void setProperties(Properties props) {
         DB_TYPE = props.getOrDefault("db_type", DB_TYPE).toString();
         HOST = props.getOrDefault("host", HOST).toString();

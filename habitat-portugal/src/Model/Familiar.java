@@ -5,16 +5,20 @@ import javafx.beans.property.SimpleStringProperty;
 /**
  * @author Tiago on 03/12/14.
  */
+
 @SuppressWarnings("UnusedDeclaration")
 public class Familiar {
 
     private long id = -1;
-    private final SimpleStringProperty nome;
-    private final SimpleStringProperty parentesco;
-    private final SimpleStringProperty data_nascimento;
-    private final SimpleStringProperty estado_civil;
-    private final SimpleStringProperty ocupacao;
-    private final SimpleStringProperty escolaridade;
+    private SimpleStringProperty nome;
+    private SimpleStringProperty parentesco;
+    private SimpleStringProperty data_nascimento;
+    private SimpleStringProperty estado_civil;
+    private SimpleStringProperty ocupacao;
+    private SimpleStringProperty escolaridade;
+
+    public Familiar() {
+    }
 
     public Familiar(SimpleStringProperty nome, SimpleStringProperty parentesco, SimpleStringProperty data_nascimento, SimpleStringProperty estado_civil, SimpleStringProperty ocupacao, SimpleStringProperty escolaridade) {
         this.nome = nome;

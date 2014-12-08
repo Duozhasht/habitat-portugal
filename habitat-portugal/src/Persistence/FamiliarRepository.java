@@ -11,16 +11,16 @@ import java.sql.*;
 @SuppressWarnings("UnusedDeclaration")
 public class FamiliarRepository extends AbstractRepository<Familiar> {
 
-    private static final String INSERT_FAMILIAR = "";
-    private static final String UPDATE_FAMILIAR = "";
+    private static final String INSERT_FAMILIAR = "insert into familiar (nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade) values (?,?,?,?,?,?)";
+    private static final String UPDATE_FAMILIAR = "update familiar set nome = ?, set parentesco = ?, set data_nascimento = ?, set estado_civil = ?, set ocupacao = ?, set escolaridade = ? where id = ?";
 
-    private static final String SELECT_FAMILIAR = "";
-    private static final String SELECT_FAMILIARES = "";
+    private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar where id = ?";
+    private static final String SELECT_FAMILIARES = "select id, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar";
 
-    private static final String DELETE_FAMILIAR = "";
-    private static final String DELETE_FAMILIARES = "";
+    private static final String DELETE_FAMILIAR = "delete from familiar where id = ?";
+    private static final String DELETE_FAMILIARES = "delete from utilizador";
 
-    private static final String COUNT_FAMILIARES = "";
+    private static final String COUNT_FAMILIARES = "select count(*) as n from familiar";
 
     private final String url;
     private final String user;
@@ -80,7 +80,38 @@ public class FamiliarRepository extends AbstractRepository<Familiar> {
 
     @Override
     public Familiar find(long id) throws PersistenceException {
-        return null;
+        try {
+            Familiar familiar;
+
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_FAMILIAR);
+
+            statement.setLong(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    familiar = new Familiar();
+                    familiar.setId(id);
+                    familiar.setNome(result.getString("nome"));
+                    familiar.setParentesco(result.getString("parentesco"));
+                    familiar.setData_nascimento(result.getString("data_nascimento"));
+                    familiar.setEstado_civil(result.getString("estado_civil"));
+                    familiar.setOcupacao(result.getString("ocupacao"));
+                    familiar.setEscolaridade(result.getString("escolaridade"));
+                }
+                else {
+                    familiar = null;
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+            return familiar;
+
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error finding user: " + id, ex);
+        }
     }
 
     @Override
@@ -90,17 +121,65 @@ public class FamiliarRepository extends AbstractRepository<Familiar> {
 
     @Override
     public void delete(Familiar entity) throws PersistenceException {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(DELETE_FAMILIAR);
 
+            statement.setLong(1,entity.getId());
+
+            try {
+                int rows = statement.executeUpdate();
+                if (rows == 0) {
+                    System.out.println("No family members removed");
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error deleting family members", ex);
+        }
     }
 
     @Override
     public void deleteAll() throws PersistenceException {
+        try {
+            Connection connection = DriverManager.getConnection(url, user, password);
 
+            try (Statement statement = connection.createStatement()) {
+                statement.executeUpdate(DELETE_FAMILIARES);
+            } finally {
+                connection.close();
+            }
+        }
+        catch (SQLException ex) {
+            throw new PersistenceException("Error deleting family members", ex);
+        }
     }
 
     @Override
     public long count() throws PersistenceException {
-        return 0;
+        try {
+            long count;
+
+            Connection connection = DriverManager.getConnection(url,user,password);
+            Statement statement = connection.createStatement();
+
+            try (ResultSet resultSet = statement.executeQuery(COUNT_FAMILIARES)) {
+                if (resultSet.next())
+                    count = resultSet.getLong("n");
+                else
+                    count = -1;
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+            return count;
+
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error counting family members", ex);
+        }
     }
 
 
