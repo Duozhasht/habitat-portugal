@@ -9,13 +9,9 @@ import java.sql.*;
  */
 public class CandidaturaRepository extends AbstractRepository<Candidatura> {
 
-    private static final String INSERT_CANDIDATURA = "insert into candidatura (nome_candidato, data_nascimento, morada, " +
-            "contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado) " +
-            "values (?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_CANDIDATURA = "INSERT INTO candidatura (nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-    private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?," +
-            "morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, " +
-            "nacionalidade = ?, aprovado = ? where id = ?";
+    private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?, morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, nacionalidade = ?, aprovado = ? where id = ?";
 
     private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, " +
             "contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id = ?";

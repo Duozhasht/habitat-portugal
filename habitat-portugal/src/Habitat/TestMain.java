@@ -1,19 +1,66 @@
 package Habitat;
 
-import Model.Utilizador;
-import Persistence.PersistenceException;
-import Persistence.RepositoryFactory;
-import Persistence.UtilizadorRepository;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+
+import Model.Familiar;
+import Persistence.*;
 
 /**
  * @author Davide Silva on 04/12/14.
  */
 public class TestMain {
+
+    public static void insereAgregado(long id) {
+        FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
+
+        try {
+            Familiar f = new Familiar();
+            f.setNome("a");
+            f.setParentesco("irmao");
+            f.setData_nascimento("j");
+            f.setEstado_civil("s");
+            f.setOcupacao("est");
+            f.setEscolaridade("12");
+            f.setCandidatura_id(id);
+
+            fRepo.save(f);
+
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 
-        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
+        insereAgregado(6);
+
+/*        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
+        FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
+        CandidaturaRepository cRepo = RepositoryFactory.getCandidaturaRepository();
+
+        Candidatura c = new Candidatura();
+        c.setNome_candidato("david");
+        c.setData_nascimento("dez");
+        c.setMorada("Braga");
+        c.setContacto("96*******");
+        c.setEstado_civil("S");
+        c.setEscolaridade("Univ");
+        c.setProfissao("Est");
+        c.setNaturalidade("Porto");
+        c.setNacionalidade("Portugal");
+        c.setAprovado(true);
+
+        Candidatura c1;
+
+        try {
+            c1 = cRepo.find(6);
+            c1.setData_nascimento("10-Dez-1991");
+            cRepo.save(c1);
+            System.out.println(c1.getNome_candidato());
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }*/
+/*
+
 
         SimpleStringProperty nome = new SimpleStringProperty("test");
         SimpleStringProperty pass = new SimpleStringProperty("1234");
@@ -29,6 +76,7 @@ public class TestMain {
         } catch (PersistenceException e) {
             e.printStackTrace();
         }
+*/
 
 /*
         Utilizador u = new Utilizador("test","olá",2);
@@ -64,4 +112,6 @@ public class TestMain {
         }*/
 
     }
+
+
 }

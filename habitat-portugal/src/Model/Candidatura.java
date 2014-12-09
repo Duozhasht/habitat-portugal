@@ -11,7 +11,7 @@ import java.util.Collection;
 @SuppressWarnings("UnusedDeclaration")
 public class Candidatura {
 
-    private long id;
+    private long id = -1;
     private SimpleStringProperty nome_candidato;
     private SimpleStringProperty data_nascimento;
     private SimpleStringProperty morada;
@@ -25,6 +25,16 @@ public class Candidatura {
     private Collection<Familiar> agregadofamiliar;
 
     public Candidatura() {
+        this.nome_candidato = new SimpleStringProperty();
+        this.data_nascimento = new SimpleStringProperty();
+        this.morada = new SimpleStringProperty();
+        this.contacto = new SimpleStringProperty();
+        this.estado_civil = new SimpleStringProperty();
+        this.escolaridade = new SimpleStringProperty();
+        this.profissao = new SimpleStringProperty();
+        this.naturalidade = new SimpleStringProperty();
+        this.nacionalidade = new SimpleStringProperty();
+        this.aprovado = new SimpleBooleanProperty();
     }
 
     public long getId() {
@@ -161,5 +171,23 @@ public class Candidatura {
 
     public void setAgregadofamiliar(Collection<Familiar> agregadofamiliar) {
         this.agregadofamiliar = agregadofamiliar;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidatura{" +
+                "id=" + id +
+                ", nome_candidato=" + nome_candidato +
+                ", data_nascimento=" + data_nascimento +
+                ", morada=" + morada +
+                ", contacto=" + contacto +
+                ", estado_civil=" + estado_civil +
+                ", escolaridade=" + escolaridade +
+                ", profissao=" + profissao +
+                ", naturalidade=" + naturalidade +
+                ", nacionalidade=" + nacionalidade +
+                ", aprovado=" + aprovado +
+                ", agregadofamiliar=" + agregadofamiliar +
+                '}';
     }
 }
