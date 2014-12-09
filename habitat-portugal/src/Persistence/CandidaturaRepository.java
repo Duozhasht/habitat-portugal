@@ -13,8 +13,7 @@ public class CandidaturaRepository extends AbstractRepository<Candidatura> {
 
     private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?, morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, nacionalidade = ?, aprovado = ? where id = ?";
 
-    private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, " +
-            "contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id = ?";
+    private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id = ?";
 
     private static final String DELETE_CANDIDATURA = "delete from candidatura where id = ?";
     private static final String DELETE_CANDIDATURAS = "delete from candidatura";

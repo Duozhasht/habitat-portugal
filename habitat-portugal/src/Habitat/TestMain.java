@@ -1,7 +1,8 @@
 package Habitat;
 
 
-import Model.Familiar;
+
+import Model.Utilizador;
 import Persistence.*;
 
 /**
@@ -9,7 +10,7 @@ import Persistence.*;
  */
 public class TestMain {
 
-    public static void insereAgregado(long id) {
+/*    public static void insereAgregado(long id) {
         FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
 
         try {
@@ -27,11 +28,47 @@ public class TestMain {
         } catch (PersistenceException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void main(String[] args) {
 
-        insereAgregado(6);
+        System.out.println("HELLO");
+
+        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
+
+        Utilizador u;
+
+        try {
+            u = new Utilizador();
+            u.setNome("davide");
+            u.setPassword("mundo");
+            uRepo.save(u);
+
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }
+/*
+
+        try {
+            Candidatura c = cRepo.find(6);
+            System.out.println(c.getNome_candidato());
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }
+*/
+
+
+/*        try {
+            for (Familiar f: fRepo.findByCandidatura(6)) {
+                System.out.println(f.getNome());
+            }
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+        /*insereAgregado(6);*/
 
 /*        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
         FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
