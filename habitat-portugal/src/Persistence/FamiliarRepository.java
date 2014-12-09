@@ -3,6 +3,8 @@ package Persistence;
 import Model.Familiar;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author davide on 06/12/14.
@@ -12,13 +14,14 @@ import java.sql.*;
 public class FamiliarRepository extends AbstractRepository<Familiar> {
 
     private static final String INSERT_FAMILIAR = "insert into familiar (nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade) values (?,?,?,?,?,?)";
-    private static final String UPDATE_FAMILIAR = "update familiar set nome = ?, set parentesco = ?, set data_nascimento = ?, set estado_civil = ?, set ocupacao = ?, set escolaridade = ? where id = ?";
+    private static final String UPDATE_FAMILIAR = "update familiar set nome = ?, parentesco = ?, data_nascimento = ?, estado_civil = ?, ocupacao = ?, escolaridade = ? where id = ?";
 
     private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar where id = ?";
     private static final String SELECT_FAMILIARES = "select id, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar";
+    private static final String SELECT_BY_CANDIDATURA = "select id, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar where candidatura_id = ?";
 
     private static final String DELETE_FAMILIAR = "delete from familiar where id = ?";
-    private static final String DELETE_FAMILIARES = "delete from utilizador";
+    private static final String DELETE_FAMILIARES = "delete from familiar";
 
     private static final String COUNT_FAMILIARES = "select count(*) as n from familiar";
 
@@ -110,7 +113,7 @@ public class FamiliarRepository extends AbstractRepository<Familiar> {
             return familiar;
 
         } catch (SQLException ex) {
-            throw new PersistenceException("Error finding user: " + id, ex);
+            throw new PersistenceException("Error finding family members: " + id, ex);
         }
     }
 
@@ -182,5 +185,34 @@ public class FamiliarRepository extends AbstractRepository<Familiar> {
         }
     }
 
+    public Iterable<Familiar> findByCandidatura(long id) throws PersistenceException{
+        try {
+            List<Familiar> familia = new ArrayList<>();
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_CANDIDATURA);
+
+            statement.setLong(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Familiar familiar = new Familiar();
+                    familiar.setId(result.getLong("id"));
+
+                    familia.add(familiar);
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+            return familia;
+
+
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error finding family members of: " + id, ex);
+        }
+
+    }
 
 }

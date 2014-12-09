@@ -42,6 +42,7 @@ public final class RepositoryFactory {
     
     private static UtilizadorRepository utilizadorRepository;
     private static FamiliarRepository familiarRepository;
+    private static CandidaturaRepository candidaturaRepository;
 
     private RepositoryFactory() { }
 
@@ -57,6 +58,13 @@ public final class RepositoryFactory {
             familiarRepository = new FamiliarRepository(getURL(),USER,PASSWORD);
         }
         return familiarRepository;
+    }
+
+    public static CandidaturaRepository getCandidaturaRepository() {
+        if (candidaturaRepository == null) {
+            candidaturaRepository = new CandidaturaRepository(getURL(),USER,PASSWORD);
+        }
+        return candidaturaRepository;
     }
 
     public static void setProperties(Properties props) {
