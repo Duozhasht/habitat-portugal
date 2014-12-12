@@ -34,11 +34,11 @@ import java.util.Properties;
 public final class RepositoryFactory {
 
     private static String DB_TYPE = "mysql";
-    private static String HOST = "localhost";
+    private static String HOST = "banze.com.pt";
     private static String PORT = "3306";
-    private static String USER = "testuser";
-    private static String PASSWORD = "123456";
-    private static String DATABASE = "testdb";
+    private static String USER = "banzeco_habitat";
+    private static String PASSWORD = "habitatmysql";
+    private static String DATABASE = "banzeco_habitat";
     
     private static UtilizadorRepository utilizadorRepository;
     private static FamiliarRepository familiarRepository;

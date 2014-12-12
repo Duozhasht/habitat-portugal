@@ -1,5 +1,6 @@
 package Habitat;
 
+import Controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,12 +9,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+
+
+    private Habitat facade = new Habitat();
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/View/ViewLogin.fxml"));
-        primaryStage.setTitle("Habitat - Login");
-        primaryStage.setScene(new Scene(root, 400, 300));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/ViewLogin.fxml"));
+        Parent login = (Parent)fxmlLoader.load();
+        LoginController controller = fxmlLoader.<LoginController>getController();
+        controller.setFacade(facade);
+        controller.setParent(login);
+        controller.setScene(new Scene(login,400,300));
+        controller.setStage(stage);
+        controller.launchController();
     }
 
 

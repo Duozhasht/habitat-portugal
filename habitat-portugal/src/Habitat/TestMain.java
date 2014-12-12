@@ -5,6 +5,9 @@ package Habitat;
 import Model.Utilizador;
 import Persistence.*;
 
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * @author Davide Silva on 04/12/14.
  */
@@ -34,18 +37,11 @@ public class TestMain {
 
         System.out.println("HELLO");
 
-        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
-
-        Utilizador u;
-
-        try {
-            u = new Utilizador();
-            u.setNome("davide");
-            u.setPassword("mundo");
-            uRepo.save(u);
-
-        } catch (PersistenceException e) {
-            e.printStackTrace();
+        Habitat exemplo = new Habitat();
+        for(Utilizador user : exemplo.getLista_utilizadores().values())
+        {
+            System.out.println(user.getId());
+            System.out.println(user.getNome());
         }
 /*
 

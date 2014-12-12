@@ -3,6 +3,7 @@ package Persistence;
 import Model.Candidatura;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * @author davide on 08/12/14.
@@ -14,6 +15,8 @@ public class CandidaturaRepository extends AbstractRepository<Candidatura> {
     private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?, morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, nacionalidade = ?, aprovado = ? where id = ?";
 
     private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id = ?";
+    private static final String SELECT_CANDIDATURAS = "select id_candidatura, nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura";
+
 
     private static final String DELETE_CANDIDATURA = "delete from candidatura where id = ?";
     private static final String DELETE_CANDIDATURAS = "delete from candidatura";
@@ -128,7 +131,40 @@ public class CandidaturaRepository extends AbstractRepository<Candidatura> {
 
     @Override
     public Iterable<Candidatura> findAll() throws PersistenceException {
-        return null;
+        try {
+            Candidatura candidatura;
+            ArrayList<Candidatura> res = new ArrayList<>();
+
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_CANDIDATURAS);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    candidatura = new Candidatura();
+                    candidatura.setId(result.getLong("id_candidatura"));
+                    candidatura.setNome_candidato(result.getString("nome_candidato"));
+                    candidatura.setData_nascimento(result.getString("data_nascimento"));
+                    candidatura.setMorada(result.getString("morada"));
+                    candidatura.setContacto(result.getString("contacto"));
+                    candidatura.setEstado_civil(result.getString("estado_civil"));
+                    candidatura.setEscolaridade(result.getString("escolaridade"));
+                    candidatura.setProfissao(result.getString("profissao"));
+                    candidatura.setNaturalidade(result.getString("naturalidade"));
+                    candidatura.setNacionalidade(result.getString("nacionalidade"));
+                    candidatura.setAprovado(result.getBoolean("aprovado"));
+                    res.add(candidatura);
+                }
+
+                }   finally {
+                    statement.close();
+                    connection.close();
+            }
+
+            return res;
+
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error finding candidatures:", ex);
+        }
     }
 
     @Override
