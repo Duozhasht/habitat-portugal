@@ -12,19 +12,18 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class FamiliarRepository implements Map<Integer, Familiar> {
 
-    private static final String INSERT_FAMILIAR = "insert into familiar (nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id) values (?,?,?,?,?,?,?)";
-    private static final String UPDATE_FAMILIAR = "update familiar set nome = ?, parentesco = ?, data_nascimento = ?, estado_civil = ?, ocupacao = ?, escolaridade = ?, candidatura_id = ? where id = ?";
+    private static final String INSERT_FAMILIAR = "insert into pessoa (nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id) values (?,?,?,?,?,?,?)";
+    private static final String UPDATE_FAMILIAR = "update pessoa set nome = ?, parentesco = ?, data_nascimento = ?, estado_civil = ?, ocupacao = ?, escolaridade = ?, candidatura_id = ? where id_pessoa = ?";
 
-    private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar where id = ?";
-    private static final String SELECT_FAMILIARES = "select id, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar";
-    private static final String SELECT_BY_CANDIDATURA = "select id, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from familiar where candidatura_id = ?";
+    private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa where id_pessoa = ?";
+    private static final String SELECT_FAMILIARES = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa";
+    private static final String SELECT_BY_CANDIDATURA = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa where candidatura_id = ?";
 
-    private static final String DELETE_FAMILIAR = "delete from familiar where id = ?";
-    private static final String DELETE_FAMILIARES = "delete from familiar";
+    private static final String DELETE_FAMILIAR = "delete from pessoa where id_pessoa = ?";
+    private static final String DELETE_FAMILIARES = "delete from pessoa";
 
-    private static final String COUNT_FAMILIARES = "select count(*) as n from familiar";
-    private static final String SELECT_IDS = "select id from pessoa";
-    private static final String SELECT_FAMILIARES_BY = "";
+    private static final String COUNT_FAMILIARES = "select count(*) as n from pessoa";
+    private static final String SELECT_IDS = "select id_pessoa from pessoa";
 
     private final String url;
     private final String user;

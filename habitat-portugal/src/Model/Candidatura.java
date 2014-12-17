@@ -4,8 +4,6 @@ import Persistence.FamiliarRepository;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.Collection;
-
 /**
  * @author by Tiago on 03/12/14.
  */

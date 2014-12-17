@@ -12,17 +12,17 @@ public class CandidaturaRepository implements Map<Integer,Candidatura> {
 
     private static final String INSERT_CANDIDATURA = "INSERT INTO candidatura (nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-    private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?, morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, nacionalidade = ?, aprovado = ? where id = ?";
+    private static final String UPDATE_CANDIDATURA = "update candidatura set nome_candidato = ?, data_nascimento = ?, morada = ?, contacto = ?, estado_civil = ?, escolaridade = ?, profissao = ?, naturalidade = ?, nacionalidade = ?, aprovado = ? where id_candidatura = ?";
 
-    private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id = ?";
+    private static final String SELECT_CANDIDATURA = "select nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura where id_candidatura = ?";
     private static final String SELECT_CANDIDATURAS = "select id_candidatura, nome_candidato, data_nascimento, morada, contacto, estado_civil, escolaridade, profissao, naturalidade, nacionalidade, aprovado from candidatura";
 
 
-    private static final String DELETE_CANDIDATURA = "delete from candidatura where id = ?";
+    private static final String DELETE_CANDIDATURA = "delete from candidatura where id_candidatura = ?";
     private static final String DELETE_CANDIDATURAS = "delete from candidatura";
 
     private static final String COUNT_FAMILIARES = "select count(*) as n from candidatura";
-    private static final String SELECT_IDS = "select id from candidatura";
+    private static final String SELECT_IDS = "select id_candidatura from candidatura";
 
     private final String url;
     private final String user;

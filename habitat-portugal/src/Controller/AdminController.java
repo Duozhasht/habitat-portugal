@@ -3,7 +3,6 @@ package Controller;
 import Habitat.Habitat;
 import Model.Candidatura;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 /**
- * Created by Tiago on 12/12/14.
+ * @author Tiago on 12/12/14.
  */
 public class AdminController {
 
@@ -23,7 +22,7 @@ public class AdminController {
 
     //Listas
     @FXML
-    TableView<Candidatura> CandidaturaTable = new TableView<Candidatura>();
+    TableView<Candidatura> CandidaturaTable = new TableView<>();
 
     ObservableList<Candidatura> CandidaturaList;
 

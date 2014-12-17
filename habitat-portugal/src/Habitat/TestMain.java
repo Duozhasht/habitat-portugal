@@ -2,7 +2,6 @@ package Habitat;
 
 
 
-import Model.Utilizador;
 import Persistence.*;
 
 /**
