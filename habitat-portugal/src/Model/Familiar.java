@@ -9,14 +9,13 @@ import javafx.beans.property.SimpleStringProperty;
 @SuppressWarnings("UnusedDeclaration")
 public class Familiar {
 
-    private long id = -1;
+    private int id = -1;
     private SimpleStringProperty nome;
     private SimpleStringProperty parentesco;
     private SimpleStringProperty data_nascimento;
     private SimpleStringProperty estado_civil;
     private SimpleStringProperty ocupacao;
     private SimpleStringProperty escolaridade;
-    private long candidatura_id = -1;
 
     public Familiar() {
         this.nome = new SimpleStringProperty();
@@ -36,11 +35,11 @@ public class Familiar {
         this.escolaridade = escolaridade;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -114,14 +113,6 @@ public class Familiar {
 
     public void setEscolaridade(String escolaridade) {
         this.escolaridade.set(escolaridade);
-    }
-
-    public long getCandidatura_id() {
-        return candidatura_id;
-    }
-
-    public void setCandidatura_id(long candidatura_id) {
-        this.candidatura_id = candidatura_id;
     }
 
     @Override
