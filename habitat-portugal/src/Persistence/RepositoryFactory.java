@@ -43,6 +43,8 @@ public final class RepositoryFactory {
     private static UtilizadorRepository utilizadorRepository;
     private static FamiliarRepository familiarRepository;
     private static CandidaturaRepository candidaturaRepository;
+    private static TarefaRepository tarefaRepository;
+    private static ProjectoRepository projectoRepository;
 
     private RepositoryFactory() { }
 
@@ -65,6 +67,20 @@ public final class RepositoryFactory {
             candidaturaRepository = new CandidaturaRepository(getURL(),USER,PASSWORD);
         }
         return candidaturaRepository;
+    }
+
+    public static TarefaRepository getTarefaRepository() {
+        if (tarefaRepository == null) {
+            tarefaRepository = new TarefaRepository(getURL(),USER,PASSWORD);
+        }
+        return tarefaRepository;
+    }
+
+    public static ProjectoRepository getProjectoRepository() {
+        if (projectoRepository == null) {
+            projectoRepository = new ProjectoRepository(getURL(),USER,PASSWORD);
+        }
+        return projectoRepository;
     }
 
     public static void setProperties(Properties props) {
