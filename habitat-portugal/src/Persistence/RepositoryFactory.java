@@ -23,6 +23,8 @@
 
 package Persistence;
 
+import Model.Evento;
+
 import java.util.Properties;
 
 /**
@@ -43,6 +45,8 @@ public final class RepositoryFactory {
     private static UtilizadorRepository utilizadorRepository;
     private static FamiliarRepository familiarRepository;
     private static CandidaturaRepository candidaturaRepository;
+    private static DoadorRepository doadorRepository;
+    private static EventoRepository eventoRepository;
 
     private RepositoryFactory() { }
 
@@ -65,6 +69,20 @@ public final class RepositoryFactory {
             candidaturaRepository = new CandidaturaRepository(getURL(),USER,PASSWORD);
         }
         return candidaturaRepository;
+    }
+
+    public static DoadorRepository getDoadorRepository() {
+        if (doadorRepository == null) {
+            doadorRepository = new DoadorRepository(getURL(),USER,PASSWORD);
+        }
+        return doadorRepository;
+    }
+
+    public static EventoRepository getEventoRepository() {
+        if (eventoRepository == null) {
+            eventoRepository = new EventoRepository(getURL(),USER,PASSWORD);
+        }
+        return eventoRepository;
     }
 
     public static void setProperties(Properties props) {
