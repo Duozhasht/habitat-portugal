@@ -115,16 +115,4 @@ public class Familiar {
         this.escolaridade.set(escolaridade);
     }
 
-    @Override
-    public String toString() {
-        return "Familiar{" +
-                "id=" + id +
-                ", nome=" + nome +
-                ", parentesco=" + parentesco +
-                ", data_nascimento=" + data_nascimento +
-                ", estado_civil=" + estado_civil +
-                ", ocupacao=" + ocupacao +
-                ", escolaridade=" + escolaridade +
-                '}';
-    }
 }
