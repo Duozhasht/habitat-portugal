@@ -1,7 +1,6 @@
 package Habitat;
 
 import Model.Candidatura;
-import Model.Familiar;
 import Model.Utilizador;
 import Persistence.CandidaturaRepository;
 import Persistence.PersistenceException;
@@ -11,8 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by Tiago on 12/12/14.

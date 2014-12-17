@@ -1,5 +1,6 @@
 package Model;
 
+import Persistence.FamiliarRepository;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -11,7 +12,7 @@ import java.util.Collection;
 @SuppressWarnings("UnusedDeclaration")
 public class Candidatura {
 
-    private long id = -1;
+    private int id = -1;
     private SimpleStringProperty nome_candidato;
     private SimpleStringProperty data_nascimento;
     private SimpleStringProperty morada;
@@ -22,7 +23,7 @@ public class Candidatura {
     private SimpleStringProperty naturalidade;
     private SimpleStringProperty nacionalidade;
     private SimpleBooleanProperty aprovado;
-    private Collection<Familiar> agregadofamiliar;
+    private FamiliarRepository agregadofamiliar;
 
     public Candidatura() {
         this.nome_candidato = new SimpleStringProperty();
@@ -37,11 +38,11 @@ public class Candidatura {
         this.aprovado = new SimpleBooleanProperty();
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -165,29 +166,13 @@ public class Candidatura {
         this.aprovado.set(aprovado);
     }
 
-    public Collection<Familiar> getAgregadofamiliar() {
+    public FamiliarRepository getAgregadofamiliar() {
         return agregadofamiliar;
     }
 
-    public void setAgregadofamiliar(Collection<Familiar> agregadofamiliar) {
+    public void setAgregadofamiliar(FamiliarRepository agregadofamiliar) {
         this.agregadofamiliar = agregadofamiliar;
     }
 
-    @Override
-    public String toString() {
-        return "Candidatura{" +
-                "id=" + id +
-                ", nome_candidato=" + nome_candidato +
-                ", data_nascimento=" + data_nascimento +
-                ", morada=" + morada +
-                ", contacto=" + contacto +
-                ", estado_civil=" + estado_civil +
-                ", escolaridade=" + escolaridade +
-                ", profissao=" + profissao +
-                ", naturalidade=" + naturalidade +
-                ", nacionalidade=" + nacionalidade +
-                ", aprovado=" + aprovado +
-                ", agregadofamiliar=" + agregadofamiliar +
-                '}';
-    }
+
 }

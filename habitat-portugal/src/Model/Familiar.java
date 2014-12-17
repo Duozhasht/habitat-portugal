@@ -16,7 +16,6 @@ public class Familiar {
     private SimpleStringProperty estado_civil;
     private SimpleStringProperty ocupacao;
     private SimpleStringProperty escolaridade;
-    private long candidatura_id = -1;
 
     public Familiar() {
         this.nome = new SimpleStringProperty();
@@ -116,24 +115,4 @@ public class Familiar {
         this.escolaridade.set(escolaridade);
     }
 
-    public long getCandidatura_id() {
-        return candidatura_id;
-    }
-
-    public void setCandidatura_id(long candidatura_id) {
-        this.candidatura_id = candidatura_id;
-    }
-
-    @Override
-    public String toString() {
-        return "Familiar{" +
-                "id=" + id +
-                ", nome=" + nome +
-                ", parentesco=" + parentesco +
-                ", data_nascimento=" + data_nascimento +
-                ", estado_civil=" + estado_civil +
-                ", ocupacao=" + ocupacao +
-                ", escolaridade=" + escolaridade +
-                '}';
-    }
 }

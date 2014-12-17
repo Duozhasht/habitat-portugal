@@ -151,7 +151,7 @@ public class UtilizadorRepository implements Map<Integer,Utilizador> {
             statement.setInt(3,value.getConta());
 
             if (isUpdate) {
-                statement.setLong(4,key);
+                statement.setInt(4,key);
             }
 
             statement.executeUpdate();
