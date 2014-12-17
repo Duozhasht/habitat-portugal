@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Utilizador {
 
-    private long id = -1;
+    private int id = -1;
     private SimpleStringProperty nome;
     private SimpleStringProperty password;
     private SimpleIntegerProperty conta;
@@ -27,11 +27,11 @@ public class Utilizador {
         this.conta = conta;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,7 +39,6 @@ public class Utilizador {
         return nome.get();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public SimpleStringProperty nomeProperty() {
         return nome;
     }
@@ -52,7 +51,6 @@ public class Utilizador {
         return password.get();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public SimpleStringProperty passwordProperty() {
         return password;
     }
@@ -65,7 +63,6 @@ public class Utilizador {
         return conta.get();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public SimpleIntegerProperty contaProperty() {
         return conta;
     }

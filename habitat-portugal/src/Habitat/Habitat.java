@@ -31,20 +31,7 @@ public class Habitat {
 
 
     public Habitat() {
-        try {
-            System.out.println("Entrei");
-            for (Iterator<Utilizador> user = uRepo.findAll().iterator(); user.hasNext(); ) {
-                Utilizador aux = user.next();
-                this.lista_utilizadores.put(aux.getId(), aux);
-            }
-            for(Iterator<Candidatura> candidatura = cRepo.findAll().iterator(); candidatura.hasNext();) {
-                Candidatura aux = candidatura.next();
-                this.lista_candidaturas.put(aux.getId(),aux);
-            }
 
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-        }
     }
 
     public HashMap<Long, Utilizador> getLista_utilizadores() {

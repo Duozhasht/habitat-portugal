@@ -5,13 +5,18 @@ package Habitat;
 import Model.Utilizador;
 import Persistence.*;
 
-import java.util.Iterator;
-import java.util.Map;
-
 /**
  * @author Davide Silva on 04/12/14.
  */
 public class TestMain {
+
+    public static void main(String[] args) {
+
+        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
+
+
+    }
+
 
 /*    public static void insereAgregado(long id) {
         FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
@@ -33,7 +38,7 @@ public class TestMain {
         }
     }*/
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 
         System.out.println("HELLO");
 
@@ -42,7 +47,7 @@ public class TestMain {
         {
             System.out.println(user.getId());
             System.out.println(user.getNome());
-        }
+        }*/
 /*
 
         try {
@@ -143,8 +148,6 @@ public class TestMain {
         } catch (PersistenceException e) {
             e.printStackTrace();
         }*/
-
-    }
 
 
 }
