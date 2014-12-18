@@ -13,12 +13,12 @@ import java.util.*;
 public class ProjectoRepository implements Map<Integer, Projecto> {
 
     private static final String INSERT_PROJECTO = "insert into projecto (nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado) values (?,?,?,?,?,?,?)";
-    private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? where id = ?";
+    private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? where id_projecto = ?";
 
-    private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id = ?";
+    private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id_projecto = ?";
     private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto";
 
-    private static final String DELETE_PROJECTO = "delete from projecto where id = ?";
+    private static final String DELETE_PROJECTO = "delete from projecto where id_projecto = ?";
     private static final String DELETE_PROJECTOS = "delete from projecto";
 
     private static final String COUNT_PROJECTOS = "select count(*) from projecto";

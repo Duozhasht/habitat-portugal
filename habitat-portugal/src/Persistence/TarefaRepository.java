@@ -15,7 +15,7 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
     private static final String INSERT_TAREFA = "insert into tarefa (nome_tarefa, data_inicio, data_final , id_encarregado) values (?,?,?,?)";
     private static final String UPDATE_TAREFA = "update tarefa set nome_tarefa = ?, data_inicio = ?, data_final = ?, id_encarregado = ? where id_tarefa = ?";
 
-    private static final String SELECT_TAREFA = "select nome_tarefa, data_inicio, data_final, id_encarregado from tarefa where id = ?";
+    private static final String SELECT_TAREFA = "select nome_tarefa, data_inicio, data_final, id_encarregado from tarefa where id_tarefa = ?";
     private static final String SELECT_TAREFAS = "select id_tarefa, nome_tarefa, data_inicio, data_final, id_encarregado from tarefa";
 
     private static final String DELETE_TAREFA = "delete from tarefa where id_tarefa = ?";

@@ -12,16 +12,16 @@ import java.util.*;
 public class DoadorRepository implements Map<Integer, Doador> {
 
     private static final String INSERT_DOADOR = "insert into doador (nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas) values (?,?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_DOADOR = "update doador set nome = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas = ? where id = ?";
+    private static final String UPDATE_DOADOR = "update doador set nome = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas = ? where id_doador = ?";
 
-    private static final String SELECT_DOADOR = "select nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador where id = ?";
-    private static final String SELECT_DOADORES = "select id, nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador";
+    private static final String SELECT_DOADOR = "select nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador where id_doador = ?";
+    private static final String SELECT_DOADORES = "select id_doador, nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador";
 
-    private static final String DELETE_DOADOR = "delete from doador where id = ?";
+    private static final String DELETE_DOADOR = "delete from doador where id_doador = ?";
     private static final String DELETE_DOADORES = "delete from doador";
 
     private static final String COUNT_DOADORES = "select count(*) as n from doador";
-    private static final String SELECT_IDS = "select id from doador";
+    private static final String SELECT_IDS = "select id_doador from doador";
 
     private final String url;
     private final String user;
