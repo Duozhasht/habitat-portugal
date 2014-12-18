@@ -13,7 +13,7 @@ import java.util.concurrent.RecursiveTask;
 public class DoadorRepository implements Map<Integer, Doador> {
 
     private static final String INSERT_DOADOR = "insert into doador (nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas) values (?,?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_DOADOR = "update doador set nome = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas, = ? where id = ?";
+    private static final String UPDATE_DOADOR = "update doador set nome = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas = ? where id = ?";
 
     private static final String SELECT_DOADOR = "select nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador where id = ?";
     private static final String SELECT_DOADORES = "select id, nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador";

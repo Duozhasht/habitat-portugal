@@ -17,6 +17,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
 
     private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id = ?";
     private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto";
+
     private static final String DELETE_PROJECTO = "delete from projecto where id = ?";
     private static final String DELETE_PROJECTOS = "delete from projecto";
 

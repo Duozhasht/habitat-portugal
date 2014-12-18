@@ -12,7 +12,7 @@ import java.util.*;
 public class EventoRepository implements Map<Integer, Evento> {
 
     private static final String INSERT_EVENTO = "insert into evento (nome_evento, data_evento, valor_total, organizador, notas) values (?,?,?,?,?)";
-    private static final String UPDATE_EVENTO = "update evento set nome_evento = ?, data_evento = ?, valor_total = ?, organizador = ?, notas, = ? where id = ?";
+    private static final String UPDATE_EVENTO = "update evento set nome_evento = ?, data_evento = ?, valor_total = ?, organizador = ?, notas = ? where id = ?";
 
     private static final String SELECT_EVENTO = "select nome_evento, data_evento, valor_total, organizador, notas from evento where id = ?";
     private static final String SELECT_EVENTOS = "select id, nome_evento, data_evento, valor_total, organizador, notas from evento";
