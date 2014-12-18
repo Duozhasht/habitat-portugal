@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import java.util.HashMap;
 
 /**
- * Created by Tiago on 12/12/14.
+ * @author Tiago on 12/12/14.
  */
 public class Habitat {
 

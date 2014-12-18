@@ -1,11 +1,9 @@
 package Model;
 
 import javafx.beans.property.SimpleStringProperty;
-import jdk.internal.org.objectweb.asm.commons.SimpleRemapper;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 /**
- * Created by PeterO'Daktyl on 17-12-2014.
+ * @author PeterO'Daktyl on 17-12-2014.
  */
 @SuppressWarnings("UnusedDeclaration")
 public class Doador {

@@ -24,7 +24,7 @@ public class AdminController {
     @FXML
     TableView<Candidatura> CandidaturaTable = new TableView<>();
 
-    ObservableList<Candidatura> CandidaturaList;
+    private ObservableList<Candidatura> CandidaturaList;
 
 
 

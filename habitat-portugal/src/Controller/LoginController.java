@@ -12,9 +12,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
-import java.io.IOException;
-
 public class LoginController {
 
 
@@ -55,7 +52,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleLoginAction(ActionEvent e) throws IOException,Exception{
+    protected void handleLoginAction(ActionEvent e) throws Exception{
         if(this.nome.getText() != null && this.password.getText() != null){
            switch (this.facade.login(this.nome.getText(),this.password.getText())){
                case 1 : System.out.println("Gestão de Candidatura");

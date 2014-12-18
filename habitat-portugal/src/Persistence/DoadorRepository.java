@@ -4,10 +4,9 @@ import Model.Doador;
 
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.RecursiveTask;
 
 /**
- * Created by PeterO'Daktyl on 17-12-2014.
+ * @author PeterO'Daktyl on 17-12-2014.
  */
 @SuppressWarnings("UnusedDeclaration")
 public class DoadorRepository implements Map<Integer, Doador> {
