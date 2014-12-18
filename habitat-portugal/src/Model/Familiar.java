@@ -115,4 +115,17 @@ public class Familiar {
         this.escolaridade.set(escolaridade);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Familiar{");
+        sb.append("id=").append(id);
+        sb.append(", nome=").append(nome);
+        sb.append(", parentesco=").append(parentesco);
+        sb.append(", data_nascimento=").append(data_nascimento);
+        sb.append(", estado_civil=").append(estado_civil);
+        sb.append(", ocupacao=").append(ocupacao);
+        sb.append(", escolaridade=").append(escolaridade);
+        sb.append('}');
+        return sb.toString();
+    }
 }

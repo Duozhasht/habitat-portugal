@@ -84,4 +84,16 @@ public class Tarefa {
     public void setId_encarregado(int id_encarregado) {
         this.id_encarregado.set(id_encarregado);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Tarefa{");
+        sb.append("id=").append(id);
+        sb.append(", nome_tarefa=").append(nome_tarefa);
+        sb.append(", data_inicio=").append(data_inicio);
+        sb.append(", data_final=").append(data_final);
+        sb.append(", id_encarregado=").append(id_encarregado);
+        sb.append('}');
+        return sb.toString();
+    }
 }

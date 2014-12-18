@@ -172,5 +172,22 @@ public class Candidatura {
         this.agregadofamiliar = agregadofamiliar;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Candidatura{");
+        sb.append("id=").append(id);
+        sb.append(", nome_candidato=").append(nome_candidato);
+        sb.append(", data_nascimento=").append(data_nascimento);
+        sb.append(", morada=").append(morada);
+        sb.append(", contacto=").append(contacto);
+        sb.append(", estado_civil=").append(estado_civil);
+        sb.append(", escolaridade=").append(escolaridade);
+        sb.append(", profissao=").append(profissao);
+        sb.append(", naturalidade=").append(naturalidade);
+        sb.append(", nacionalidade=").append(nacionalidade);
+        sb.append(", aprovado=").append(aprovado);
+        sb.append(", agregadofamiliar=").append(agregadofamiliar);
+        sb.append('}');
+        return sb.toString();
+    }
 }

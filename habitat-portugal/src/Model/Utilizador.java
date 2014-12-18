@@ -73,13 +73,12 @@ public class Utilizador {
 
     @Override
     public String toString() {
-        return "Utilizador{" +
-                "id=" + id +
-                ", nome=" + nome +
-                ", password=" + password +
-                ", conta=" + conta +
-                '}';
+        final StringBuilder sb = new StringBuilder("Utilizador{");
+        sb.append("id=").append(id);
+        sb.append(", nome=").append(nome);
+        sb.append(", password=").append(password);
+        sb.append(", conta=").append(conta);
+        sb.append('}');
+        return sb.toString();
     }
-
-
 }

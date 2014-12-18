@@ -150,4 +150,21 @@ public class Projecto {
     public void setTarefas(TarefaRepository tarefas) {
         this.tarefas = tarefas;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Projecto{");
+        sb.append("id=").append(id);
+        sb.append(", nome_projecto=").append(nome_projecto);
+        sb.append(", data_inicio=").append(data_inicio);
+        sb.append(", data_final=").append(data_final);
+        sb.append(", custo_inicio=").append(custo_inicio);
+        sb.append(", custo_final=").append(custo_final);
+        sb.append(", classificacao=").append(classificacao);
+        sb.append(", estado=").append(estado);
+        sb.append(", candidatura=").append(candidatura);
+        sb.append(", tarefas=").append(tarefas);
+        sb.append('}');
+        return sb.toString();
+    }
 }

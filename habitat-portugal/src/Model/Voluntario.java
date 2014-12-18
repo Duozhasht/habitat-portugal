@@ -222,4 +222,30 @@ public class Voluntario {
     public void setCca_habitat(String cca_habitat) {
         this.cca_habitat = cca_habitat;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Voluntario{");
+        sb.append("id_voluntario=").append(id_voluntario);
+        sb.append(", nome_voluntario='").append(nome_voluntario).append('\'');
+        sb.append(", data_nascimento='").append(data_nascimento).append('\'');
+        sb.append(", profissao='").append(profissao).append('\'');
+        sb.append(", morada='").append(morada).append('\'');
+        sb.append(", codigo_postal='").append(codigo_postal).append('\'');
+        sb.append(", localidade='").append(localidade).append('\'');
+        sb.append(", telefone='").append(telefone).append('\'');
+        sb.append(", telemovel='").append(telemovel).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", hab_academ='").append(hab_academ).append('\'');
+        sb.append(", conhec_lingui='").append(conhec_lingui).append('\'');
+        sb.append(", form_compl='").append(form_compl).append('\'');
+        sb.append(", exp_voluntariado='").append(exp_voluntariado).append('\'');
+        sb.append(", conhec_constr='").append(conhec_constr).append('\'');
+        sb.append(", trabalho_grupo='").append(trabalho_grupo).append('\'');
+        sb.append(", pub='").append(pub).append('\'');
+        sb.append(", disponi_tempo='").append(disponi_tempo).append('\'');
+        sb.append(", cca_habitat='").append(cca_habitat).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

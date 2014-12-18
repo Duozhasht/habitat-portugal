@@ -99,4 +99,17 @@ public class Evento {
     public void setNotas(String notas) {
         this.notas.set(notas);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Evento{");
+        sb.append("id=").append(id);
+        sb.append(", nome_evento=").append(nome_evento);
+        sb.append(", data_evento=").append(data_evento);
+        sb.append(", valor_total=").append(valor_total);
+        sb.append(", organizador=").append(organizador);
+        sb.append(", notas=").append(notas);
+        sb.append('}');
+        return sb.toString();
+    }
 }
