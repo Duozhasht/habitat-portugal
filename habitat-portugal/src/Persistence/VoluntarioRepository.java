@@ -16,6 +16,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
 
     private static final String SELECT_VOLUNTARIO = "select * from voluntario where id_voluntario = ?";
     private static final String SELECT_VOLUNTARIOS = "select * from voluntario";
+    private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where id_voluntario = ?";
 
     private static final String DELETE_VOLUNTARIO = "delete from voluntario where id_voluntario = ?";
     private static final String DELETE_VOLUNTARIOS = "delete from voluntario";
@@ -320,5 +321,31 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
     @Override
     public Set<Entry<Integer, Voluntario>> entrySet() {
         return null;
+    }
+
+    public Iterable<Voluntario> findByGrupo(int id) {
+        List<Voluntario> lista = new ArrayList<>();
+        try {
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_GRUPO);
+
+            statement.setLong(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Voluntario voluntario = new Voluntario();
+                    voluntario.setId_voluntario(result.getInt("id_voluntario"));
+
+                    lista.add(voluntario);
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
     }
 }

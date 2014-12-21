@@ -1,5 +1,6 @@
 package Model;
 
+import Persistence.VoluntarioRepository;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -14,6 +15,7 @@ public class Grupo {
     private SimpleStringProperty data_criacao;
     private SimpleStringProperty data_final;
     private SimpleStringProperty notas;
+    private VoluntarioRepository voluntarios;
 
     public Grupo() {
         this.nome_grupo = new SimpleStringProperty();
