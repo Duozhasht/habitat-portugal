@@ -16,6 +16,7 @@ public class Familiar {
     private SimpleStringProperty estado_civil;
     private SimpleStringProperty ocupacao;
     private SimpleStringProperty escolaridade;
+    private int candidatura = -1;
 
     public Familiar() {
         this.nome = new SimpleStringProperty();
@@ -115,17 +116,25 @@ public class Familiar {
         this.escolaridade.set(escolaridade);
     }
 
+    public int getCandidatura() {
+        return candidatura;
+    }
+
+    public void setCandidatura(int candidatura) {
+        this.candidatura = candidatura;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Familiar{");
-        sb.append("id=").append(id);
-        sb.append(", nome=").append(nome);
-        sb.append(", parentesco=").append(parentesco);
-        sb.append(", data_nascimento=").append(data_nascimento);
-        sb.append(", estado_civil=").append(estado_civil);
-        sb.append(", ocupacao=").append(ocupacao);
-        sb.append(", escolaridade=").append(escolaridade);
-        sb.append('}');
-        return sb.toString();
+        return "Familiar{" +
+                "id=" + id +
+                ", nome=" + nome +
+                ", parentesco=" + parentesco +
+                ", data_nascimento=" + data_nascimento +
+                ", estado_civil=" + estado_civil +
+                ", ocupacao=" + ocupacao +
+                ", escolaridade=" + escolaridade +
+                ", candidatura=" + candidatura +
+                '}';
     }
 }

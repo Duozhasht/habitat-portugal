@@ -112,6 +112,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
+                    familiar.setCandidatura(result.getInt("candidatura"));
                 }
             } finally {
                 statement.close();
@@ -148,10 +149,12 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
             statement.setString(3,value.getData_nascimento());
             statement.setString(4,value.getEstado_civil());
             statement.setString(5,value.getOcupacao());
-            statement.setString(6, value.getEscolaridade());
+            statement.setString(6,value.getEscolaridade());
+            statement.setInt(7, value.getCandidatura());
+
 
             if (isUpdate) {
-                statement.setInt(7, key);
+                statement.setInt(8, key);
             }
 
             statement.executeUpdate();
@@ -264,6 +267,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
+                    familiar.setCandidatura(result.getInt("candidatura"));
 
                     r.add(familiar);
                 }
@@ -298,10 +302,10 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
-                    Familiar familiar = new Familiar();
-                    familiar.setId(result.getInt("id_pessoa"));
-
-                    familia.add(familiar);
+                    if (containsKey(result.getInt("id_pessoa"))) {
+                        Familiar familiar = get(result.getInt("id_pessoa"));
+                        familia.add(familiar);
+                    }
                 }
             } finally {
                 statement.close();
