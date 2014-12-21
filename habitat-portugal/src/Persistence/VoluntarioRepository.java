@@ -16,7 +16,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
 
     private static final String SELECT_VOLUNTARIO = "select * from voluntario where id_voluntario = ?";
     private static final String SELECT_VOLUNTARIOS = "select * from voluntario";
-    private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where id_voluntario = ?";
+    private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where id_grupo = ?";
 
     private static final String DELETE_VOLUNTARIO = "delete from voluntario where id_voluntario = ?";
     private static final String DELETE_VOLUNTARIOS = "delete from voluntario";
@@ -276,7 +276,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
         try {
             Voluntario voluntario;
 
-            Connection connection = DriverManager.getConnection(url,user,password);
+            Connection connection = DriverManager.getConnection(url, user, password);
             PreparedStatement statement = connection.prepareStatement(SELECT_VOLUNTARIOS);
 
             try (ResultSet result = statement.executeQuery()) {
@@ -334,10 +334,10 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
-                    Voluntario voluntario = new Voluntario();
-                    voluntario.setId_voluntario(result.getInt("id_voluntario"));
-
-                    lista.add(voluntario);
+                    if (containsKey(result.getInt("id_voluntario"))) {
+                        Voluntario voluntario = get(result.getInt("id_voluntario"));
+                        lista.add(voluntario);
+                    }
                 }
             } finally {
                 statement.close();
