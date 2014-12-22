@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DialogController.CandidaturaController">
+   <children>
+      <Label layoutX="110.0" layoutY="14.0" prefHeight="19.0" prefWidth="173.0" text="Gestão de Candidatura" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nome_candidato" layoutX="30.0" layoutY="100.0" prefHeight="26.0" prefWidth="340.0" promptText="Introduza o nome do candidato" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="morada" layoutX="30.0" layoutY="150.0" promptText="Introduza a morada" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="150.0" />
+      <TextField fx:id="contacto" layoutX="30.0" layoutY="200.0" promptText="Introduza o contacto" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="200.0" />
+      <DatePicker fx:id="data_nascimento" layoutX="30.0" layoutY="250.0" prefHeight="26.0" prefWidth="370.0" promptText="Data de Nascimento" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="250.0" />
+      <TextField fx:id="escolaridade" layoutX="30.0" layoutY="300.0" prefHeight="26.0" prefWidth="370.0" promptText="Nivel de Escolaridade" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="300.0" />
+      <TextField fx:id="profissao" layoutX="30.0" layoutY="350.0" prefHeight="26.0" prefWidth="370.0" promptText="Profissão" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="350.0" />
+      <TextField fx:id="naturalidade" layoutX="30.0" layoutY="400.0" promptText="Naturalidade" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="400.0" />
+      <TextField fx:id="nacionalidade" layoutX="30.0" layoutY="450.0" promptText="Nacionalidade" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="450.0" />
+      <Label layoutX="30.0" layoutY="495.0" prefHeight="16.0" prefWidth="77.0" text="Estado Civil" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="495.0" />
+      <RadioButton fx:id="solteiro" layoutX="30.0" layoutY="525.0" mnemonicParsing="false" text="Solteiro" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="525.0" />
+      <RadioButton fx:id="casado" layoutX="115.0" layoutY="525.0" mnemonicParsing="false" text="Casado" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="525.0" />
+      <RadioButton fx:id="divorciado" layoutX="215.0" layoutY="525.0" mnemonicParsing="false" text="Divorciado" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="525.0" />
+      <RadioButton fx:id="viuvo" layoutX="315.0" layoutY="525.0" mnemonicParsing="false" text="Viuvo" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="525.0" />
+      <Label layoutX="30.0" layoutY="560.0" text="Estado da Candidatura" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="560.0" />
+      <RadioButton fx:id="aprovada" layoutX="30.0" layoutY="590.0" mnemonicParsing="false" text="Aprovada" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="590.0" />
+      <RadioButton fx:id="nao_aprovada" layoutX="115.0" layoutY="590.0" mnemonicParsing="false" text="Não aprovada" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="590.0" />
+      <Button layoutX="15.0" layoutY="566.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="26.0" prefWidth="100.0" text="Ok" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="285.0" />
+      <Button layoutX="229.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleCancelarAction" prefHeight="26.0" prefWidth="100.0" text="Cancelar" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="285.0" />
+      <Label layoutX="134.0" layoutY="66.0" text="Dados do Candidato">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TableView fx:id="afTable" layoutX="430.0" layoutY="100.0" prefHeight="180.0" prefWidth="340.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+        <columns>
+          <TableColumn prefWidth="208.0" text="Nome do Familiar">
+           <cellValueFactory>
+              <PropertyValueFactory property="nome" />
+           </cellValueFactory>
+           </TableColumn>
+            <TableColumn prefWidth="131.0" text="Parentesco">
+               <cellValueFactory>
+                  <PropertyValueFactory property="parentesco" />
+               </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Separator layoutX="397.0" layoutY="62.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="3.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="80.0" />
+      <TextField fx:id="nome_familiar" layoutX="430.0" layoutY="300.0" prefHeight="26.0" prefWidth="370.0" promptText="Introduza o nome do familiar" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
+      <DatePicker fx:id="data_nascimento_familiar" layoutX="430.0" layoutY="350.0" promptText="Introduza a data de nascimento" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
+      <TextField fx:id="parentesco" layoutX="430.0" layoutY="400.0" promptText="Introduza o grau de parentesco" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0" />
+      <TextField fx:id="ocupacao" layoutX="430.0" layoutY="450.0" promptText="Introduza a sua ocupação" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="450.0" />
+      <TextField fx:id="escolaridade_familiar" layoutX="430.0" layoutY="500.0" promptText="Introduza a sua escolaridade" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="500.0" />
+      <Label layoutX="430.0" layoutY="549.0" prefHeight="16.0" prefWidth="77.0" text="Estado Civil" AnchorPane.leftAnchor="430.0" />
+      <RadioButton fx:id="solteiro_familiar" layoutX="430.0" layoutY="579.0" mnemonicParsing="false" text="Solteiro" AnchorPane.leftAnchor="430.0" />
+      <RadioButton fx:id="casado_familiar" layoutX="515.0" layoutY="579.0" mnemonicParsing="false" text="Casado" AnchorPane.leftAnchor="515.0" />
+      <RadioButton fx:id="divorciado_familiar" layoutX="600.0" layoutY="579.0" mnemonicParsing="false" text="Divorciado" AnchorPane.leftAnchor="600.0" />
+      <RadioButton fx:id="viuvo_familiar" layoutX="700.0" layoutY="579.0" mnemonicParsing="false" text="Viuvo" AnchorPane.leftAnchor="700.0" />
+      <Button layoutX="430.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleAdicionarAction" prefWidth="100.0" text="Adicionar" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="620.0" />
+      <Button layoutX="550.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleRemoverAction" prefWidth="100.0" text="Remover" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="620.0" />
+      <Button layoutX="670.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleEditarAction" prefWidth="100.0" text="Editar" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="620.0" />
+      <Separator layoutX="25.0" layoutY="640.0" prefWidth="200.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="415.0" />
+      <Label layoutX="510.0" layoutY="66.0" text="Dados do Agregado Familiar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Separator layoutX="450.0" layoutY="667.0" prefWidth="200.0" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="15.0" />
+   </children>
+</AnchorPane>
