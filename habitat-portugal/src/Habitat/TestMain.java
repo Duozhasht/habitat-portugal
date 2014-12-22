@@ -2,20 +2,12 @@ package Habitat;
 
 
 
-import Persistence.*;
+import Model.Utilizador;
 
 /**
  * @author Davide Silva on 04/12/14.
  */
 public class TestMain {
-
-    public static void main(String[] args) {
-
-        UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
-
-
-    }
-
 
 /*    public static void insereAgregado(long id) {
         FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
@@ -37,16 +29,16 @@ public class TestMain {
         }
     }*/
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("HELLO");
 
         Habitat exemplo = new Habitat();
-        for(Utilizador user : exemplo.getLista_utilizadores().values())
+        for(Utilizador user : exemplo.getuRepo().values())
         {
             System.out.println(user.getId());
             System.out.println(user.getNome());
-        }*/
+        }
 /*
 
         try {
@@ -147,6 +139,8 @@ public class TestMain {
         } catch (PersistenceException e) {
             e.printStackTrace();
         }*/
+
+    }
 
 
 }
