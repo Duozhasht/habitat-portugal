@@ -15,9 +15,9 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
     private static final String INSERT_FAMILIAR = "insert into pessoa (nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id) values (?,?,?,?,?,?,?)";
     private static final String UPDATE_FAMILIAR = "update pessoa set nome = ?, parentesco = ?, data_nascimento = ?, estado_civil = ?, ocupacao = ?, escolaridade = ?, candidatura_id = ? where id_pessoa = ?";
 
-    private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa where id_pessoa = ?";
-    private static final String SELECT_FAMILIARES = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa";
-    private static final String SELECT_BY_CANDIDATURA = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade from pessoa where candidatura_id = ?";
+    private static final String SELECT_FAMILIAR = "select nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id from pessoa where id_pessoa = ?";
+    private static final String SELECT_FAMILIARES = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id from pessoa";
+    private static final String SELECT_BY_CANDIDATURA = "select id_pessoa, nome, parentesco, data_nascimento, estado_civil, ocupacao, escolaridade, candidatura_id from pessoa where candidatura_id = ?";
 
     private static final String DELETE_FAMILIAR = "delete from pessoa where id_pessoa = ?";
     private static final String DELETE_FAMILIARES = "delete from pessoa";
@@ -112,7 +112,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
-                    familiar.setCandidatura(result.getInt("candidatura"));
+                    familiar.setCandidatura(result.getInt("candidatura_id"));
                 }
             } finally {
                 statement.close();
@@ -267,7 +267,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
-                    familiar.setCandidatura(result.getInt("candidatura"));
+                    familiar.setCandidatura(result.getInt("candidatura_id"));
 
                     r.add(familiar);
                 }
