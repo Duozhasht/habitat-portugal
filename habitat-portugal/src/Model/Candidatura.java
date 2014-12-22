@@ -1,6 +1,7 @@
 package Model;
 
 import Persistence.FamiliarRepository;
+import Persistence.RepositoryFactory;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -34,6 +35,7 @@ public class Candidatura {
         this.naturalidade = new SimpleStringProperty();
         this.nacionalidade = new SimpleStringProperty();
         this.aprovado = new SimpleBooleanProperty();
+        this.agregadofamiliar = RepositoryFactory.getFamiliarRepository();
     }
 
     public int getId() {
