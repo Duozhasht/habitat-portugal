@@ -12,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
+import java.io.IOException;
+
 public class LoginController {
 
 
@@ -52,7 +55,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleLoginAction(ActionEvent e) throws Exception{
+    protected void handleLoginAction(ActionEvent e) throws IOException,Exception{
         if(this.nome.getText() != null && this.password.getText() != null){
            switch (this.facade.login(this.nome.getText(),this.password.getText())){
                case 1 : System.out.println("Gestão de Candidatura");
@@ -73,8 +76,8 @@ public class LoginController {
 
     private void startAdminController() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/ViewAdmin.fxml"));
-        Parent admin = (Parent)fxmlLoader.load();
-        AdminController controller = fxmlLoader.<AdminController>getController();
+        Parent admin = fxmlLoader.load();
+        AdminController controller = fxmlLoader.getController();
         controller.setFacade(this.facade);
         controller.setParent(admin);
         controller.setScene(new Scene(admin,1000,600));
