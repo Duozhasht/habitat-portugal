@@ -30,7 +30,7 @@ public class AdminController {
     //Tabelas
     @FXML TableView<Candidatura> caTable = new TableView<>();
     @FXML TableView<Candidatura> cnaTable = new TableView<>();
-    @FXML TableView<Familiar> ftable = new TableView<Familiar>();
+    @FXML TableView<Familiar> ftable = new TableView<>();
 
 
     //Listas

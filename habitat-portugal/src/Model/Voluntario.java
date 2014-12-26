@@ -1,5 +1,7 @@
 package Model;
 
+import Persistence.TarefaRepository;
+
 /**
  * @author davide on 18/12/14.
  */
@@ -25,6 +27,7 @@ public class Voluntario {
     private String pub;
     private String disponi_tempo;
     private String cca_habitat;
+    private TarefaRepository lista_tarefas;
 
     public Voluntario() {
         this.nome_voluntario = "";
@@ -221,6 +224,14 @@ public class Voluntario {
 
     public void setCca_habitat(String cca_habitat) {
         this.cca_habitat = cca_habitat;
+    }
+
+    public TarefaRepository getLista_tarefas() {
+        return lista_tarefas;
+    }
+
+    public void setLista_tarefas(TarefaRepository lista_tarefas) {
+        this.lista_tarefas = lista_tarefas;
     }
 
     @Override
