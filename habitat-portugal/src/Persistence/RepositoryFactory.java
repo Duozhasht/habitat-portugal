@@ -23,6 +23,8 @@
 
 package Persistence;
 
+import Model.Voluntario;
+
 import java.util.Properties;
 
 /**
@@ -47,6 +49,7 @@ public final class RepositoryFactory {
     private static EventoRepository eventoRepository;
     private static TarefaRepository tarefaRepository;
     private static ProjectoRepository projectoRepository;
+    private static VoluntarioRepository voluntarioRepository;
     private static GrupoRepository grupoRepository;
 
     private RepositoryFactory() { }
@@ -98,6 +101,13 @@ public final class RepositoryFactory {
             projectoRepository = new ProjectoRepository(getURL(),USER,PASSWORD);
         }
         return projectoRepository;
+    }
+
+    public static VoluntarioRepository getVoluntarioRepository(){
+        if(voluntarioRepository == null){
+            voluntarioRepository = new VoluntarioRepository(getURL(),USER,PASSWORD);
+        }
+        return voluntarioRepository;
     }
 
     public static GrupoRepository getGrupoRepository() {

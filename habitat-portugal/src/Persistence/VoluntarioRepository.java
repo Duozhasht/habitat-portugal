@@ -11,11 +11,11 @@ import java.util.*;
 
 @SuppressWarnings("UnusedDeclaration")
 public class VoluntarioRepository implements Map<Integer, Voluntario> {
-    private static final String INSERT_VOLUNTARIO = "insert into voluntario (nome_voluntario, data_nascimento, profissao, morada, codigo_postal, localidade, telefone, telemovel, email, hab_academ, conhec_lingui, form_compl, exp_voluntariado, conhec_constr, trabalho_grupo, pub , disponi_tempo, cca_habitat) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_VOLUNTARIO = "update voluntario set nome_voluntario = ?, data_nascimento = ?, profissao = ?, morada = ?, codigo_postal = ?, localidade = ?, telefone = ?, telemovel = ?, email = ?, hab_academ = ?, conhec_lingui = ?, form_compl = ?, exp_voluntariado = ?, conhec_constr = ?, trabalho_grupo = ?, pub  = ?, disponi_tempo = ?, cca_habitat = ? where id_voluntario = ?";
+    private static final String INSERT_VOLUNTARIO = "insert into voluntario (nome_voluntario, data_nascimento, profissao, morada, contacto, hab_academ, conhec_lingui, exp_voluntariado, conhec_constr, trabalho_grupo, pub , disponi_tempo, cca_habitat) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String UPDATE_VOLUNTARIO = "update voluntario set nome_voluntario = ?, data_nascimento = ?, profissao = ?, morada = ?, contacto = ?, hab_academ = ?, conhec_lingui = ?, exp_voluntariado = ?, conhec_constr = ?, trabalho_grupo = ?, pub  = ?, disponi_tempo = ?, cca_habitat = ? where id_voluntario = ?";
 
     private static final String SELECT_VOLUNTARIO = "select * from voluntario where id_voluntario = ?";
-    private static final String SELECT_VOLUNTARIOS = "select * from voluntario";
+    private static final String SELECT_VOLUNTARIOS = "select id_voluntario, nome_voluntario, data_nascimento, profissao, morada, contacto, hab_academ, conhec_lingui, exp_voluntariado, conhec_constr, trabalho_grupo, pub , disponi_tempo, cca_habitat from voluntario";
     private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where id_grupo = ?";
 
     private static final String DELETE_VOLUNTARIO = "delete from voluntario where id_voluntario = ?";
@@ -110,18 +110,13 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
                     voluntario.setData_nascimento(result.getString("data_nascimento"));
                     voluntario.setProfissao(result.getString("profissao"));
                     voluntario.setMorada(result.getString("morada"));
-                    voluntario.setCodigo_postal(result.getString("codigo_postal"));
-                    voluntario.setLocalidade(result.getString("localidade"));
-                    voluntario.setTelefone(result.getString("telefone"));
-                    voluntario.setTelemovel(result.getString("telemovel"));
-                    voluntario.setEmail(result.getString("email"));
+                    voluntario.setContacto(result.getString("contacto"));
                     voluntario.setHab_academ(result.getString("hab_academ"));
                     voluntario.setConhec_lingui(result.getString("conhec_lingui"));
-                    voluntario.setForm_compl(result.getString("form_compl"));
                     voluntario.setExp_voluntariado(result.getString("exp_voluntariado"));
-                    voluntario.setConhec_constr(result.getString("conhec_constr"));
-                    voluntario.setTrabalho_grupo(result.getString("trabalho_grupo"));
-                    voluntario.setPub(result.getString("pub"));
+                    voluntario.setConhec_constr(result.getBoolean("conhec_constr"));
+                    voluntario.setTrabalho_grupo(result.getBoolean("trabalho_grupo"));
+                    voluntario.setPub(result.getBoolean("pub"));
                     voluntario.setDisponi_tempo(result.getString("disponi_tempo"));
                     voluntario.setCca_habitat(result.getString("cca_habitat"));
                 }
@@ -160,23 +155,18 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
             statement.setString(2, value.getData_nascimento());
             statement.setString(3, value.getProfissao());
             statement.setString(4, value.getMorada());
-            statement.setString(5, value.getCodigo_postal());
-            statement.setString(6, value.getLocalidade());
-            statement.setString(7, value.getTelefone());
-            statement.setString(8, value.getTelemovel());
-            statement.setString(9, value.getEmail());
-            statement.setString(10, value.getHab_academ());
-            statement.setString(11, value.getConhec_lingui());
-            statement.setString(12, value.getForm_compl());
-            statement.setString(13, value.getExp_voluntariado());
-            statement.setString(14, value.getConhec_constr());
-            statement.setString(15, value.getTrabalho_grupo());
-            statement.setString(16, value.getPub());
-            statement.setString(17, value.getDisponi_tempo());
-            statement.setString(18, value.getCca_habitat());
+            statement.setString(5, value.getContacto());
+            statement.setString(6, value.getHab_academ());
+            statement.setString(7, value.getConhec_lingui());
+            statement.setString(8, value.getExp_voluntariado());
+            statement.setBoolean(9, value.getConhec_constr());
+            statement.setBoolean(10, value.getTrabalho_grupo());
+            statement.setBoolean(11, value.getPub());
+            statement.setString(12, value.getDisponi_tempo());
+            statement.setString(13, value.getCca_habitat());
 
             if (isUpdate) {
-                statement.setInt(19,key);
+                statement.setInt(14,key);
             }
 
             statement.executeUpdate();
@@ -288,18 +278,13 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
                     voluntario.setData_nascimento(result.getString("data_nascimento"));
                     voluntario.setProfissao(result.getString("profissao"));
                     voluntario.setMorada(result.getString("morada"));
-                    voluntario.setCodigo_postal(result.getString("codigo_postal"));
-                    voluntario.setLocalidade(result.getString("localidade"));
-                    voluntario.setTelefone(result.getString("telefone"));
-                    voluntario.setTelemovel(result.getString("telemovel"));
-                    voluntario.setEmail(result.getString("email"));
+                    voluntario.setContacto(result.getString("contacto"));
                     voluntario.setHab_academ(result.getString("hab_academ"));
                     voluntario.setConhec_lingui(result.getString("conhec_lingui"));
-                    voluntario.setForm_compl(result.getString("form_compl"));
                     voluntario.setExp_voluntariado(result.getString("exp_voluntariado"));
-                    voluntario.setConhec_constr(result.getString("conhec_constr"));
-                    voluntario.setTrabalho_grupo(result.getString("trabalho_grupo"));
-                    voluntario.setPub(result.getString("pub"));
+                    voluntario.setConhec_constr(result.getBoolean("conhec_constr"));
+                    voluntario.setTrabalho_grupo(result.getBoolean("trabalho_grupo"));
+                    voluntario.setPub(result.getBoolean("pub"));
                     voluntario.setDisponi_tempo(result.getString("disponi_tempo"));
                     voluntario.setCca_habitat(result.getString("cca_habitat"));
 
@@ -330,7 +315,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
             Connection connection = DriverManager.getConnection(url, user, password);
             PreparedStatement statement = connection.prepareStatement(SELECT_BY_GRUPO);
 
-            statement.setLong(1,id);
+            statement.setInt(1,id);
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
