@@ -17,6 +17,7 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
 
     private static final String SELECT_TAREFA = "select nome_tarefa, data_inicio, data_final, id_encarregado from tarefa where id_tarefa = ?";
     private static final String SELECT_TAREFAS = "select id_tarefa, nome_tarefa, data_inicio, data_final, id_encarregado from tarefa";
+    private static final String SELECT_BY_VOLUNTARIO = "select id_tarefa from voluntario_tarefa where id_voluntario = ?";
 
     private static final String DELETE_TAREFA = "delete from tarefa where id_tarefa = ?";
     private static final String DELETE_TAREFAS = "delete from tarefa";
@@ -278,5 +279,31 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
     @Override
     public Set<Entry<Integer, Tarefa>> entrySet() {
         return null;
+    }
+
+    public Iterable<Tarefa> findByVoluntario(int id) {
+        List<Tarefa> lista = new ArrayList<>();
+        try {
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_VOLUNTARIO);
+
+            statement.setLong(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    if (containsKey(result.getInt("id_tarefa"))) {
+                        Tarefa tarefa = get(result.getInt("id_tarefa"));
+                        lista.add(tarefa);
+                    }
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
     }
 }
