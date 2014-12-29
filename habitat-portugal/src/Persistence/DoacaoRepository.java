@@ -15,16 +15,16 @@ import java.util.Set;
 public class DoacaoRepository implements Map<Integer, Doacao> {
 
     private static final String INSERT_DOACAO = "insert into doacao (descricao, quantidade, tipo, doador_id) values (?,?,?,?)";
-    private static final String UPDATE_DOACAO = "update doacao set descricao = ?, quantidade = ?, tipo = ?, doador_id = ? where id_tarefa = ?";
+    private static final String UPDATE_DOACAO = "update doacao set descricao = ?, quantidade = ?, tipo = ?, doador_id = ? where id_doacao = ?";
 
     private static final String SELECT_DOACAO = "select * from doacao where id_doacao = ?";
-    private static final String SELECT_DOACOES = "select id_tarefa, nome_tarefa, data_inicio, data_final, id_encarregado from doacao";
+    private static final String SELECT_DOACOES = "select * from doacao";
 
-    private static final String DELETE_DOACAO = "delete from doacao where id_tarefa = ?";
+    private static final String DELETE_DOACAO = "delete from doacao where id_doacao = ?";
     private static final String DELETE_DOACOES = "delete from doacao";
 
     private static final String COUNT_DOACOES = "select count(*) as n from doacao";
-    private static final String SELECT_IDS = "select id_tarefa from doacao";
+    private static final String SELECT_IDS = "select id_doacao from doacao";
 
     private final String url;
     private final String user;
@@ -93,7 +93,31 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
 
     @Override
     public Doacao get(Object key) {
-        return null;
+        Doacao doacao = null;
+        try {
+
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_DOACAO);
+
+            statement.setInt(1,(int) key);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    doacao = new Doacao();
+                    doacao.setId_doacao((int) key);
+                    doacao.setDescricao(result.getString("descricao"));
+                    doacao.setQuantidade(result.getString("quantidade"));
+                    doacao.setTipo(result.getString("tipo"));
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return doacao;
     }
 
     @Override
@@ -108,7 +132,9 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
 
     @Override
     public void putAll(Map<? extends Integer, ? extends Doacao> m) {
-
+        for (Doacao d: m.values()) {
+            put(d.getId_doacao(),d);
+        }
     }
 
     @Override
