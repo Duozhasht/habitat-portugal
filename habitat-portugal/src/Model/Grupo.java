@@ -3,6 +3,9 @@ package Model;
 import Persistence.VoluntarioRepository;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author davide on 21/12/14.
  */
@@ -15,7 +18,7 @@ public class Grupo {
     private SimpleStringProperty data_criacao;
     private SimpleStringProperty data_final;
     private SimpleStringProperty notas;
-    private VoluntarioRepository voluntarios;
+    private List<Integer> id_voluntarios;
 
     public Grupo() {
         this.nome_grupo = new SimpleStringProperty();
@@ -23,15 +26,17 @@ public class Grupo {
         this.data_criacao = new SimpleStringProperty();
         this.data_final = new SimpleStringProperty();
         this.notas = new SimpleStringProperty();
+        this.id_voluntarios = new ArrayList<>();
     }
 
     public Grupo(SimpleStringProperty nome_grupo, SimpleStringProperty motivo, SimpleStringProperty data_criacao,
-                 SimpleStringProperty data_final, SimpleStringProperty notas) {
+                 SimpleStringProperty data_final, SimpleStringProperty notas, List<Integer> id_voluntarios) {
         this.nome_grupo = nome_grupo;
         this.motivo = motivo;
         this.data_criacao = data_criacao;
         this.data_final = data_final;
         this.notas = notas;
+        this.id_voluntarios = id_voluntarios;
     }
 
     public int getId_grupo() {
@@ -102,6 +107,14 @@ public class Grupo {
         this.notas.set(notas);
     }
 
+    public List<Integer> getId_voluntarios() {
+        return id_voluntarios;
+    }
+
+    public void setId_voluntarios(List<Integer> id_voluntarios) {
+        this.id_voluntarios = id_voluntarios;
+    }
+
     @Override
     public String toString() {
         return "Grupo{" +
@@ -111,6 +124,7 @@ public class Grupo {
                 ", data_criacao=" + data_criacao +
                 ", data_final=" + data_final +
                 ", notas=" + notas +
+                ", id_voluntarios=" + id_voluntarios +
                 '}';
     }
 }

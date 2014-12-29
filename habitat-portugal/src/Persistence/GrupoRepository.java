@@ -24,6 +24,9 @@ public class GrupoRepository implements Map<Integer, Grupo> {
     private static final String COUNT_GRUPOS = "select count(*) as n from grupo";
     private static final String SELECT_IDS = "select id_grupo from grupo";
 
+    private static final String INSERE_VOLUNTARIO_GRUPO = "insert into grupo_voluntario (id_voluntario, id_grupo) values (?,?)";
+    private static final String REMOVE_VOLUNTARIO_GRUPO = "delete from grupo_voluntario where id_voluntario = ? and id_grupo = ?";
+
     private final String url;
     private final String user;
     private final String password;
@@ -283,5 +286,45 @@ public class GrupoRepository implements Map<Integer, Grupo> {
     @Override
     public Set<Entry<Integer, Grupo>> entrySet() {
         return null;
+    }
+
+    public void insereVoluntarioGrupo(int idVoluntario, int idGrupo) {
+        try {
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = connection.prepareStatement(INSERE_VOLUNTARIO_GRUPO);
+
+            statement.setInt(1,idVoluntario);
+            statement.setInt(2,idGrupo);
+
+            try {
+                statement.executeUpdate();
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeVoluntarioGrupo (int idVoluntario, int idGrupo) {
+        try {
+            Connection connection = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = connection.prepareStatement(REMOVE_VOLUNTARIO_GRUPO);
+
+            statement.setInt(1,idVoluntario);
+            statement.setInt(2,idGrupo);
+
+            try {
+                statement.executeUpdate();
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
