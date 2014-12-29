@@ -390,20 +390,35 @@
                                       <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                 <Button layoutX="483.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Adicionar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
-                                                 <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                                                 <Button layoutX="483.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleAdicionarVAction" prefHeight="30.0" prefWidth="155.0" text="Adicionar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
+                                                 <TableView fx:id="vTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                                                      <columns>
-                                                         <TableColumn prefWidth="55.0" text="ID" />
-                                                         <TableColumn prefWidth="279.0" text="Nome do Voluntário" />
-                                                         <TableColumn prefWidth="185.0" text="Data de Nascimento" />
-                                                         <TableColumn minWidth="2.0" prefWidth="174.0" text="Contacto" />
-                                                         <TableColumn minWidth="1.0" prefWidth="106.0" text="Ex-Voluntario " />
+                                                         <TableColumn prefWidth="55.0" text="ID">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="id_voluntario" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="279.0" text="Nome do Voluntario">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="nome_voluntario" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="185.0" text="Data de Nascimento">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="data_nascimento" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn minWidth="2.0" prefWidth="174.0" text="Contacto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="contacto" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
                                                      </columns>
                                                  </TableView>
-                                                 <Button layoutX="878.0" layoutY="257.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Remover Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
-                                                 <Button layoutX="871.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Editar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="280.0" />
-                                                 <Button layoutX="871.0" layoutY="359.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Consultar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="330.0" />
-                                                 <Pane layoutX="798.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                 <Button layoutX="878.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleRemoverVAction" prefHeight="30.0" prefWidth="155.0" text="Remover Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
+                                                 <Button layoutX="871.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleEditarVAction" prefHeight="30.0" prefWidth="155.0" text="Editar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="280.0" />
+                                                 <Button layoutX="871.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleConsultarVAction" prefHeight="30.0" prefWidth="155.0" text="Consultar Voluntário" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="330.0" />
+                                                 <Pane layoutX="798.0" layoutY="10.0" prefHeight="172.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <children>
                                                         <Label layoutX="20.0" layoutY="40.0" text="Gestão de Voluntários">
                                                             <font>

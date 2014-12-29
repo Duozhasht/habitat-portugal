@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DialogController.VoluntarioController">
+   <children>
+      <Label layoutX="112.0" layoutY="14.0" prefHeight="19.0" prefWidth="156.0" text="Gestão de Voluntário" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nome_voluntario" layoutX="30.0" layoutY="100.0" prefHeight="26.0" prefWidth="340.0" promptText="Introduza o nome do voluntário" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="morada" layoutX="30.0" layoutY="150.0" promptText="Introduza a morada" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0" />
+      <TextField fx:id="contacto" layoutX="30.0" layoutY="200.0" promptText="Introduza o contacto" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="200.0" />
+      <DatePicker fx:id="data_nascimento" layoutX="30.0" layoutY="250.0" prefHeight="26.0" prefWidth="370.0" promptText="Data de Nascimento" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="250.0" />
+      <TextField fx:id="hab_academ" layoutX="30.0" layoutY="300.0" prefHeight="26.0" prefWidth="370.0" promptText="Nivel de Escolaridade" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
+      <TextField fx:id="profissao" layoutX="30.0" layoutY="350.0" prefHeight="26.0" prefWidth="370.0" promptText="Profissão" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
+      <TextField fx:id="conhec_lingui" layoutX="30.0" layoutY="400.0" promptText="Conhecimentos Linguisticos" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0" />
+      <TextField fx:id="exp_voluntariado" layoutX="30.0" layoutY="450.0" promptText="Experiencia em Voluntariado" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="450.0" />
+      <TextField fx:id="disponi_tempo" layoutX="31.0" layoutY="500.0" prefHeight="26.0" prefWidth="340.0" promptText="Disponibilidade de Tempo" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="500.0" />
+      <TextField fx:id="cca_habitat" layoutX="30.0" layoutY="544.0" prefHeight="26.0" prefWidth="340.0" promptText="Como Conheceu a Habitat" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="550.0" />
+      <Label layoutX="30.0" layoutY="600.0" prefHeight="16.0" prefWidth="207.0" text="Conhecimentos em Construcção:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="600.0" />
+      <RadioButton fx:id="sim_cc" layoutX="250.0" layoutY="600.0" mnemonicParsing="false" text="Sim" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="600.0" />
+      <RadioButton fx:id="nao_cc" layoutX="320.0" layoutY="600.0" mnemonicParsing="false" text="Não" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="600.0" />
+      <Label layoutX="30.0" layoutY="630.0" text="Trabalho em Grupo:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="630.0" />
+      <RadioButton fx:id="sim_tg" layoutX="250.0" layoutY="630.0" mnemonicParsing="false" text="Sim" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="630.0" />
+      <RadioButton fx:id="nao_tg" layoutX="320.0" layoutY="630.0" mnemonicParsing="false" text="Não" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="630.0" />
+      <Label layoutX="134.0" layoutY="66.0" text="Dados do Voluntário" AnchorPane.leftAnchor="160.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="sim_ri" layoutX="250.0" layoutY="660.0" mnemonicParsing="false" text="Sim" AnchorPane.topAnchor="660.0" />
+      <RadioButton fx:id="nao_ri" layoutX="320.0" layoutY="660.0" mnemonicParsing="false" text="Não" AnchorPane.topAnchor="660.0" />
+      <Button fx:id="ok" layoutX="128.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="26.0" prefWidth="100.0" text="Ok" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="100.0" />
+      <Button layoutX="405.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleCancelarAction" prefHeight="26.0" prefWidth="100.0" text="Cancelar" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="100.0" />
+      <Separator layoutX="15.0" layoutY="701.0" prefHeight="0.0" prefWidth="405.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="19.0" />
+      <Label layoutX="30.0" layoutY="660.0" text="Receber Informações da Habitat:" AnchorPane.topAnchor="660.0" />
+   </children>
+</AnchorPane>
