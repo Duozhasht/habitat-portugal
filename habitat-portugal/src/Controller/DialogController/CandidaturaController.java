@@ -5,6 +5,8 @@ import Model.Candidatura;
 import Model.Familiar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -53,8 +55,14 @@ public class CandidaturaController {
     @FXML RadioButton casado_familiar;
     @FXML RadioButton divorciado_familiar;
     @FXML RadioButton viuvo_familiar;
-    @FXML TableView<Familiar> afTable = new TableView<>();
+    //Buttons
+    @FXML Button ok;
+    @FXML Button adicionar;
+    @FXML Button remover;
+    @FXML Button editar;
 
+
+    @FXML TableView<Familiar> afTable = new TableView<>();
     ObservableList<Familiar> afList;
 
 
@@ -170,6 +178,37 @@ public class CandidaturaController {
 
     }
 
+
+    public void lockFxml(){
+        this.nome_candidato.setDisable(true);
+        this.data_nascimento.setDisable(true);
+        this.morada.setDisable(true);
+        this.contacto.setDisable(true);
+        this.escolaridade.setDisable(true);
+        this.profissao.setDisable(true);
+        this.naturalidade.setDisable(true);
+        this.nacionalidade.setDisable(true);
+
+        this.nome_familiar.setDisable(true);
+        this.data_nascimento_familiar.setDisable(true);
+        this.parentesco.setDisable(true);
+        this.ocupacao.setDisable(true);
+        this.escolaridade_familiar.setDisable(true);
+        this.ok.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialogStage.close();
+            }
+        });
+        this.adicionar.setDisable(true);
+        this.remover.setDisable(true);
+        this.editar.setDisable(true);
+
+
+
+
+    }
+
     public void clearData(){
         this.nome_familiar.clear();
         this.data_nascimento_familiar.setConverter(new StringConverter<LocalDate>() {
@@ -201,6 +240,8 @@ public class CandidaturaController {
    @FXML protected void handleOkAction(){
        RadioButton ec_1 = (RadioButton)this.estado_civil.getSelectedToggle();
        RadioButton a = (RadioButton)this.aprovacao.getSelectedToggle();
+       if(this.candidatura == null)
+           this.candidatura = new Candidatura();
        this.candidatura.setNome_candidato(this.nome_candidato.getText());
        this.candidatura.setData_nascimento(this.data_nascimento.getValue().toString());
        this.candidatura.setMorada(this.morada.getText());
@@ -224,7 +265,7 @@ public class CandidaturaController {
 
 
     @FXML
-    protected void handleCancelarAction() {
+    protected void handleCancelarAction(ActionEvent e) {
 
         dialogStage.close();
     }
