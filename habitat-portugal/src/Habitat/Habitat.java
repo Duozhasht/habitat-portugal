@@ -3,10 +3,8 @@ package Habitat;
 import Model.Candidatura;
 import Model.Familiar;
 import Model.Utilizador;
-import Persistence.CandidaturaRepository;
-import Persistence.FamiliarRepository;
-import Persistence.RepositoryFactory;
-import Persistence.UtilizadorRepository;
+import Model.Voluntario;
+import Persistence.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,6 +20,7 @@ public class Habitat {
     private UtilizadorRepository uRepo = RepositoryFactory.getUtilizadorRepository();
     private CandidaturaRepository cRepo = RepositoryFactory.getCandidaturaRepository();
     private FamiliarRepository fRepo = RepositoryFactory.getFamiliarRepository();
+    private VoluntarioRepository vRepo = RepositoryFactory.getVoluntarioRepository();
 
 
 
@@ -79,6 +78,17 @@ public class Habitat {
         return res;
     }
 
+    public ObservableList<Voluntario> getObservableV(){
+        ObservableList<Voluntario> res = FXCollections.observableArrayList();
+        for(Voluntario voluntario : this.vRepo.values()){
+            System.out.println("ASDASDD");
+            res.add(voluntario);
+
+        }
+
+        return res;
+    }
+
 
     public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar){
         try{
@@ -114,6 +124,32 @@ public class Habitat {
     public boolean removerFamiliarCandidatura(Familiar familiar){
         this.getfRepo().remove(familiar.getId());
         return true;
+    }
+
+    public boolean adicionarVoluntario(Voluntario voluntario){
+        try{
+            this.vRepo.put(voluntario.getId_voluntario(), voluntario);
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean removerVoluntario(Voluntario voluntario){
+        try{
+
+            this.vRepo.remove(voluntario.getId_voluntario());
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 
