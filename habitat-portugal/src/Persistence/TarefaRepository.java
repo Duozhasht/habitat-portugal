@@ -281,7 +281,7 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
         return null;
     }
 
-    public Iterable<Tarefa> findByGrupo(int id) {
+    public Iterable<Tarefa> findByVoluntario(int id) {
         List<Tarefa> lista = new ArrayList<>();
         try {
 
