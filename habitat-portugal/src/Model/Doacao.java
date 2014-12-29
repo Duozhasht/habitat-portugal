@@ -14,8 +14,8 @@ public class Doacao {
     private SimpleStringProperty descricao;
     private SimpleStringProperty quantidade;
     private SimpleStringProperty tipo;
-    private DoadorRepository doador;
-    private EventoRepository evento;
+    private int doador = -1;
+    private int evento = -1;
 
     public Doacao() {
         this.descricao = new SimpleStringProperty();
@@ -72,6 +72,22 @@ public class Doacao {
 
     public void setTipo(String tipo) {
         this.tipo.set(tipo);
+    }
+
+    public int getDoador() {
+        return doador;
+    }
+
+    public void setDoador(int doador) {
+        this.doador = doador;
+    }
+
+    public int getEvento() {
+        return evento;
+    }
+
+    public void setEvento(int evento) {
+        this.evento = evento;
     }
 
     @Override
