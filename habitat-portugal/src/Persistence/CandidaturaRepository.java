@@ -159,7 +159,7 @@ public class CandidaturaRepository implements Map<Integer,Candidatura> {
             statement.setBoolean(10, (value.getAprovado()));
 
             if (isUpdate) {
-                statement.setLong(11,key);
+                statement.setInt(11,key);
             }
 
             statement.executeUpdate();

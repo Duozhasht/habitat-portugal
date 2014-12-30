@@ -105,7 +105,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     voluntario = new Voluntario();
-                    voluntario.setId_voluntario(result.getInt("id_voluntario"));
+                    voluntario.setId_voluntario((int) key);
                     voluntario.setNome_voluntario(result.getString("nome_voluntario"));
                     voluntario.setData_nascimento(result.getString("data_nascimento"));
                     voluntario.setProfissao(result.getString("profissao"));

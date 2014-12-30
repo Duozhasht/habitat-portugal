@@ -20,6 +20,7 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
 
     private static final String SELECT_DOACAO = "select * from doacao where id_doacao = ?";
     private static final String SELECT_DOACOES = "select * from doacao";
+    private static final String SELECT_BY_DOADOR = "select * from doacao where doador_id = ?";
 
     private static final String DELETE_DOACAO = "delete from doacao where id_doacao = ?";
     private static final String DELETE_DOACOES = "delete from doacao";
@@ -300,5 +301,31 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
     @Override
     public Set<Entry<Integer, Doacao>> entrySet() {
         return null;
+    }
+
+    public Iterable<Doacao> findByCandidatura(int id) {
+        List<Doacao> doacoes = new ArrayList<>();
+        try {
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_DOADOR);
+
+            statement.setInt(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    if (containsKey(result.getInt("id_doador"))) {
+                        Doacao doacao = get(result.getInt("id_doador"));
+                        doacoes.add(doacao);
+                    }
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return doacoes;
     }
 }

@@ -298,7 +298,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
             Connection connection = DriverManager.getConnection(url, user, password);
             PreparedStatement statement = connection.prepareStatement(SELECT_BY_CANDIDATURA);
 
-            statement.setLong(1,id);
+            statement.setInt(1,id);
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
