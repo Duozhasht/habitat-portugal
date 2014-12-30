@@ -12,8 +12,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Tiago on 18/12/14.
@@ -24,6 +28,7 @@ public class CandidaturaController {
     private Habitat facade;
     private Candidatura candidatura;
     private boolean okClicked = false;
+
 
 
     //Dados do Candidato -> FXML Components
@@ -85,6 +90,8 @@ public class CandidaturaController {
         }
 
     }
+
+
     public void initComponents(){
         //Handle RadioButton Group - estado_civil_candidato
         this.solteiro.setToggleGroup(estado_civil);
@@ -105,7 +112,7 @@ public class CandidaturaController {
         this.afList = FXCollections.observableArrayList();
         this.afTable.setItems(afList);
         this.data_nascimento.setConverter(new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
             @Override
             public String toString(LocalDate object) {
@@ -125,7 +132,7 @@ public class CandidaturaController {
             }
         });
         this.data_nascimento_familiar.setConverter(new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
             @Override
             public String toString(LocalDate object) {
@@ -149,7 +156,7 @@ public class CandidaturaController {
 
     public void setData(){
         this.nome_candidato.setText(this.candidatura.getNome_candidato());
-        //this.data_nascimento;
+        this.data_nascimento.setValue(this.candidatura.getData_nascimento().toLocalDate());
         this.morada.setText(this.candidatura.getMorada());
         this.contacto.setText(this.candidatura.getContacto());
         this.escolaridade.setText(this.candidatura.getEscolaridade());
@@ -212,7 +219,7 @@ public class CandidaturaController {
     public void clearData(){
         this.nome_familiar.clear();
         this.data_nascimento_familiar.setConverter(new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
             @Override
             public String toString(LocalDate object) {
@@ -243,7 +250,7 @@ public class CandidaturaController {
        if(this.candidatura == null)
            this.candidatura = new Candidatura();
        this.candidatura.setNome_candidato(this.nome_candidato.getText());
-       this.candidatura.setData_nascimento(this.data_nascimento.getValue().toString());
+       this.candidatura.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
        this.candidatura.setMorada(this.morada.getText());
        this.candidatura.setContacto(this.contacto.getText());
        this.candidatura.setEscolaridade(this.escolaridade.getText());
@@ -276,7 +283,7 @@ public class CandidaturaController {
             RadioButton ec_2 = (RadioButton)this.estado_civil_familiar.getSelectedToggle();
             Familiar familiar = new Familiar();
             familiar.setNome(this.nome_familiar.getText());
-            familiar.setData_nascimento(this.data_nascimento_familiar.getValue().toString());
+            familiar.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
             familiar.setParentesco(this.parentesco.getText());
             familiar.setOcupacao(this.parentesco.getText());
             familiar.setEscolaridade(this.escolaridade.getText());
@@ -298,7 +305,7 @@ public class CandidaturaController {
 
     @FXML
     protected void handleEditarAction(){
-        //
+
     }
 
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -104,7 +105,7 @@ public class VoluntarioController {
 
     public void setData(){
         this.nome_voluntario.setText(this.voluntario.getNome_voluntario());
-        //this.data
+        this.data_nascimento.setValue(this.voluntario.getData_nascimento().toLocalDate());
         this.profissao.setText(this.voluntario.getProfissao());
         this.morada.setText(this.voluntario.getMorada());
         this.contacto.setText(this.voluntario.getContacto());
@@ -164,7 +165,7 @@ public class VoluntarioController {
        if(this.voluntario == null)
            this.voluntario = new Voluntario();
        this.voluntario.setNome_voluntario(this.nome_voluntario.getText());
-       this.voluntario.setData_nascimento(this.data_nascimento.getValue().toString());
+       this.voluntario.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
        this.voluntario.setProfissao(this.profissao.getText());
        this.voluntario.setMorada(this.morada.getText());
        this.voluntario.setContacto(this.contacto.getText());

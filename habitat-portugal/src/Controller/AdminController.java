@@ -1,11 +1,8 @@
 package Controller;
 
-import Controller.DialogController.CandidaturaController;
-import Controller.DialogController.VoluntarioController;
+import Controller.DialogController.*;
 import Habitat.Habitat;
-import Model.Candidatura;
-import Model.Familiar;
-import Model.Voluntario;
+import Model.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,17 +27,25 @@ public class AdminController {
     private Stage stage;
 
     //Tabelas
-    @FXML TableView<Candidatura> caTable = new TableView<>();
+    @FXML  TableView<Candidatura> caTable = new TableView<>();
     @FXML TableView<Candidatura> cnaTable = new TableView<>();
     @FXML TableView<Familiar> fTable = new TableView<>();
     @FXML TableView<Voluntario> vTable = new TableView<>();
+    @FXML TableView<Grupo> gTable = new TableView<>();
+    @FXML TableView<Evento> eTable = new TableView<>();
+    @FXML TableView<Doacao> dcTable = new TableView<>();
+    @FXML TableView<Doador> ddTable = new TableView<>();
 
 
     //Listas
-    ObservableList<Candidatura> caList;
-    ObservableList<Candidatura> cnaList;
-    ObservableList<Familiar> fList;
-    ObservableList<Voluntario> vList;
+    private ObservableList<Candidatura> caList;
+    private ObservableList<Candidatura> cnaList;
+    private ObservableList<Familiar> fList;
+    private ObservableList<Voluntario> vList;
+    private ObservableList<Grupo> gList;
+    private ObservableList<Evento> eList;
+    private ObservableList<Doacao> dcList;
+    private ObservableList<Doador> ddList;
 
 
     public void setFacade(Habitat facade) {
@@ -64,16 +69,32 @@ public class AdminController {
         this.cnaList = this.facade.getObservableCNA();
         this.fList = this.facade.getObservableF();
         this.vList = this.facade.getObservableV();
+        this.gList = this.facade.getObservableG();
+        this.eList = this.facade.getObservableE();
+        this.dcList = this.facade.getObservableDC();
+        this.ddList = this.facade.getObservableDD();
         this.caTable.setItems(caList);
         this.cnaTable.setItems(cnaList);
         this.fTable.setItems(fList);
         this.vTable.setItems(vList);
+        this.gTable.setItems(gList);
+        this.eTable.setItems(eList);
+        this.dcTable.setItems(dcList);
+        this.ddTable.setItems(ddList);
         stage.setTitle("Habitat - Administrador");
         stage.setScene(scene);
         stage.show();
     }
 
 
+        /*
+    ------------------------------------------------------
+    ------------------------------------------------------
+    Candidatura & Familia TAB
+    ------------------------------------------------------
+    ------------------------------------------------------
+
+     */
 
     public void updateTablesCandidatura(){
         this.caList.clear();
@@ -86,12 +107,6 @@ public class AdminController {
     }
 
 
-
-    public void updateTablesVoluntario(){
-        this.vList.clear();
-        this.vList.addAll(this.facade.getObservableV());
-        this.vTable.setItems(vList);
-    }
 
     private boolean showCandidaturaADialog(String modo){
         try {
@@ -169,44 +184,6 @@ public class AdminController {
         }
     }
 
-    private boolean showCandidaturaVDialog(String modo){
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewVoluntario.fxml"));
-            AnchorPane page = loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(modo);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(this.stage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-
-            // Set the person into the controller.
-            VoluntarioController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setFacade(this.facade);
-            if(modo.equals("Editar Voluntario"))
-                controller.setVoluntario(this.vTable.getSelectionModel().getSelectedItem());
-            if(modo.equals("Consultar Voluntario")) {
-                controller.setVoluntario(this.vTable.getSelectionModel().getSelectedItem());
-                controller.lockFxml();
-            }
-            controller.initializer();
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-            System.out.println(".");
-            this.updateTablesVoluntario();
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
 
 
 
@@ -266,11 +243,111 @@ public class AdminController {
         this.showCandidaturaNADialog("Consultar Candidatura");
     }
 
+
+
+
+
+
+
+    /*
+    ------------------------------------------------------
+    ------------------------------------------------------
+    VOLUNTARIO & GRUPO TAB
+    ------------------------------------------------------
+    ------------------------------------------------------
+     */
+
+    public void updateTablesVoluntario(){
+        this.vList.clear();
+        this.vList.addAll(this.facade.getObservableV());
+        this.vTable.setItems(vList);
+    }
+
+    public void updateTablesGrupos(){
+        this.gList.clear();
+        this.gList.addAll(this.facade.getObservableG());
+        this.vTable.setItems(vList);
+    }
+
+    private boolean showVoluntarioDialog(String modo){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewVoluntario.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            VoluntarioController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Editar Voluntario"))
+                controller.setVoluntario(this.vTable.getSelectionModel().getSelectedItem());
+            if(modo.equals("Consultar Voluntario")) {
+                controller.setVoluntario(this.vTable.getSelectionModel().getSelectedItem());
+                controller.lockFxml();
+            }
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            System.out.println(".");
+            this.updateTablesVoluntario();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean showGrupoDialog(String modo){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewGrupo.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            GrupoController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Gestão de Grupo"))
+                controller.setGrupo(this.gTable.getSelectionModel().getSelectedItem());
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            System.out.println(".");
+            this.updateTablesGrupos();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     @FXML
     protected void handleAdicionarVAction() {
-        this.showCandidaturaVDialog("Adicionar Voluntario");
+        this.showVoluntarioDialog("Adicionar Voluntario");
 
     }
+
 
 
 
@@ -285,13 +362,241 @@ public class AdminController {
 
     @FXML
     protected void handleEditarVAction() {
-        this.showCandidaturaVDialog("Editar Voluntario");
+        this.showVoluntarioDialog("Editar Voluntario");
 
     }
 
     @FXML
     protected void handleConsultarVAction() {
-        this.showCandidaturaVDialog("Consultar Voluntario");
+        this.showVoluntarioDialog("Consultar Voluntario");
+    }
+
+
+    @FXML
+    protected void handleAdicionarGAction() {
+        this.showGrupoDialog("Adicionar Grupo");
+
+    }
+
+
+
+
+    @FXML
+    protected void handleRemoverGAction() {
+        if(this.facade.removerGrupo(this.gTable.getSelectionModel().getSelectedItem()))
+            this.gList.remove(this.gTable.getSelectionModel().getSelectedItem());
+        else
+            System.out.println("Erro!");
+    }
+
+
+    @FXML
+    protected void handleEditarGAction() {
+        this.showGrupoDialog("Gestão de Grupo");
+
+    }
+
+
+        /*
+    ------------------------------------------------------
+    ------------------------------------------------------
+    Eventos e Doacoes TAB
+    ------------------------------------------------------
+    ------------------------------------------------------
+     */
+
+    public void updateTablesEvento(){
+        this.eList.clear();
+        this.eList.addAll(this.facade.getObservableE());
+        this.eTable.setItems(eList);
+    }
+
+    public void updateTablesDoacoes(){
+        this.dcList.clear();
+        this.dcList.addAll(this.facade.getObservableDC());
+        this.dcTable.setItems(dcList);
+    }
+
+    public void updateTablesDoadores(){
+        this.ddList.clear();
+        this.ddList.addAll(this.facade.getObservableDD());
+        this.ddTable.setItems(ddList);
+    }
+
+    private boolean showEventosDialog(String modo){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewEvento.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            EventoController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Editar Evento"))
+                controller.setEvento(this.eTable.getSelectionModel().getSelectedItem());
+            if(modo.equals("Consultar Evento")) {
+                controller.setEvento(this.eTable.getSelectionModel().getSelectedItem());
+                controller.lockFxml();
+            }
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesEvento();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean showDoacaoDialog(String modo){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewDoacao.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            DoacaoController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Editar Doacao"))
+                controller.setDoacao(this.dcTable.getSelectionModel().getSelectedItem());
+            if(modo.equals("Consultar Doacao")) {
+                controller.setDoacao(this.dcTable.getSelectionModel().getSelectedItem());
+            }
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesDoacoes();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean showDoadorDialog(String modo){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewDoador.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            DoadorController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Editar Doador"))
+                controller.setDoador(this.ddTable.getSelectionModel().getSelectedItem());
+            if(modo.equals("Consultar Doador")) {
+                controller.setDoador(this.ddTable.getSelectionModel().getSelectedItem());
+            }
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesDoadores();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    @FXML
+    protected void handleAdicionarEAction() {
+        this.showEventosDialog("Adicionar Evento");
+
+    }
+
+
+
+
+    @FXML
+    protected void handleRemoverEAction() {
+        if(this.facade.removerEvento(this.eTable.getSelectionModel().getSelectedItem()))
+            this.eList.remove(this.eTable.getSelectionModel().getSelectedItem());
+        else
+            System.out.println("Erro!");
+    }
+
+
+    @FXML
+    protected void handleEditarEAction() {
+        this.showEventosDialog("Editar Evento");
+    }
+
+    @FXML
+    protected void handleAdicionarDCAction() {
+        this.showDoacaoDialog("Adicionar Evento");
+
+    }
+
+    @FXML
+    protected void handleRemoverDCAction() {
+        if(this.facade.removerDoacao(this.dcTable.getSelectionModel().getSelectedItem()))
+            this.dcList.remove(this.eTable.getSelectionModel().getSelectedItem());
+        else
+            System.out.println("Erro!");
+    }
+
+
+    @FXML
+    protected void handleEditarDCAction() {
+        this.showDoacaoDialog("Editar Doacao");
+    }
+
+    @FXML
+    protected void handleAdicionarDDAction() {
+        this.showDoadorDialog("Adicionar Doacao");
+
+    }
+
+
+
+
+    @FXML
+    protected void handleRemoverDDAction() {
+        if(this.facade.removerDoador(this.ddTable.getSelectionModel().getSelectedItem()))
+            this.ddList.remove(this.ddTable.getSelectionModel().getSelectedItem());
+        else
+            System.out.println("Erro!");
+    }
+
+
+    @FXML
+    protected void handleEditarDDAction() {
+        this.showDoadorDialog("Editar Doacao");
     }
 
 }
