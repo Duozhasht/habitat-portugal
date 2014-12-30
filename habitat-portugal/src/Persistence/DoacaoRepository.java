@@ -303,7 +303,7 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
         return null;
     }
 
-    public Iterable<Doacao> findByCandidatura(int id) {
+    public Iterable<Doacao> findByDoador(int id) {
         List<Doacao> doacoes = new ArrayList<>();
         try {
 
