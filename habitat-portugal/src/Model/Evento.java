@@ -2,6 +2,8 @@ package Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.sql.Date;
+
 /**
  * @author PeterO'Daktyl on 17-12-2014.
  */
@@ -10,14 +12,14 @@ public class Evento {
 
     private int id = -1;
     private SimpleStringProperty nome_evento;
-    private SimpleStringProperty data_evento;
+    private Date data_evento;
     private SimpleStringProperty valor_total;
     private SimpleStringProperty organizador;
     private SimpleStringProperty notas;
 
     public Evento () {
         this.nome_evento = new SimpleStringProperty();
-        this.data_evento = new SimpleStringProperty();
+        this.data_evento = null;
         this.valor_total = new SimpleStringProperty();
         this.organizador = new SimpleStringProperty();
         this.notas = new SimpleStringProperty();
@@ -26,7 +28,7 @@ public class Evento {
     public Evento(SimpleStringProperty nome_evento, SimpleStringProperty data_evento, SimpleStringProperty valor_total,
                   SimpleStringProperty organizador, SimpleStringProperty notas) {
         this.nome_evento = nome_evento;
-        this.data_evento = data_evento;
+        this.data_evento = null;
         this.valor_total = valor_total;
         this.organizador = organizador;
         this.notas = notas;
@@ -52,16 +54,12 @@ public class Evento {
         this.nome_evento.set(nome_evento);
     }
 
-    public String getData_evento() {
-        return data_evento.get();
-    }
-
-    public SimpleStringProperty data_eventoProperty() {
+    public Date getData_evento() {
         return data_evento;
     }
 
-    public void setData_evento(String data_evento) {
-        this.data_evento.set(data_evento);
+    public void setData_evento(Date data_evento) {
+        this.data_evento = data_evento;
     }
 
     public String getValor_total() {

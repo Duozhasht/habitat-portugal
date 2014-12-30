@@ -1,8 +1,10 @@
 package Model;
 
+import Persistence.RepositoryFactory;
 import Persistence.VoluntarioRepository;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,28 +17,29 @@ public class Grupo {
     private int id_grupo = -1;
     private SimpleStringProperty nome_grupo;
     private SimpleStringProperty motivo;
-    private SimpleStringProperty data_criacao;
-    private SimpleStringProperty data_final;
+    private Date data_criacao;
+    private Date data_final;
     private SimpleStringProperty notas;
-    private List<Integer> id_voluntarios;
+    private VoluntarioRepository elementos;
 
     public Grupo() {
         this.nome_grupo = new SimpleStringProperty();
         this.motivo = new SimpleStringProperty();
-        this.data_criacao = new SimpleStringProperty();
-        this.data_final = new SimpleStringProperty();
+        this.data_criacao = null;
+        this.data_final = null;
         this.notas = new SimpleStringProperty();
-        this.id_voluntarios = new ArrayList<>();
+        this.elementos = RepositoryFactory.getVoluntarioRepository();
+
     }
 
     public Grupo(SimpleStringProperty nome_grupo, SimpleStringProperty motivo, SimpleStringProperty data_criacao,
                  SimpleStringProperty data_final, SimpleStringProperty notas, List<Integer> id_voluntarios) {
         this.nome_grupo = nome_grupo;
         this.motivo = motivo;
-        this.data_criacao = data_criacao;
-        this.data_final = data_final;
+        this.data_criacao = null;
+        this.data_final = null;
         this.notas = notas;
-        this.id_voluntarios = id_voluntarios;
+
     }
 
     public int getId_grupo() {
@@ -71,28 +74,20 @@ public class Grupo {
         this.motivo.set(motivo);
     }
 
-    public String getData_criacao() {
-        return data_criacao.get();
-    }
-
-    public SimpleStringProperty data_criacaoProperty() {
+    public Date getData_criacao() {
         return data_criacao;
     }
 
-    public void setData_criacao(String data_criacao) {
-        this.data_criacao.set(data_criacao);
+    public void setData_criacao(Date data_criacao) {
+        this.data_criacao = data_criacao;
     }
 
-    public String getData_final() {
-        return data_final.get();
-    }
-
-    public SimpleStringProperty data_finalProperty() {
+    public Date getData_final() {
         return data_final;
     }
 
-    public void setData_final(String data_final) {
-        this.data_final.set(data_final);
+    public void setData_final(Date data_final) {
+        this.data_final = data_final;
     }
 
     public String getNotas() {
@@ -107,12 +102,12 @@ public class Grupo {
         this.notas.set(notas);
     }
 
-    public List<Integer> getId_voluntarios() {
-        return id_voluntarios;
+    public VoluntarioRepository getElementos() {
+        return elementos;
     }
 
-    public void setId_voluntarios(List<Integer> id_voluntarios) {
-        this.id_voluntarios = id_voluntarios;
+    public void setElementos(VoluntarioRepository elementos) {
+        this.elementos = elementos;
     }
 
     @Override
@@ -124,7 +119,6 @@ public class Grupo {
                 ", data_criacao=" + data_criacao +
                 ", data_final=" + data_final +
                 ", notas=" + notas +
-                ", id_voluntarios=" + id_voluntarios +
                 '}';
     }
 }

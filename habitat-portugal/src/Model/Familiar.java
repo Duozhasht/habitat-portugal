@@ -2,6 +2,8 @@ package Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.sql.Date;
+
 /**
  * @author Tiago on 03/12/14.
  */
@@ -12,7 +14,7 @@ public class Familiar {
     private int id = -1;
     private SimpleStringProperty nome;
     private SimpleStringProperty parentesco;
-    private SimpleStringProperty data_nascimento;
+    private Date data_nascimento;
     private SimpleStringProperty estado_civil;
     private SimpleStringProperty ocupacao;
     private SimpleStringProperty escolaridade;
@@ -21,20 +23,12 @@ public class Familiar {
     public Familiar() {
         this.nome = new SimpleStringProperty();
         this.parentesco = new SimpleStringProperty();
-        this.data_nascimento = new SimpleStringProperty();
+        this.data_nascimento = null;
         this.estado_civil = new SimpleStringProperty();
         this.ocupacao = new SimpleStringProperty();
         this.escolaridade = new SimpleStringProperty();
     }
 
-    public Familiar(SimpleStringProperty nome, SimpleStringProperty parentesco, SimpleStringProperty data_nascimento, SimpleStringProperty estado_civil, SimpleStringProperty ocupacao, SimpleStringProperty escolaridade) {
-        this.nome = nome;
-        this.parentesco = parentesco;
-        this.data_nascimento = data_nascimento;
-        this.estado_civil = estado_civil;
-        this.ocupacao = ocupacao;
-        this.escolaridade = escolaridade;
-    }
 
     public int getId() {
         return id;
@@ -68,16 +62,12 @@ public class Familiar {
         this.parentesco.set(parentesco);
     }
 
-    public String getData_nascimento() {
-        return data_nascimento.get();
-    }
-
-    public SimpleStringProperty data_nascimentoProperty() {
+    public Date getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(String data_nascimento) {
-        this.data_nascimento.set(data_nascimento);
+    public void setData_nascimento(Date data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 
     public String getEstado_civil() {

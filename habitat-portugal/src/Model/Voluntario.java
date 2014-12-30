@@ -3,6 +3,8 @@ package Model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.sql.Date;
+
 /**
  * @author Tiago on 18/12/14.
  */
@@ -11,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Voluntario {
     private int id_voluntario = -1;
     private SimpleStringProperty nome_voluntario;
-    private SimpleStringProperty data_nascimento;
+    private Date data_nascimento;
     private SimpleStringProperty profissao;
     private SimpleStringProperty morada;
     private SimpleStringProperty contacto;
@@ -26,7 +28,7 @@ public class Voluntario {
 
     public Voluntario(){
         this.nome_voluntario = new SimpleStringProperty();
-        this.data_nascimento = new SimpleStringProperty();
+        this.data_nascimento = null;
         this.profissao = new SimpleStringProperty();
         this.morada = new SimpleStringProperty();
         this.contacto = new SimpleStringProperty();
@@ -61,16 +63,12 @@ public class Voluntario {
         this.nome_voluntario.set(nome_voluntario);
     }
 
-    public String getData_nascimento() {
-        return data_nascimento.get();
-    }
-
-    public SimpleStringProperty data_nascimentoProperty() {
+    public Date getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(String data_nascimento) {
-        this.data_nascimento.set(data_nascimento);
+    public void setData_nascimento(Date data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 
     public String getProfissao() {
@@ -203,5 +201,10 @@ public class Voluntario {
 
     public void setCca_habitat(String cca_habitat) {
         this.cca_habitat.set(cca_habitat);
+    }
+
+    @Override
+    public String toString(){
+        return this.getNome_voluntario();
     }
 }

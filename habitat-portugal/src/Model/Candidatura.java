@@ -5,15 +5,19 @@ import Persistence.RepositoryFactory;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+
 /**
  * @author by Tiago on 03/12/14.
  */
 @SuppressWarnings("UnusedDeclaration")
 public class Candidatura {
 
+
     private int id = -1;
     private SimpleStringProperty nome_candidato;
-    private SimpleStringProperty data_nascimento;
+    private Date data_nascimento;
     private SimpleStringProperty morada;
     private SimpleStringProperty contacto;
     private SimpleStringProperty estado_civil;
@@ -26,7 +30,7 @@ public class Candidatura {
 
     public Candidatura() {
         this.nome_candidato = new SimpleStringProperty();
-        this.data_nascimento = new SimpleStringProperty();
+        this.data_nascimento = null;
         this.morada = new SimpleStringProperty();
         this.contacto = new SimpleStringProperty();
         this.estado_civil = new SimpleStringProperty();
@@ -58,16 +62,12 @@ public class Candidatura {
         this.nome_candidato.set(nome_candidato);
     }
 
-    public String getData_nascimento() {
-        return data_nascimento.get();
-    }
-
-    public SimpleStringProperty data_nascimentoProperty() {
+    public Date getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(String data_nascimento) {
-        this.data_nascimento.set(data_nascimento);
+    public void setData_nascimento(Date data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 
     public String getMorada() {
@@ -192,4 +192,6 @@ public class Candidatura {
         sb.append('}');
         return sb.toString();
     }
+
+
 }
