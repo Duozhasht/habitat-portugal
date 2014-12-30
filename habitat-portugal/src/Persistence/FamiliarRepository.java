@@ -108,7 +108,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setId((int)key);
                     familiar.setNome(result.getString("nome"));
                     familiar.setParentesco(result.getString("parentesco"));
-                    familiar.setData_nascimento(result.getString("data_nascimento"));
+                    familiar.setData_nascimento(result.getDate("data_nascimento"));
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
@@ -146,7 +146,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
 
             statement.setString(1,value.getNome());
             statement.setString(2,value.getParentesco());
-            statement.setString(3,value.getData_nascimento());
+            statement.setDate(3,value.getData_nascimento());
             statement.setString(4,value.getEstado_civil());
             statement.setString(5,value.getOcupacao());
             statement.setString(6,value.getEscolaridade());
@@ -263,7 +263,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
                     familiar.setId(result.getInt("id_pessoa"));
                     familiar.setNome(result.getString("nome"));
                     familiar.setParentesco(result.getString("parentesco"));
-                    familiar.setData_nascimento(result.getString("data_nascimento"));
+                    familiar.setData_nascimento(result.getDate("data_nascimento"));
                     familiar.setEstado_civil(result.getString("estado_civil"));
                     familiar.setOcupacao(result.getString("ocupacao"));
                     familiar.setEscolaridade(result.getString("escolaridade"));
@@ -298,7 +298,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
             Connection connection = DriverManager.getConnection(url, user, password);
             PreparedStatement statement = connection.prepareStatement(SELECT_BY_CANDIDATURA);
 
-            statement.setInt(1,id);
+            statement.setLong(1,id);
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {

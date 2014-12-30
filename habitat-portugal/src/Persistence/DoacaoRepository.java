@@ -303,6 +303,7 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
         return null;
     }
 
+
     public Iterable<Doacao> findByDoador(int id) {
         List<Doacao> doacoes = new ArrayList<>();
         try {
@@ -328,4 +329,5 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
         }
         return doacoes;
     }
+
 }

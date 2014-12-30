@@ -23,6 +23,7 @@
 
 package Persistence;
 
+import Model.Doacao;
 import Model.Voluntario;
 
 import java.util.Properties;
@@ -30,7 +31,7 @@ import java.util.Properties;
 /**
  * RepositoryFactory
  *
- * @author Davide Silva on 30/12/2014
+ * @author Benjamim Sonntag
  */
 @SuppressWarnings("UnusedDeclaration")
 public final class RepositoryFactory {
@@ -41,33 +42,41 @@ public final class RepositoryFactory {
     private static String USER = "banzeco_habitat";
     private static String PASSWORD = "habitatmysql";
     private static String DATABASE = "banzeco_habitat";
-
+    
+    private static UtilizadorRepository utilizadorRepository;
+    private static FamiliarRepository familiarRepository;
     private static CandidaturaRepository candidaturaRepository;
-    private static DoacaoRepository doacaoRepository;
     private static DoadorRepository doadorRepository;
     private static EventoRepository eventoRepository;
-    private static GrupoRepository grupoRepository;
-    private static MaterialRepository materialRepository;
-    private static FamiliarRepository familiarRepository;
-    private static ProjectoRepository projectoRepository;
     private static TarefaRepository tarefaRepository;
-    private static UtilizadorRepository utilizadorRepository;
+    private static ProjectoRepository projectoRepository;
     private static VoluntarioRepository voluntarioRepository;
+    private static GrupoRepository grupoRepository;
+    private static DoacaoRepository doacaoRepository;
+    private static MaterialRepository materialRepository;
+
 
     private RepositoryFactory() { }
+
+    public static UtilizadorRepository getUtilizadorRepository() {
+        if (utilizadorRepository == null) {
+            utilizadorRepository = new UtilizadorRepository(getURL(),USER,PASSWORD);
+        }
+        return utilizadorRepository;
+    }
+
+    public static FamiliarRepository getFamiliarRepository() {
+        if (familiarRepository == null) {
+            familiarRepository = new FamiliarRepository(getURL(),USER,PASSWORD);
+        }
+        return familiarRepository;
+    }
 
     public static CandidaturaRepository getCandidaturaRepository() {
         if (candidaturaRepository == null) {
             candidaturaRepository = new CandidaturaRepository(getURL(),USER,PASSWORD);
         }
         return candidaturaRepository;
-    }
-
-    public static DoacaoRepository getDoacaoRepository() {
-        if (doacaoRepository == null) {
-            doacaoRepository = new DoacaoRepository(getURL(),USER,PASSWORD);
-        }
-        return doacaoRepository;
     }
 
     public static DoadorRepository getDoadorRepository() {
@@ -84,25 +93,11 @@ public final class RepositoryFactory {
         return eventoRepository;
     }
 
-    public static GrupoRepository getGrupoRepository() {
-        if (grupoRepository == null) {
-            grupoRepository = new GrupoRepository(getURL(),USER,PASSWORD);
+    public static TarefaRepository getTarefaRepository() {
+        if (tarefaRepository == null) {
+            tarefaRepository = new TarefaRepository(getURL(),USER,PASSWORD);
         }
-        return grupoRepository;
-    }
-
-    public static MaterialRepository getMaterialRepository() {
-        if (materialRepository == null) {
-            materialRepository = new MaterialRepository(getURL(),USER,PASSWORD);
-        }
-        return materialRepository;
-    }
-
-    public static FamiliarRepository getFamiliarRepository() {
-        if (familiarRepository == null) {
-            familiarRepository = new FamiliarRepository(getURL(),USER,PASSWORD);
-        }
-        return familiarRepository;
+        return tarefaRepository;
     }
 
     public static ProjectoRepository getProjectoRepository() {
@@ -112,25 +107,32 @@ public final class RepositoryFactory {
         return projectoRepository;
     }
 
-    public static TarefaRepository getTarefaRepository() {
-        if (tarefaRepository == null) {
-            tarefaRepository = new TarefaRepository(getURL(),USER,PASSWORD);
-        }
-        return tarefaRepository;
-    }
-
-    public static UtilizadorRepository getUtilizadorRepository() {
-        if (utilizadorRepository == null) {
-            utilizadorRepository = new UtilizadorRepository(getURL(),USER,PASSWORD);
-        }
-        return utilizadorRepository;
-    }
-
     public static VoluntarioRepository getVoluntarioRepository(){
         if(voluntarioRepository == null){
             voluntarioRepository = new VoluntarioRepository(getURL(),USER,PASSWORD);
         }
         return voluntarioRepository;
+    }
+
+    public static GrupoRepository getGrupoRepository() {
+        if (grupoRepository == null) {
+            grupoRepository = new GrupoRepository(getURL(),USER,PASSWORD);
+        }
+        return grupoRepository;
+    }
+
+    public static DoacaoRepository getDoacaoRepository() {
+        if (doacaoRepository == null) {
+            doacaoRepository = new DoacaoRepository(getURL(),USER,PASSWORD);
+        }
+        return doacaoRepository;
+    }
+
+    public static MaterialRepository getMaterialRepository() {
+        if (materialRepository == null) {
+            materialRepository = new MaterialRepository(getURL(),USER,PASSWORD);
+        }
+        return materialRepository;
     }
 
     public static void setProperties(Properties props) {
@@ -141,9 +143,9 @@ public final class RepositoryFactory {
         PASSWORD = props.getOrDefault("password", PASSWORD).toString();
         DATABASE = props.getOrDefault("database", DATABASE).toString();
     }
-
+    
     private static String getURL() {
         return "jdbc:" + DB_TYPE + "://" + HOST + ":" + PORT + "/" + DATABASE;
     }
-
+    
 }

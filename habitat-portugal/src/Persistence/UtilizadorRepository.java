@@ -15,17 +15,17 @@ import java.util.*;
 
 public class UtilizadorRepository implements Map<Integer,Utilizador> {
 
-    private static final String INSERT_UTILIZADOR = "insert into utilizador (nome_utilizador, password, conta) values (?,?,?)";
-    private static final String UPDATE_UTILIZADOR = "update utilizador set nome_utilizador = ?, password = ?, conta = ? where id = ?";
+    private static final String INSERT_UTILIZADOR = "insert into utilizador (nome_utilizador, password, tipo) values (?,?,?)";
+    private static final String UPDATE_UTILIZADOR = "update utilizador set nome_utilizador = ?, password = ?, tipo = ? where id_utilizador = ?";
 
-    private static final String SELECT_UTILIZADOR = "select nome_utilizador, password, conta from utilizador where id = ?";
-    private static final String SELECT_UTILIZADORES = "select id, nome_utilizador, password, conta from utilizador";
+    private static final String SELECT_UTILIZADOR = "select nome_utilizador, password, tipo from utilizador where id_utilizador = ?";
+    private static final String SELECT_UTILIZADORES = "select id_utilizador, nome_utilizador, password, tipo from utilizador";
 
-    private static final String DELETE_UTILIZADOR = "delete from utilizador where id = ?";
+    private static final String DELETE_UTILIZADOR = "delete from utilizador where id_utilizador = ?";
     private static final String DELETE_UTILIZADORES = "delete from utilizador";
 
     private static final String COUNT_UTILIZADORES = "select count(*) as n from utilizador";
-    private static final String SELECT_IDS = "select id from utilizador";
+    private static final String SELECT_IDS = "select id_utilizador from utilizador";
 
     private final String url;
     private final String user;
@@ -111,7 +111,7 @@ public class UtilizadorRepository implements Map<Integer,Utilizador> {
                     utilizador.setId((int) key);
                     utilizador.setNome(result.getString("nome_utilizador"));
                     utilizador.setPassword(result.getString("password"));
-                    utilizador.setConta(result.getInt("conta"));
+                    utilizador.setConta(result.getInt("tipo"));
                 }
             } finally {
                 statement.close();
@@ -257,10 +257,10 @@ public class UtilizadorRepository implements Map<Integer,Utilizador> {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     utilizador = new Utilizador();
-                    utilizador.setId(resultSet.getInt("id"));
+                    utilizador.setId(resultSet.getInt("id_utilizador"));
                     utilizador.setNome(resultSet.getString("nome_utilizador"));
                     utilizador.setPassword(resultSet.getString("password"));
-                    utilizador.setConta(resultSet.getInt("conta"));
+                    utilizador.setConta(resultSet.getInt("tipo"));
 
                     r.add(utilizador);
                 }

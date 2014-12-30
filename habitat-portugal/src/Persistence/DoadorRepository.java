@@ -257,7 +257,7 @@ public class DoadorRepository implements Map<Integer, Doador> {
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
                     d = new Doador();
-                    d.setId(result.getInt("id"));
+                    d.setId(result.getInt("id_doador"));
                     d.setNome(result.getString("nome"));
                     d.setContacto(result.getString("contacto"));
                     d.setTelefone(result.getString("telefone"));

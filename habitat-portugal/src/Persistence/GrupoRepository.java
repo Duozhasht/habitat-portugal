@@ -13,7 +13,7 @@ import java.util.*;
 public class GrupoRepository implements Map<Integer, Grupo> {
 
     private static final String INSERT_GRUPO = "insert into grupo (nome_grupo, motivo, data_criacao, data_final, notas) values (?,?,?,?,?)";
-    private static final String UPDATE_GRUPO = "update grupo set nome_grupo = ?, motivo = ?, data_criacao = ?, data_final = ?, notas = ? where id = ?";
+    private static final String UPDATE_GRUPO = "update grupo set nome_grupo = ?, motivo = ?, data_criacao = ?, data_final = ?, notas = ? where id_grupo = ?";
 
     private static final String SELECT_GRUPO = "select * from grupo where id_grupo = ?";
     private static final String SELECT_GRUPOS = "select * from grupo";
@@ -111,8 +111,8 @@ public class GrupoRepository implements Map<Integer, Grupo> {
                     grupo.setId_grupo((int) key);
                     grupo.setNome_grupo(result.getString("nome_grupo"));
                     grupo.setMotivo(result.getString("motivo"));
-                    grupo.setData_criacao(result.getString("data_criacao"));
-                    grupo.setData_final(result.getString("data_final"));
+                    grupo.setData_criacao(result.getDate("data_criacao"));
+                    grupo.setData_final(result.getDate("data_final"));
                     grupo.setNotas(result.getString("notas"));
 
                 }
@@ -150,9 +150,9 @@ public class GrupoRepository implements Map<Integer, Grupo> {
 
             statement.setString(1,(value.getNome_grupo()));
             statement.setString(2,(value.getMotivo()));
-            statement.setString(3,(value.getData_criacao()));
-            statement.setString(4,(value.getData_final()));
-            statement.setString(5, (value.getNotas()));
+            statement.setDate(3,(value.getData_criacao()));
+            statement.setDate(4,(value.getData_final()));
+            statement.setString(5,(value.getNotas()));
 
             if (isUpdate) {
                 statement.setLong(6,key);
@@ -265,8 +265,8 @@ public class GrupoRepository implements Map<Integer, Grupo> {
                     grupo.setId_grupo(result.getInt("id_grupo"));
                     grupo.setNome_grupo(result.getString("nome_grupo"));
                     grupo.setMotivo(result.getString("motivo"));
-                    grupo.setData_criacao(result.getString("data_criacao"));
-                    grupo.setData_final(result.getString("data_final"));
+                    grupo.setData_criacao(result.getDate("data_criacao"));
+                    grupo.setData_final(result.getDate("data_final"));
                     grupo.setNotas(result.getString("notas"));
 
                     r.add(grupo);
