@@ -22,44 +22,39 @@ public class Habitat {
     private EventoRepository eRepo = RepositoryFactory.getEventoRepository();
     private DoacaoRepository dcRepo = RepositoryFactory.getDoacaoRepository();
     private DoadorRepository ddRepo = RepositoryFactory.getDoadorRepository();
-
-
+    private ProjectoRepository pRepo = RepositoryFactory.getProjectoRepository();
 
 
     public UtilizadorRepository getuRepo() {
         return uRepo;
     }
 
-    public void setuRepo(UtilizadorRepository uRepo) {
-        this.uRepo = uRepo;
-    }
-
     public CandidaturaRepository getcRepo() {
         return cRepo;
     }
 
-    public void setcRepo(CandidaturaRepository cRepo) {
-        this.cRepo = cRepo;
+    public FamiliarRepository getfRepo() {
+        return fRepo;
     }
-
-    public FamiliarRepository getfRepo() {return fRepo;}
-
-    public void setfRepo(FamiliarRepository fRepo) {this.fRepo = fRepo;}
 
     public VoluntarioRepository getvRepo() {
         return vRepo;
-    }
-
-    public void setvRepo(VoluntarioRepository vRepo) {
-        this.vRepo = vRepo;
     }
 
     public GrupoRepository getgRepo() {
         return gRepo;
     }
 
-    public void setgRepo(GrupoRepository gRepo) {
-        this.gRepo = gRepo;
+    public EventoRepository geteRepo() {
+        return eRepo;
+    }
+
+    public DoacaoRepository getDcRepo() {
+        return dcRepo;
+    }
+
+    public DoadorRepository getDdRepo() {
+        return ddRepo;
     }
 
     public ObservableList<Candidatura> getObservableCA(){
@@ -142,18 +137,18 @@ public class Habitat {
         return res;
     }
 
-
-    // CamposOK familiar
-    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar) throws CamposNullException {
-
-        try {
-            candidatura.camposOK();
-        } catch (CamposNullException e) {
-            throw e;
+    public ObservableList<Projecto> getObservablePF(){
+        ObservableList<Projecto> res = FXCollections.observableArrayList();
+        for(Projecto projecto : this.pRepo.values()){
+            res.add(projecto);
         }
+        return res;
+    }
 
+
+    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar){
         try{
-            Candidatura res = this.cRepo.put(candidatura.getId(), candidatura);
+            Candidatura res =this.cRepo.put(candidatura.getId(), candidatura);
             for(Familiar familiar : agregadofamiliar){
                 familiar.setCandidatura(res.getId());
                 this.fRepo.put(familiar.getId(),familiar);
@@ -166,6 +161,8 @@ public class Habitat {
         return false;
 
     }
+
+
 
     public boolean removerCandidatura(Candidatura candidatura){
         try{
@@ -218,15 +215,8 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista) throws CamposNullException {
-
-        try {
-            grupo.camposOK();
-        } catch (CamposNullException e) {
-            throw e;
-        }
-
-        try {
+    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista){
+        try{
             this.gRepo.put(grupo.getId_grupo(), grupo);
             for(Voluntario v : lista){
                 this.gRepo.insereVoluntarioGrupo(v.getId_voluntario(),grupo.getId_grupo());
@@ -255,14 +245,8 @@ public class Habitat {
 
     }
 
-    public boolean adicionarEvento(Evento evento) throws CamposNullException
+    public boolean adicionarEvento(Evento evento)
     {
-        try {
-            evento.camposOK();
-        } catch (CamposNullException e) {
-            throw e;
-        }
-
         try{
             this.eRepo.put(evento.getId(),evento);
 
@@ -287,14 +271,8 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoador(Doador doador) throws CamposNullException
+    public boolean adicionarDoador(Doador doador)
     {
-        try {
-            doador.camposOK();
-        } catch (CamposNullException e) {
-            throw e;
-        }
-
         try{
             this.ddRepo.put(doador.getId(),doador);
 
@@ -319,14 +297,8 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoacao(Doacao doacao) throws CamposNullException
+    public boolean adicionarDoacao(Doacao doacao)
     {
-        try {
-            doacao.camposOK();
-        } catch (CamposNullException e) {
-            throw e;
-        }
-
         try{
             this.dcRepo.put(doacao.getId_doacao(),doacao);
 
@@ -342,6 +314,32 @@ public class Habitat {
     {
         try{
             this.dcRepo.remove(doacao.getId_doacao());
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean adicionarProjecto(Projecto projecto)
+    {
+        try{
+            this.pRepo.put(projecto.getId(),projecto);
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean removerProjecto(Projecto projecto)
+    {
+        try{
+            this.pRepo.remove(projecto.getId());
 
             return true;
         }catch (Exception e){
