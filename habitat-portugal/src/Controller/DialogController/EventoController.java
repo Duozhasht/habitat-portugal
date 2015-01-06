@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Evento;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,11 +101,13 @@ public class EventoController {
         this.evento.setNotas(this.notas.getText());
         this.evento.setOrganizador(this.organizador.getText());
         this.evento.setData_evento(Date.valueOf(this.data_evento.getValue()));
-        if(this.facade.adicionarEvento(this.evento))
-            dialogStage.close();
-        else
-            System.out.println("Erro");
 
+        try {
+            this.facade.adicionarEvento(this.evento);
+            dialogStage.close();
+        } catch (CamposNullException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML

@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Doador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,10 +82,13 @@ public class DoadorController {
         this.doador.setNif(this.nif.getText());
         this.doador.setNotas(this.notas.getText());
 
-        if(this.facade.adicionarDoador(this.doador))
+
+        try {
+            this.facade.adicionarDoador(this.doador);
             dialogStage.close();
-        else
-            System.out.println("ERRO");
+        } catch (CamposNullException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 

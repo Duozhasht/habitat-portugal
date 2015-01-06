@@ -193,5 +193,16 @@ public class Candidatura {
         return sb.toString();
     }
 
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_candidato().equals("")) throw new CamposNullException("Campo Nome Candidato não pode ser vazio");
+        if (this.getData_nascimento().toString().equals("")) throw new CamposNullException("Campo Data Nascimento não pode ser vazio");
+        if (this.getMorada().equals("")) throw new CamposNullException("Campo Morada não pode ser vazio");
+        if (this.getContacto().equals("")) throw new CamposNullException("Campo Contacto não pode ser vazio");
+        if (this.getEstado_civil().equals("")) throw new CamposNullException("Campo Estado Civil não pode ser vazio");
+        if (this.getEscolaridade().equals("")) throw new CamposNullException("Campo Escolaridade não pode ser vazio");
+        if (this.getProfissao().equals("")) throw new CamposNullException("Campo Profissão não pode ser vazio");
+        if (this.getNaturalidade().equals("")) throw new CamposNullException("Campo Naturalidade não pode ser vazio");
+        if (this.getNacionalidade().equals("")) throw new CamposNullException("Campo Nacionalidade não pode ser vazio");
+    }
 
 }

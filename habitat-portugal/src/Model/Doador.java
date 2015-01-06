@@ -177,5 +177,13 @@ public class Doador {
         sb.append('}');
         return sb.toString();
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome().equals("")) throw new CamposNullException("Campo Nome não pode ser vazio");
+        if (this.getContacto().equals("")) throw new CamposNullException("Campo Contacto não pode ser vazio");
+        if (this.getTelefone().equals("")) throw new CamposNullException("Campo Telefone não pode ser vazio");
+        if (this.getMorada().equals("")) throw new CamposNullException("Campo Morada não pode ser vazio");
+        if (this.getNif().equals("")) throw new CamposNullException("Campo Nif não pode ser vazio");
+    }
 }
 

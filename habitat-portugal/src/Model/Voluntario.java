@@ -207,4 +207,17 @@ public class Voluntario {
     public String toString(){
         return this.getNome_voluntario();
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_voluntario().equals("")) throw new CamposNullException("Campo Nome Voluntário não pode ser vazio");
+        if (this.getData_nascimento().toString().equals("")) throw new CamposNullException("Campo Data Nascimento não pode ser vazio");
+        if (this.getProfissao().equals("")) throw new CamposNullException("Campo Profissão não pode ser vazio");
+        if (this.getMorada().equals("")) throw new CamposNullException("Campo Morada não pode ser vazio");
+        if (this.getContacto().equals("")) throw new CamposNullException("Campo Contacto não pode ser vazio");
+        if (this.getHab_academ().equals("")) throw new CamposNullException("Campo Habilitações Académicas não pode ser vazio");
+        if (this.getConhec_lingui().equals("")) throw new CamposNullException("Campo Conhecimento Linguístico não pode ser vazio");
+        if (this.getExp_voluntariado().equals("")) throw new CamposNullException("Campo Experiência Voluntariado não pode ser vazio");
+        if (this.getDisponi_tempo().equals("")) throw new CamposNullException("Campo Disponibilidade Tempo não pode ser vazio");
+        if (this.getCca_habitat().equals("")) throw new CamposNullException("Campo Como Conheceu A Habitat");
+    }
 }

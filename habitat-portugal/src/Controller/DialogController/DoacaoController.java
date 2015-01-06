@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Doacao;
 import Model.Doador;
 import Model.Evento;
@@ -85,14 +86,13 @@ public class DoacaoController {
         this.doacao.setDoador(dd.getId());
         this.doacao.setEvento(ee.getId());
 
-
-        if(this.facade.adicionarDoacao(this.doacao))
+        try {
+            this.facade.adicionarDoacao(this.doacao);
             dialogStage.close();
-        else
-            System.out.println("ERRO");
-
+        } catch (CamposNullException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
 
     @FXML
     protected void handleCancelarAction(ActionEvent e) {

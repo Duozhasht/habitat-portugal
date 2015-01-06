@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Candidatura;
 import Model.Familiar;
 import javafx.collections.FXCollections;
@@ -244,10 +245,10 @@ public class CandidaturaController {
 
     //Buttons Actions
 
-   @FXML protected void handleOkAction(){
-       RadioButton ec_1 = (RadioButton)this.estado_civil.getSelectedToggle();
-       RadioButton a = (RadioButton)this.aprovacao.getSelectedToggle();
-       if(this.candidatura == null)
+   @FXML protected void handleOkAction() {
+       RadioButton ec_1 = (RadioButton) this.estado_civil.getSelectedToggle();
+       RadioButton a = (RadioButton) this.aprovacao.getSelectedToggle();
+       if (this.candidatura == null)
            this.candidatura = new Candidatura();
        this.candidatura.setNome_candidato(this.nome_candidato.getText());
        this.candidatura.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
@@ -258,18 +259,18 @@ public class CandidaturaController {
        this.candidatura.setNaturalidade(this.naturalidade.getText());
        this.candidatura.setNacionalidade(this.nacionalidade.getText());
        this.candidatura.setEstado_civil(ec_1.getText());
-       if(a.getText().equals("Aprovada"))
+       if (a.getText().equals("Aprovada"))
            this.candidatura.setAprovado(true);
        else
            this.candidatura.setAprovado(false);
 
-       if(this.facade.adicionarCandidatura(this.candidatura,this.afList))
+       try {
+           this.facade.adicionarCandidatura(this.candidatura, this.afList);
            dialogStage.close();
-       else
-           System.out.println("ERRO");
-
+       } catch (CamposNullException e) {
+           System.out.println(e.getMessage());
        }
-
+   }
 
     @FXML
     protected void handleCancelarAction(ActionEvent e) {

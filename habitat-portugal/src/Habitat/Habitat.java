@@ -143,9 +143,17 @@ public class Habitat {
     }
 
 
-    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar){
+    // CamposOK familiar
+    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar) throws CamposNullException {
+
+        try {
+            candidatura.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
         try{
-            Candidatura res =this.cRepo.put(candidatura.getId(), candidatura);
+            Candidatura res = this.cRepo.put(candidatura.getId(), candidatura);
             for(Familiar familiar : agregadofamiliar){
                 familiar.setCandidatura(res.getId());
                 this.fRepo.put(familiar.getId(),familiar);
@@ -210,8 +218,15 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista){
-        try{
+    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista) throws CamposNullException {
+
+        try {
+            grupo.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
+        try {
             this.gRepo.put(grupo.getId_grupo(), grupo);
             for(Voluntario v : lista){
                 this.gRepo.insereVoluntarioGrupo(v.getId_voluntario(),grupo.getId_grupo());
@@ -240,8 +255,14 @@ public class Habitat {
 
     }
 
-    public boolean adicionarEvento(Evento evento)
+    public boolean adicionarEvento(Evento evento) throws CamposNullException
     {
+        try {
+            evento.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
         try{
             this.eRepo.put(evento.getId(),evento);
 
@@ -266,8 +287,14 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoador(Doador doador)
+    public boolean adicionarDoador(Doador doador) throws CamposNullException
     {
+        try {
+            doador.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
         try{
             this.ddRepo.put(doador.getId(),doador);
 
@@ -292,8 +319,14 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoacao(Doacao doacao)
+    public boolean adicionarDoacao(Doacao doacao) throws CamposNullException
     {
+        try {
+            doacao.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
         try{
             this.dcRepo.put(doacao.getId_doacao(),doacao);
 

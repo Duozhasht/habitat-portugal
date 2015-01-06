@@ -84,4 +84,8 @@ public class Material {
     public void setDoacao(DoacaoRepository doacao) {
         this.doacao = doacao;
     }
+
+    public void camposOK() throws CamposNullException {
+
+    }
 }
