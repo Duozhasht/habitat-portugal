@@ -1,7 +1,6 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
-import Model.CamposNullException;
 import Model.Candidatura;
 import Model.Familiar;
 import javafx.collections.FXCollections;
@@ -13,12 +12,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
+import org.controlsfx.dialog.*;
 
 /**
  * Created by Tiago on 18/12/14.
@@ -245,10 +243,10 @@ public class CandidaturaController {
 
     //Buttons Actions
 
-   @FXML protected void handleOkAction() {
-       RadioButton ec_1 = (RadioButton) this.estado_civil.getSelectedToggle();
-       RadioButton a = (RadioButton) this.aprovacao.getSelectedToggle();
-       if (this.candidatura == null)
+   @FXML protected void handleOkAction(){
+       RadioButton ec_1 = (RadioButton)this.estado_civil.getSelectedToggle();
+       RadioButton a = (RadioButton)this.aprovacao.getSelectedToggle();
+       if(this.candidatura == null)
            this.candidatura = new Candidatura();
        this.candidatura.setNome_candidato(this.nome_candidato.getText());
        this.candidatura.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
@@ -259,18 +257,21 @@ public class CandidaturaController {
        this.candidatura.setNaturalidade(this.naturalidade.getText());
        this.candidatura.setNacionalidade(this.nacionalidade.getText());
        this.candidatura.setEstado_civil(ec_1.getText());
-       if (a.getText().equals("Aprovada"))
+       if(a.getText().equals("Aprovada"))
            this.candidatura.setAprovado(true);
        else
            this.candidatura.setAprovado(false);
 
-       try {
-           this.facade.adicionarCandidatura(this.candidatura, this.afList);
+       if(this.facade.adicionarCandidatura(this.candidatura,this.afList))
            dialogStage.close();
-       } catch (CamposNullException e) {
-           System.out.println(e.getMessage());
+       else
+           System.out.println("ERRO");
+
+
+
+
        }
-   }
+
 
     @FXML
     protected void handleCancelarAction(ActionEvent e) {
@@ -306,6 +307,11 @@ public class CandidaturaController {
 
     @FXML
     protected void handleEditarAction(){
+        Dialogs.create()
+                .owner(dialogStage)
+                .title("Erro")
+                .message("Hello world")
+                .showInformation();
 
     }
 

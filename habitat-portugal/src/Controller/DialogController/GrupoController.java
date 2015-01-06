@@ -1,7 +1,6 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
-import Model.CamposNullException;
 import Model.Candidatura;
 import Model.Grupo;
 import Model.Voluntario;
@@ -140,21 +139,15 @@ public class GrupoController {
 
         this.grupo.setNome_grupo(this.nome_grupo.getText());
         this.grupo.setMotivo(this.motivo.getText());
-        if (this.data_criacao.getUserData() != null) {
-            this.grupo.setData_criacao(Date.valueOf(this.data_criacao.getValue()));
-        }
-        if (this.data_final.getUserData() != null) {
-            this.grupo.setData_final(Date.valueOf(this.data_final.getValue()));
-        }
+        this.grupo.setData_criacao(Date.valueOf(this.data_criacao.getValue()));
+        this.grupo.setData_final(Date.valueOf(this.data_final.getValue()));
         this.grupo.setNotas(this.notas.getText());
 
-        try {
-            this.facade.adicionarGrupo(this.grupo, this.vList);
+        if(this.facade.adicionarGrupo(this.grupo,this.vList))
             dialogStage.close();
-        } catch (CamposNullException e)
-        {
-            System.out.println(e.getMessage());
-        }
+        else
+            System.out.println("ERRO");
+
     }
 
     @FXML

@@ -35,6 +35,7 @@ public class AdminController {
     @FXML TableView<Evento> eTable = new TableView<>();
     @FXML TableView<Doacao> dcTable = new TableView<>();
     @FXML TableView<Doador> ddTable = new TableView<>();
+    @FXML TableView<Projecto> pfTable = new TableView<>();
 
 
     //Listas
@@ -46,6 +47,7 @@ public class AdminController {
     private ObservableList<Evento> eList;
     private ObservableList<Doacao> dcList;
     private ObservableList<Doador> ddList;
+    private ObservableList<Projecto> pfList;
 
 
     public void setFacade(Habitat facade) {
@@ -598,5 +600,83 @@ public class AdminController {
     protected void handleEditarDDAction() {
         this.showDoadorDialog("Editar Doacao");
     }
+
+
+        /*
+    ------------------------------------------------------
+    ------------------------------------------------------
+    Projectos TAB
+    ------------------------------------------------------
+    ------------------------------------------------------
+     */
+
+    public void updateTablesProjecto() {
+        this.pfList.clear();
+        this.pfList.addAll(this.facade.getObservablePF());
+        this.pfTable.setItems(pfList);
+    }
+
+    private boolean showProjectFDialog(String modo){
+
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewProjectoF.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            ProjectoFController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            if(modo.equals("Editar Doador"))
+                controller.setProjecto(this.pfTable.getSelectionModel().getSelectedItem());
+            if(modo.equals("Consultar Doador")) {
+                controller.setProjecto(this.pfTable.getSelectionModel().getSelectedItem());
+            }
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesProjecto();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+    @FXML
+    protected void handleAdicionarPFAction() {
+        this.showProjectFDialog("Adicionar Projecto");
+
+    }
+
+
+    @FXML
+    protected void handleRemoverPFAction() {
+        if(this.facade.removerProjecto(this.pfTable.getSelectionModel().getSelectedItem()))
+            this.pfList.remove(this.pfTable.getSelectionModel().getSelectedItem());
+        else
+            System.out.println("Erro!");
+    }
+
+
+    @FXML
+    protected void handleEditarPFAction() {
+        this.showProjectFDialog("Editar Doacao");
+    }
+
+
+
 
 }
