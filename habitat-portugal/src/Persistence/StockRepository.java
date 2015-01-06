@@ -1,34 +1,31 @@
 package Persistence;
 
-import Model.Projecto;
+import Model.Stock;
 
 import java.sql.*;
 import java.util.*;
 
-/**
- * @author davide on 17/12/14.
- */
 
 @SuppressWarnings("UnusedDeclaration")
-public class ProjectoRepository implements Map<Integer, Projecto> {
+public class StockRepository implements Map<Integer, Stock> {
 
-    private static final String INSERT_PROJECTO = "insert into projecto (nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado) values (?,?,?,?,?,?,?)";
-    private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? where id_projecto = ?";
+    public static final String INSERT_STOCK = "insert into stock(descricao,quantidade, doacao_id) values(?,?,?)";
+    public static final String UPDATE_STOCK = "update stock set descricao = ?, quantidade = ?, doacao_id = ? where id_stock = ?";
 
-    private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id_projecto = ?";
-    private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto";
+    public static final String DELETE_STOCK = "delete from stock where id_stock = ?";
+    public static final String DELETE_STOCKS = "delete from stock";
 
-    private static final String DELETE_PROJECTO = "delete from projecto where id_projecto = ?";
-    private static final String DELETE_PROJECTOS = "delete from projecto";
+    public static final String SELECT_STOCK = "select * from stock where id_stock = ?";
+    public static final String SELECT_STOCKS = "select * from stock";
 
-    private static final String COUNT_PROJECTOS = "select count(*) as n from projecto";
-    private static final String SELECT_IDS = "select id_projecto from projecto";
+    public static final String COUNT_STOCK = "select count(*) as n from stock";
+    private static final String SELECT_IDS = "select id_stock from stock";
 
     private final String url;
     private final String user;
     private final String password;
 
-    public ProjectoRepository(String url, String user, String password) {
+    public StockRepository(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
@@ -42,7 +39,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
 
-            try (ResultSet resultSet = statement.executeQuery(COUNT_PROJECTOS)) {
+            try (ResultSet resultSet = statement.executeQuery(COUNT_STOCK)) {
                 if (resultSet.next())
                     count = resultSet.getInt("n");
                 else
@@ -69,7 +66,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
     public boolean containsKey(Object key) {
         try {
             Connection connection = DriverManager.getConnection(url,user,password);
-            PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTO);
+            PreparedStatement statement = connection.prepareStatement(SELECT_STOCK);
 
             statement.setInt(1, (int) key);
 
@@ -88,31 +85,26 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
 
     @Override
     public boolean containsValue(Object value) {
-        return containsKey(((Projecto) value).getId());
+        return containsKey(((Stock) value).getId_stock());
     }
 
     @Override
-    public Projecto get(Object key) {
-        Projecto projecto = null;
+    public Stock get(Object key) {
+        Stock stock = null;
         try {
 
             Connection connection = DriverManager.getConnection(url,user,password);
-            PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTO);
+            PreparedStatement statement = connection.prepareStatement(SELECT_STOCK);
 
             statement.setInt(1,(int) key);
 
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
-                    projecto = new Projecto();
-
-                    projecto.setId((int) key);
-                    projecto.setNome_projecto(result.getString("nome_projecto"));
-                    projecto.setData_inicio(result.getDate("data_inicio"));
-                    projecto.setData_final(result.getDate("data_final"));
-                    projecto.setCusto_inicio(result.getInt("custo_inicial"));
-                    projecto.setCusto_final(result.getInt("custo_final"));
-                    projecto.setClassificacao(result.getString("classificacao"));
-                    projecto.setEstado(result.getString("estado"));
+                    stock = new Stock();
+                    stock.setId_stock((int) key);
+                    stock.setDescricao(result.getString("descricao"));
+                    stock.setQuantidade(result.getString("quantidade"));
+                    stock.setDoacao_id(result.getInt("doacao_id"));
                 }
             } finally {
                 statement.close();
@@ -122,22 +114,21 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return projecto;
+        return stock;
     }
 
-    @Override
-    public Projecto put(Integer key, Projecto value) {
+    public Stock put(Integer key, Stock value) {
         String query;
         int autoGeneratedKeys;
         boolean isUpdate;
         if (key < 0) {
             isUpdate = false;
-            query = INSERT_PROJECTO;
+            query = INSERT_STOCK;
             autoGeneratedKeys = Statement.RETURN_GENERATED_KEYS;
         }
         else {
             isUpdate = true;
-            query = UPDATE_PROJECTO;
+            query = UPDATE_STOCK;
             autoGeneratedKeys = Statement.NO_GENERATED_KEYS;
         }
 
@@ -145,16 +136,12 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
             Connection connection = DriverManager.getConnection(url,user,password);
             PreparedStatement statement = connection.prepareStatement(query,autoGeneratedKeys);
 
-            statement.setString(1, (value.getNome_projecto()));
-            statement.setDate(2, (value.getData_inicio()));
-            statement.setDate(3, (value.getData_final()));
-            statement.setInt(4, (value.getCusto_inicio()));
-            statement.setInt(5, (value.getCusto_final()));
-            statement.setString(6,(value.getClassificacao()));
-            statement.setString(7, (value.getEstado()));
+            statement.setString(1, (value.getDescricao()));
+            statement.setString(2, (value.getQuantidade()));
+            statement.setInt(3, (value.getDoacao_id()));
 
             if (isUpdate) {
-                statement.setLong(8,key);
+                statement.setInt(4, key);
             }
 
             statement.executeUpdate();
@@ -163,7 +150,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
                 if (autoGeneratedKeys == Statement.RETURN_GENERATED_KEYS) {
                     ResultSet keys = statement.getGeneratedKeys();
                     if (keys != null && keys.next()) {
-                        value.setId(keys.getInt(1));
+                        value.setId_stock(keys.getInt(1));
                     }
                 }
             } catch (SQLException ex) {
@@ -180,11 +167,11 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
     }
 
     @Override
-    public Projecto remove(Object key) {
-        Projecto p = get(key);
+    public Stock remove(Object key) {
+        Stock s = get(key);
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
-            PreparedStatement statement = connection.prepareStatement(DELETE_PROJECTO);
+            PreparedStatement statement = connection.prepareStatement(DELETE_STOCK);
 
             statement.setInt(1, (int) key);
 
@@ -197,13 +184,13 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return p;
+        return s;
     }
 
     @Override
-    public void putAll(Map<? extends Integer, ? extends Projecto> m) {
-        for (Projecto p: m.values()) {
-            put(p.getId(),p);
+    public void putAll(Map<? extends Integer, ? extends Stock> m) {
+        for (Stock stock: m.values()) {
+            put(stock.getId_stock(),stock);
         }
     }
 
@@ -213,7 +200,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
             Connection connection = DriverManager.getConnection(url, user, password);
 
             try (Statement statement = connection.createStatement()) {
-                statement.executeUpdate(DELETE_PROJECTOS);
+                statement.executeUpdate(DELETE_STOCKS);
             } finally {
                 connection.close();
             }
@@ -249,35 +236,29 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
     }
 
     @Override
-    public Collection<Projecto> values() {
-        ArrayList<Projecto> r = new ArrayList<>();
+    public Collection<Stock> values() {
+        ArrayList<Stock> r = new ArrayList<>();
         try {
-            Projecto projecto;
+            Stock stock;
 
             Connection connection = DriverManager.getConnection(url,user,password);
-            PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTOS);
+            PreparedStatement statement = connection.prepareStatement(SELECT_STOCKS);
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
-                    projecto = new Projecto();
+                    stock = new Stock();
 
-                    projecto.setId(result.getInt("id_projecto"));
-                    projecto.setNome_projecto(result.getString("nome_projecto"));
-                    projecto.setData_inicio(result.getDate("data_inicio"));
-                    projecto.setData_final(result.getDate("data_final"));
-                    projecto.setCusto_inicio(result.getInt("custo_inicio"));
-                    projecto.setCusto_final(result.getInt("custo_final"));
-                    projecto.setClassificacao(result.getString("classificacao"));
-                    projecto.setEstado(result.getString("estado"));
-                    projecto.setCandidatura(result.getInt("candidatura_id"));
+                    stock.setId_stock(result.getInt("id_stock"));
+                    stock.setDescricao(result.getString("descricao"));
+                    stock.setQuantidade(result.getString("quantidade"));
+                    stock.setDoacao_id(result.getInt("doacao_id"));
 
-                    r.add(projecto);
+                    r.add(stock);
                 }
             }  finally {
                 statement.close();
                 connection.close();
             }
-
         }
         catch (SQLException ex) {
             ex.printStackTrace();
@@ -286,9 +267,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
         return r;
     }
 
-    @Override
-    public Set<Entry<Integer, Projecto>> entrySet() {
+    public Set<Entry<Integer, Stock>> entrySet() {
         return null;
     }
-
 }

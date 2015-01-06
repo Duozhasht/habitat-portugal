@@ -12,12 +12,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
+import org.controlsfx.dialog.*;
 
 /**
  * Created by Tiago on 18/12/14.
@@ -268,6 +267,9 @@ public class CandidaturaController {
        else
            System.out.println("ERRO");
 
+
+
+
        }
 
 
@@ -305,6 +307,11 @@ public class CandidaturaController {
 
     @FXML
     protected void handleEditarAction(){
+        Dialogs.create()
+                .owner(dialogStage)
+                .title("Erro")
+                .message("Hello world")
+                .showInformation();
 
     }
 

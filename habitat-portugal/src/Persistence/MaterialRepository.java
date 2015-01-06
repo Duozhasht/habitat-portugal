@@ -12,7 +12,7 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class MaterialRepository implements Map<Integer, Material> {
 
-    private static final String INSERT_MATERIAL = "insert into material_projecto (quant_necessaria, quant_actual, motivo, projecto_id) values (?,?,?,?,?)";
+    private static final String INSERT_MATERIAL = "insert into material_projecto (quant_necessaria, quant_actual, motivo, projecto_id) values (?,?,?,?)";
     private static final String UPDATE_MATERIAL = "update material_projecto set quant_necessaria = ?, quant_actual = ?, motivo = ?, projecto_id = ? where id_material = ?";
 
     private static final String DELETE_MATERIAL = "delete from material_projecto where id_material = ?";
@@ -20,6 +20,7 @@ public class MaterialRepository implements Map<Integer, Material> {
 
     private static final String SELECT_MATERIAL = "select * from material_projecto where id_material = ?";
     private static final String SELECT_MATERIAIS = "select * from material_projecto";
+    private static final String SELECT_BY_PROJECTO = "select * from material_projecto where projecto_id = ?";
 
     private static final String COUNT_MATERIAIS = "select count(*) as n from material_projecto";
     private static final String SELECT_IDS = "select id_material from material_projecto";
@@ -279,5 +280,31 @@ public class MaterialRepository implements Map<Integer, Material> {
     @Override
     public Set<Entry<Integer, Material>> entrySet() {
         return null;
+    }
+
+    public Iterable<Material> findByProjecto(int id) {
+        List<Material> material = new ArrayList<>();
+        try {
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_PROJECTO);
+
+            statement.setInt(1,id);
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    if (containsKey(result.getInt("id_material"))) {
+                        Material m = get(result.getInt("id_material"));
+                        material.add(m);
+                    }
+                }
+            } finally {
+                statement.close();
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return material;
     }
 }

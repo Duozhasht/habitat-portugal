@@ -110,4 +110,11 @@ public class Evento {
         sb.append('}');
         return sb.toString();
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_evento().equals("")) throw new CamposNullException("Campo Nome Evento não pode ser vazio");
+        if (this.getData_evento().toString().equals("")) throw new CamposNullException("Campo Data Evento não pode ser vazio");
+        if (this.getValor_total().equals("")) throw new CamposNullException("Campo Valor Total não pode ser vazio");
+        if (this.getOrganizador().equals("")) throw new CamposNullException("Campo Organizador não pode ser vazio");
+    }
 }

@@ -121,4 +121,10 @@ public class Grupo {
                 ", notas=" + notas +
                 '}';
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_grupo().equals("")) throw new CamposNullException("Campo Nome Grupo não pode ser vazio");
+        if (this.getMotivo().equals("")) throw new CamposNullException("Campo Motivo não pode ser vazio");
+        if (this.getData_criacao().toString().equals("")) throw new CamposNullException("Campo Data Criação não pode ser vazio");
+    }
 }

@@ -54,6 +54,7 @@ public final class RepositoryFactory {
     private static GrupoRepository grupoRepository;
     private static DoacaoRepository doacaoRepository;
     private static MaterialRepository materialRepository;
+    private static StockRepository stockRepository;
 
 
     private RepositoryFactory() { }
@@ -133,6 +134,13 @@ public final class RepositoryFactory {
             materialRepository = new MaterialRepository(getURL(),USER,PASSWORD);
         }
         return materialRepository;
+    }
+
+    public static StockRepository getStockRepository() {
+        if (stockRepository == null) {
+            stockRepository = new StockRepository(getURL(),USER,PASSWORD);
+        }
+        return stockRepository;
     }
 
     public static void setProperties(Properties props) {

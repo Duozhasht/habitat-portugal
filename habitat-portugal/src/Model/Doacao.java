@@ -100,4 +100,10 @@ public class Doacao {
         sb.append('}');
         return sb.toString();
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getDescricao().equals("")) throw new CamposNullException("Campo Descrição não pode ser vazio");
+        if (this.getTipo().equals("")) throw new CamposNullException("Campo Tipo não pode ser vazio");
+        if (this.getDoador() == -1) throw new CamposNullException("Campo Doador não pode ser vazio");
+    }
 }

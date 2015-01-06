@@ -4,10 +4,13 @@ import Habitat.Habitat;
 import Model.Doacao;
 import Model.Doador;
 import Model.Evento;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * Created by Tiago on 30/12/14.
@@ -58,6 +61,8 @@ public class DoacaoController {
         this.material.setToggleGroup(tipo);
         this.monetaria.setToggleGroup(tipo);
         this.monetaria.setSelected(true);
+        this.doador.setItems(this.facade.getObservableDD());
+        this.evento.setItems(this.facade.getObservableE());
     }
 
     public void setData(){
@@ -69,6 +74,16 @@ public class DoacaoController {
             this.material.setSelected(true);
         if(this.doacao.getTipo().equals("Monetária"))
             this.monetaria.setSelected(true);
+        ObservableList<Doador> doadores = this.doador.getItems();
+        for(Doador dd : doadores){
+            if(dd.getId() == this.doacao.getDoador())
+                this.doador.getSelectionModel().select(dd);
+        }
+        ObservableList<Evento> eventos = this.evento.getItems();
+        for(Evento e : eventos){
+            if(e.getId() == this.doacao.getEvento())
+                this.evento.getSelectionModel().select(e);
+        }
 
 
     }
@@ -92,6 +107,7 @@ public class DoacaoController {
             System.out.println("ERRO");
 
     }
+
 
 
     @FXML

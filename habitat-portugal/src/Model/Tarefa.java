@@ -3,6 +3,8 @@ package Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.sql.Date;
+
 /**
  * @author davide on 17/12/14.
  */
@@ -11,22 +13,16 @@ import javafx.beans.property.SimpleStringProperty;
 public class Tarefa {
     private int id = -1;
     private SimpleStringProperty nome_tarefa;
-    private SimpleStringProperty data_inicio;
-    private SimpleStringProperty data_final;
-    private SimpleIntegerProperty id_encarregado;
+    private Date data_inicio;
+    private Date data_final;
+    private SimpleStringProperty encarregado;
+    private int projecto_id = -1;
 
     public Tarefa() {
         this.nome_tarefa = new SimpleStringProperty();
-        this.data_inicio = new SimpleStringProperty();
-        this.data_final = new SimpleStringProperty();
-        this.id_encarregado = new SimpleIntegerProperty();
-    }
-
-    public Tarefa(SimpleStringProperty nome_tarefa, SimpleStringProperty data_inicio, SimpleStringProperty data_final, SimpleIntegerProperty id_encarregado) {
-        this.nome_tarefa = nome_tarefa;
-        this.data_inicio = data_inicio;
-        this.data_final = data_final;
-        this.id_encarregado = id_encarregado;
+        this.data_inicio = null;
+        this.data_final = null;
+        this.encarregado = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -49,40 +45,40 @@ public class Tarefa {
         this.nome_tarefa.set(nome_tarefa);
     }
 
-    public String getData_inicio() {
-        return data_inicio.get();
-    }
-
-    public SimpleStringProperty data_inicioProperty() {
+    public Date getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(String data_inicio) {
-        this.data_inicio.set(data_inicio);
+    public void setData_inicio(Date data_inicio) {
+        this.data_inicio = data_inicio;
     }
 
-    public String getData_final() {
-        return data_final.get();
-    }
-
-    public SimpleStringProperty data_finalProperty() {
+    public Date getData_final() {
         return data_final;
     }
 
-    public void setData_final(String data_final) {
-        this.data_final.set(data_final);
+    public void setData_final(Date data_final) {
+        this.data_final = data_final;
     }
 
-    public int getId_encarregado() {
-        return id_encarregado.get();
+    public String getEncarregado() {
+        return encarregado.get();
     }
 
-    public SimpleIntegerProperty id_encarregadoProperty() {
-        return id_encarregado;
+    public SimpleStringProperty encarregadoProperty() {
+        return encarregado;
     }
 
-    public void setId_encarregado(int id_encarregado) {
-        this.id_encarregado.set(id_encarregado);
+    public void setEncarregado(String encarregado) {
+        this.encarregado.set(encarregado);
+    }
+
+    public int getProjecto_id() {
+        return projecto_id;
+    }
+
+    public void setProjecto_id(int projecto_id) {
+        this.projecto_id = projecto_id;
     }
 
     @Override
@@ -92,8 +88,16 @@ public class Tarefa {
         sb.append(", nome_tarefa=").append(nome_tarefa);
         sb.append(", data_inicio=").append(data_inicio);
         sb.append(", data_final=").append(data_final);
-        sb.append(", id_encarregado=").append(id_encarregado);
+        sb.append(", encarregado=").append(encarregado);
         sb.append('}');
         return sb.toString();
+    }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_tarefa().equals("")) throw new CamposNullException("Campo Nome Tarefa não pode ser vazio");
+        if (this.getData_inicio().toString().equals("")) throw new CamposNullException("Campo Data Inicio não pode ser vazio");
+        if (this.getData_final().toString().equals("")) throw new CamposNullException("Campo Data Final não pode ser vazio");
+        if (this.getEncarregado().equals("")) throw new CamposNullException("Campo Encarregado nao pode ser vazio");
+        if (this.getProjecto_id() == -1) throw new CamposNullException("Campo Projecto não pode ser vazio");
     }
 }

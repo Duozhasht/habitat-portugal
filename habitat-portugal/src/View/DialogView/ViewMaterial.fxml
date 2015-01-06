@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DialogController.GrupoController">
+   <children>
+      <Label layoutX="407.0" layoutY="30.0" prefHeight="19.0" prefWidth="151.0" text="Gestão de Tarefa" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="342.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="438.0" layoutY="66.0" prefHeight="16.0" prefWidth="63.0" text="Tarefas" AnchorPane.leftAnchor="438.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="ok" layoutX="128.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="26.0" prefWidth="100.0" text="Ok" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="325.0" />
+      <Button layoutX="291.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleCancelarAction" prefHeight="26.0" prefWidth="100.0" text="Cancelar" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="325.0" />
+      <Separator layoutX="15.0" layoutY="701.0" prefHeight="0.0" prefWidth="405.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <TableView fx:id="vTable" layoutX="30.0" layoutY="459.0" prefHeight="293.0" prefWidth="652.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="459.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Id">
+           <cellValueFactory>
+              <PropertyValueFactory property="id_voluntario" />
+           </cellValueFactory>
+           </TableColumn>
+          <TableColumn prefWidth="149.0" text="Nome do Voluntário">
+             <cellValueFactory>
+                <PropertyValueFactory property="nome_voluntario" />
+             </cellValueFactory>
+          </TableColumn>
+            <TableColumn prefWidth="165.0" text="Contacto">
+               <cellValueFactory>
+                  <PropertyValueFactory property="contacto" />
+               </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Label layoutX="399.0" layoutY="420.0" text="Voluntários da Tarefa">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="voluntario" layoutX="717.0" layoutY="459.0" prefHeight="26.0" prefWidth="160.0" promptText="Escolha um Voluntário a Inserir" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="459.0" />
+      <Button fx:id="adicionar" layoutX="707.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleAdicionarAction" prefHeight="26.0" prefWidth="163.0" text="Adicionar" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
+      <Button fx:id="remover" layoutX="707.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleRemoverAction" prefHeight="26.0" prefWidth="163.0" text="Remover" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
+      <TableView layoutX="15.0" layoutY="138.0" prefHeight="293.0" prefWidth="650.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="100.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Id" />
+          <TableColumn prefWidth="152.0" text="Nome" />
+            <TableColumn prefWidth="137.0" text="Data de Inicio" />
+            <TableColumn prefWidth="136.0" text="Data de Fim" />
+            <TableColumn prefWidth="151.0" text="Pessoa Responsável" />
+        </columns>
+      </TableView>
+      <TextField layoutX="717.0" layoutY="506.0" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="30.0" />
+      <TextArea layoutX="720.0" layoutY="553.0" prefHeight="80.0" prefWidth="160.0" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="553.0" />
+      <TextField layoutX="708.0" layoutY="100.0" prefHeight="26.0" prefWidth="162.0" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0" />
+      <DatePicker layoutX="710.0" layoutY="149.0" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0" />
+      <DatePicker layoutX="695.0" layoutY="201.0" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="200.0" />
+      <TextField layoutX="709.0" layoutY="247.0" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="250.0" />
+   </children>
+</AnchorPane>

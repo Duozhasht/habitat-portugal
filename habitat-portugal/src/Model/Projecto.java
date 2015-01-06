@@ -1,9 +1,12 @@
 package Model;
 
 import Persistence.CandidaturaRepository;
+import Persistence.MaterialRepository;
 import Persistence.TarefaRepository;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+
+import java.sql.Date;
 
 /**
  * @author davide on 17/12/14.
@@ -13,34 +16,24 @@ import javafx.beans.property.SimpleStringProperty;
 public class Projecto {
     private int id = -1;
     private SimpleStringProperty nome_projecto;
-    private SimpleStringProperty data_inicio;
-    private SimpleStringProperty data_final;
+    private Date data_inicio;
+    private Date data_final;
     private SimpleIntegerProperty custo_inicio;
     private SimpleIntegerProperty custo_final;
     private SimpleStringProperty classificacao;
     private SimpleStringProperty estado;
-    private CandidaturaRepository candidatura;
+    private int candidatura = -1;
     private TarefaRepository tarefas;
+    private MaterialRepository material;
 
     public Projecto() {
         this.nome_projecto = new SimpleStringProperty();
-        this.data_inicio = new SimpleStringProperty();
-        this.data_final = new SimpleStringProperty();
+        this.data_inicio = null;
+        this.data_final = null;
         this.custo_inicio = new SimpleIntegerProperty();
         this.custo_final = new SimpleIntegerProperty();
         this.classificacao = new SimpleStringProperty();
         this.estado = new SimpleStringProperty();
-    }
-
-    public Projecto(SimpleStringProperty nome_projecto, SimpleStringProperty data_inicio, SimpleStringProperty data_final,
-                    SimpleIntegerProperty custo_inicio, SimpleIntegerProperty custo_final, SimpleStringProperty classificacao, SimpleStringProperty estado) {
-        this.nome_projecto = nome_projecto;
-        this.data_inicio = data_inicio;
-        this.data_final = data_final;
-        this.custo_inicio = custo_inicio;
-        this.custo_final = custo_final;
-        this.classificacao = classificacao;
-        this.estado = estado;
     }
 
     public int getId() {
@@ -63,28 +56,20 @@ public class Projecto {
         this.nome_projecto.set(nome_projecto);
     }
 
-    public String getData_inicio() {
-        return data_inicio.get();
-    }
-
-    public SimpleStringProperty data_inicioProperty() {
+    public Date getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(String data_inicio) {
-        this.data_inicio.set(data_inicio);
+    public void setData_inicio(Date data_inicio) {
+        this.data_inicio = data_inicio;
     }
 
-    public String getData_final() {
-        return data_final.get();
-    }
-
-    public SimpleStringProperty data_finalProperty() {
+    public Date getData_final() {
         return data_final;
     }
 
-    public void setData_final(String data_final) {
-        this.data_final.set(data_final);
+    public void setData_final(Date data_final) {
+        this.data_final = data_final;
     }
 
     public int getCusto_inicio() {
@@ -135,11 +120,11 @@ public class Projecto {
         this.estado.set(estado);
     }
 
-    public CandidaturaRepository getCandidatura() {
+    public int getCandidatura() {
         return candidatura;
     }
 
-    public void setCandidatura(CandidaturaRepository candidatura) {
+    public void setCandidatura(int candidatura) {
         this.candidatura = candidatura;
     }
 
@@ -149,6 +134,14 @@ public class Projecto {
 
     public void setTarefas(TarefaRepository tarefas) {
         this.tarefas = tarefas;
+    }
+
+    public MaterialRepository getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(MaterialRepository material) {
+        this.material = material;
     }
 
     @Override
@@ -166,5 +159,14 @@ public class Projecto {
         sb.append(", tarefas=").append(tarefas);
         sb.append('}');
         return sb.toString();
+    }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome_projecto().equals("")) throw new CamposNullException("Campo Nome Projecto não pode ser vazio");
+        if (this.getData_inicio().toString().equals("")) throw new CamposNullException("Campo Data Início não pode ser vazio");
+        if ((Integer.toString(this.getCusto_inicio())).equals("")) throw new CamposNullException("Campo Custo Início não pode ser vazio");
+        if (this.getClassificacao().equals("")) throw new CamposNullException("Campo Classificação não pode ser vazio");
+        if (this.getEstado().equals("")) throw new CamposNullException("Campo Estado não pode ser vazio");
+        if ((Integer.toString(this.getCandidatura()).equals(""))) throw new CamposNullException("Campo Candidatura não pode ser vazio");
     }
 }

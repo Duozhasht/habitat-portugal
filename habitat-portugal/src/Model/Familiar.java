@@ -127,4 +127,14 @@ public class Familiar {
                 ", candidatura=" + candidatura +
                 '}';
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getNome().equals("")) throw new CamposNullException("Campo Nome não pode ser vazio");
+        if (this.getParentesco().equals("")) throw new CamposNullException("Campo Parentesco não pode ser vazio");
+        if (this.getData_nascimento().toString().equals("")) throw new CamposNullException("Campo Data Nascimento não pode ser vazio");
+        if (this.getEstado_civil().equals("")) throw new CamposNullException("Campo Estado Civil não pode ser vazio");
+        if (this.getOcupacao().equals("")) throw new CamposNullException("Campo Ocupação não pode ser vazio");
+        if (this.getEscolaridade().equals("")) throw new CamposNullException("Campo Escolaridade não pode ser vazio");
+        if (this.getCandidatura() == -1) throw new CamposNullException("Campo Candidatura não pode ser vazio");
+    }
 }
