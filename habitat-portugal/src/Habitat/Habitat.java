@@ -146,10 +146,18 @@ public class Habitat {
     }
 
 
-    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar){
+    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar) throws CamposNullException{
+
+        try {
+            candidatura.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
+
         try{
-            Candidatura res =this.cRepo.put(candidatura.getId(), candidatura);
+            Candidatura res = this.cRepo.put(candidatura.getId(), candidatura);
             for(Familiar familiar : agregadofamiliar){
+                adicionarFamiliarCandidatura(res,familiar);
                 familiar.setCandidatura(res.getId());
                 this.fRepo.put(familiar.getId(),familiar);
             }
@@ -161,8 +169,6 @@ public class Habitat {
         return false;
 
     }
-
-
 
     public boolean removerCandidatura(Candidatura candidatura){
         try{
@@ -177,6 +183,17 @@ public class Habitat {
         }
 
         return false;
+    }
+
+    public boolean adicionarFamiliarCandidatura(Candidatura res, Familiar familiar) throws CamposNullException {
+        try {
+            familiar.camposOK();
+            familiar.setCandidatura(res.getId());
+            this.fRepo.put(familiar.getId(),familiar);
+        } catch (CamposNullException e) {
+            throw e;
+        }
+        return true;
     }
 
     public boolean removerFamiliarCandidatura(Familiar familiar){

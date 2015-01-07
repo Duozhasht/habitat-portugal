@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Candidatura;
 import Model.Familiar;
 import javafx.collections.FXCollections;
@@ -262,15 +263,18 @@ public class CandidaturaController {
        else
            this.candidatura.setAprovado(false);
 
-       if(this.facade.adicionarCandidatura(this.candidatura,this.afList))
+       try {
+           this.facade.adicionarCandidatura(this.candidatura,this.afList);
            dialogStage.close();
-       else
-           System.out.println("ERRO");
-
-
-
-
+       } catch (CamposNullException e) {
+           Dialogs.create()
+                   .owner(dialogStage)
+                   .title("Erro")
+                   .masthead(null)
+                   .message(e.getMessage())
+                   .showInformation();
        }
+   }
 
 
     @FXML

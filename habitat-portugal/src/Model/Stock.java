@@ -58,4 +58,10 @@ public class Stock {
     public void setDoacao_id(int doacao_id) {
         this.doacao_id = doacao_id;
     }
+
+    public void camposOK() throws CamposNullException {
+        if (this.getDescricao().equals("")) throw new CamposNullException("Campo Descrição não pode ser vazio");
+        if (this.getQuantidade().equals("")) throw new CamposNullException("Campo Quantidade não pode ser vazio");
+        if (this.getDoacao_id() == -1) throw new CamposNullException("Campo Doação não pode ser vazio");
+    }
 }
