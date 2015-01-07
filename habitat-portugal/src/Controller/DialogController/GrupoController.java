@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Candidatura;
 import Model.Grupo;
 import Model.Voluntario;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import org.controlsfx.dialog.Dialogs;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -143,10 +145,18 @@ public class GrupoController {
         this.grupo.setData_final(Date.valueOf(this.data_final.getValue()));
         this.grupo.setNotas(this.notas.getText());
 
-        if(this.facade.adicionarGrupo(this.grupo,this.vList))
-            dialogStage.close();
-        else
-            System.out.println("ERRO");
+        try {
+            this.facade.adicionarGrupo(this.grupo, this.vList);
+                    dialogStage.close();
+        } catch (CamposNullException e) {
+            e.printStackTrace();
+            Dialogs.create()
+                    .owner(dialogStage)
+                    .title("Erro")
+                    .masthead(null)
+                    .message(e.getMessage())
+                    .showInformation();
+        }
 
     }
 

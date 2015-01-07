@@ -1,12 +1,14 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Doador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.controlsfx.dialog.Dialogs;
 
 /**
  * Created by Tiago on 30/12/14.
@@ -81,10 +83,17 @@ public class DoadorController {
         this.doador.setNif(this.nif.getText());
         this.doador.setNotas(this.notas.getText());
 
-        if(this.facade.adicionarDoador(this.doador))
+        try {
+            this.facade.adicionarDoador(this.doador);
             dialogStage.close();
-        else
-            System.out.println("ERRO");
+        } catch (CamposNullException e) {
+            Dialogs.create()
+                    .owner(dialogStage)
+                    .title("Erro")
+                    .masthead(null)
+                    .message(e.getMessage())
+                    .showInformation();
+        }
 
     }
 

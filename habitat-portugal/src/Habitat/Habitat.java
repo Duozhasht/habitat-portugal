@@ -188,7 +188,12 @@ public class Habitat {
 
 
 
-    public boolean adicionarVoluntario(Voluntario voluntario){
+    public boolean adicionarVoluntario(Voluntario voluntario) throws CamposNullException{
+        try {
+            voluntario.camposOK();
+        } catch (CamposNullException e) {
+           throw e;
+        }
         try{
             this.vRepo.put(voluntario.getId_voluntario(), voluntario);
 
@@ -215,7 +220,12 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista){
+    public boolean adicionarGrupo(Grupo grupo, ObservableList<Voluntario> lista) throws CamposNullException{
+        try {
+            grupo.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
         try{
             this.gRepo.put(grupo.getId_grupo(), grupo);
             for(Voluntario v : lista){
@@ -245,8 +255,13 @@ public class Habitat {
 
     }
 
-    public boolean adicionarEvento(Evento evento)
+    public boolean adicionarEvento(Evento evento) throws CamposNullException
     {
+        try {
+            evento.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
         try{
             this.eRepo.put(evento.getId(),evento);
 
@@ -271,8 +286,13 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoador(Doador doador)
+    public boolean adicionarDoador(Doador doador) throws CamposNullException
     {
+        try {
+            doador.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
         try{
             this.ddRepo.put(doador.getId(),doador);
 
@@ -297,8 +317,13 @@ public class Habitat {
         return false;
     }
 
-    public boolean adicionarDoacao(Doacao doacao)
+    public boolean adicionarDoacao(Doacao doacao) throws CamposNullException
     {
+        try {
+            doacao.camposOK();
+        } catch (CamposNullException e) {
+            throw e;
+        }
         try{
             this.dcRepo.put(doacao.getId_doacao(),doacao);
 

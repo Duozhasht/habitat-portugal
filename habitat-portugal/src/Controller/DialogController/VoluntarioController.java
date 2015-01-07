@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Voluntario;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.controlsfx.dialog.Dialogs;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -187,10 +189,18 @@ public class VoluntarioController {
        else
            this.voluntario.setConhec_constr(false);
 
-       if(this.facade.adicionarVoluntario(voluntario))
+       try {
+           this.facade.adicionarVoluntario(voluntario);
            dialogStage.close();
-       else
-           System.out.println("ERRO");
+       } catch (CamposNullException e) {
+           Dialogs.create()
+                   .owner(dialogStage)
+                   .title("Erro")
+                   .masthead(null)
+                   .message(e.getMessage())
+                   .showInformation();
+       }
+
    }
 
 

@@ -1,6 +1,7 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
+import Model.CamposNullException;
 import Model.Doacao;
 import Model.Doador;
 import Model.Evento;
@@ -9,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.controlsfx.dialog.Dialogs;
 
 import java.util.ArrayList;
 
@@ -101,10 +103,17 @@ public class DoacaoController {
         this.doacao.setEvento(ee.getId());
 
 
-        if(this.facade.adicionarDoacao(this.doacao))
+        try {
+            this.facade.adicionarDoacao(this.doacao);
             dialogStage.close();
-        else
-            System.out.println("ERRO");
+        } catch (CamposNullException e) {
+            Dialogs.create()
+                    .owner(dialogStage)
+                    .title("Erro")
+                    .masthead(null)
+                    .message(e.getMessage())
+                    .showInformation();
+        }
 
     }
 
