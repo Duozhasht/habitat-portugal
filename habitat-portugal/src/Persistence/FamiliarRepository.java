@@ -291,7 +291,7 @@ public class FamiliarRepository implements Map<Integer, Familiar> {
 
 
 
-    public Iterable<Familiar> findByCandidatura(int id) {
+    public List<Familiar> findByCandidatura(int id) {
         List<Familiar> familia = new ArrayList<>();
         try {
 

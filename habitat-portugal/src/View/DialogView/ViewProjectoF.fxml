@@ -26,7 +26,7 @@
       <TextField fx:id="custo_inicio" layoutX="30.0" layoutY="250.0" prefHeight="26.0" prefWidth="170.0" promptText="Custo Inicial" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="250.0" />
       <TextField fx:id="custo_final" layoutX="219.0" layoutY="250.0" prefHeight="26.0" prefWidth="162.0" promptText="Custo Final" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="250.0" />
       <TextField fx:id="classificacao" layoutX="30.0" layoutY="300.0" promptText="Introduza o tipo de Projecto" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
-      <ComboBox layoutX="30.0" layoutY="350.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
+      <ComboBox fx:id="candidato" layoutX="30.0" layoutY="350.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
       <Button fx:id="ok" layoutX="128.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="26.0" prefWidth="100.0" text="Ok" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="100.0" />
       <Button layoutX="405.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleCancelarAction" prefHeight="26.0" prefWidth="100.0" text="Cancelar" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="100.0" />
       <Separator layoutX="15.0" layoutY="701.0" prefHeight="0.0" prefWidth="405.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="19.0" />

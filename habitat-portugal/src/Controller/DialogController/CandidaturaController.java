@@ -22,6 +22,7 @@ import org.controlsfx.dialog.*;
 /**
  * Created by Tiago on 18/12/14.
  */
+@SuppressWarnings("deprecation")
 public class CandidaturaController {
 
     private Stage dialogStage;
@@ -250,7 +251,8 @@ public class CandidaturaController {
        if(this.candidatura == null)
            this.candidatura = new Candidatura();
        this.candidatura.setNome_candidato(this.nome_candidato.getText());
-       this.candidatura.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
+       if(this.data_nascimento.getValue() != null)
+        this.candidatura.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
        this.candidatura.setMorada(this.morada.getText());
        this.candidatura.setContacto(this.contacto.getText());
        this.candidatura.setEscolaridade(this.escolaridade.getText());
@@ -289,7 +291,8 @@ public class CandidaturaController {
             RadioButton ec_2 = (RadioButton)this.estado_civil_familiar.getSelectedToggle();
             Familiar familiar = new Familiar();
             familiar.setNome(this.nome_familiar.getText());
-            familiar.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
+            if(data_nascimento.getValue()!=null)
+                familiar.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
             familiar.setParentesco(this.parentesco.getText());
             familiar.setOcupacao(this.parentesco.getText());
             familiar.setEscolaridade(this.escolaridade.getText());

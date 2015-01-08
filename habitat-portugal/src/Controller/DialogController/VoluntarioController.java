@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by Tiago on 23/12/14.
  */
+
+@SuppressWarnings("deprecation")
 public class VoluntarioController {
 
 
@@ -167,7 +169,8 @@ public class VoluntarioController {
        if(this.voluntario == null)
            this.voluntario = new Voluntario();
        this.voluntario.setNome_voluntario(this.nome_voluntario.getText());
-       this.voluntario.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
+       if(this.data_nascimento.getValue() != null)
+            this.voluntario.setData_nascimento(Date.valueOf(this.data_nascimento.getValue()));
        this.voluntario.setProfissao(this.profissao.getText());
        this.voluntario.setMorada(this.morada.getText());
        this.voluntario.setContacto(this.contacto.getText());

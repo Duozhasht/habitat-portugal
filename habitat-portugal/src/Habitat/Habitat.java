@@ -5,6 +5,8 @@ import Persistence.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 /**
  * Created by Tiago on 12/12/14.
  */
@@ -23,6 +25,10 @@ public class Habitat {
     private DoacaoRepository dcRepo = RepositoryFactory.getDoacaoRepository();
     private DoadorRepository ddRepo = RepositoryFactory.getDoadorRepository();
     private ProjectoRepository pRepo = RepositoryFactory.getProjectoRepository();
+    private MaterialRepository mRepo = RepositoryFactory.getMaterialRepository();
+    private StockRepository sRepo = RepositoryFactory.getStockRepository();
+    private TarefaRepository tRepo = RepositoryFactory.getTarefaRepository();
+    private VoluntarioTarefaRepository vtRepo = RepositoryFactory.getVoluntarioTarefaRepository();
 
 
     public UtilizadorRepository getuRepo() {
@@ -55,6 +61,14 @@ public class Habitat {
 
     public DoadorRepository getDdRepo() {
         return ddRepo;
+    }
+
+    public ProjectoRepository getpRepo() {
+        return pRepo;
+    }
+
+    public MaterialRepository getmRepo() {
+        return mRepo;
     }
 
     public ObservableList<Candidatura> getObservableCA(){
@@ -140,14 +154,75 @@ public class Habitat {
     public ObservableList<Projecto> getObservablePF(){
         ObservableList<Projecto> res = FXCollections.observableArrayList();
         for(Projecto projecto : this.pRepo.values()){
-            res.add(projecto);
+            if(projecto.getEstado().equals("Financiamento"))
+                res.add(projecto);
+        }
+        return res;
+    }
+
+    public ObservableList<Projecto> getObservablePD(){
+        ObservableList<Projecto> res = FXCollections.observableArrayList();
+        for(Projecto projecto : this.pRepo.values()){
+            if(projecto.getEstado().equals("Desenvolvimento"))
+                res.add(projecto);
+        }
+        return res;
+    }
+
+    public ObservableList<Projecto> getObservablePC(){
+        ObservableList<Projecto> res = FXCollections.observableArrayList();
+        for(Projecto projecto : this.pRepo.values()){
+            if(projecto.getEstado().equals("Concluido"))
+                res.add(projecto);
+        }
+        return res;
+    }
+
+    public ObservableList<Material> getObservableMP(int projecto){
+        ObservableList<Material> res = FXCollections.observableArrayList();
+        for(Material material : this.mRepo.findByProjecto(projecto)){
+            res.add(material);
+        }
+        return res;
+    }
+
+    public ObservableList<Stock> getObservableS(){
+        ObservableList<Stock> res = FXCollections.observableArrayList();
+        for(Stock stock : this.sRepo.values()){
+            res.add(stock);
+        }
+        return res;
+    }
+
+    public ObservableList<Tarefa> getObservableT(int projecto){
+        ObservableList<Tarefa> res = FXCollections.observableArrayList();
+        for(Tarefa tarefa : this.tRepo.findByProjecto(projecto)){
+            res.add(tarefa);
+        }
+        return res;
+    }
+    ///////
+    public ObservableList<VoluntarioTarefa> getObservableVT(){
+        ObservableList<VoluntarioTarefa> res = FXCollections.observableArrayList();
+        for(VoluntarioTarefa voluntarioTarefa : this.vtRepo.values()){
+            res.add(voluntarioTarefa);
         }
         return res;
     }
 
 
-    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar) throws CamposNullException{
 
+
+    /*
+    *
+    *
+    *  Candidatura Methods
+    *
+    *
+    * */
+
+
+    public boolean adicionarCandidatura(Candidatura candidatura, ObservableList<Familiar> agregadofamiliar) throws CamposNullException{
         try {
             candidatura.camposOK();
         } catch (CamposNullException e) {
@@ -170,7 +245,8 @@ public class Habitat {
 
     }
 
-    public boolean removerCandidatura(Candidatura candidatura){
+
+    public boolean removerCandidatura(Candidatura candidatura) {
         try{
             for(Familiar familiar : candidatura.getAgregadofamiliar().findByCandidatura(candidatura.getId()) ){
                 this.removerFamiliarCandidatura(familiar);
@@ -185,6 +261,8 @@ public class Habitat {
         return false;
     }
 
+
+
     public boolean adicionarFamiliarCandidatura(Candidatura res, Familiar familiar) throws CamposNullException {
         try {
             familiar.camposOK();
@@ -196,10 +274,28 @@ public class Habitat {
         return true;
     }
 
+
     public boolean removerFamiliarCandidatura(Familiar familiar){
         this.getfRepo().remove(familiar.getId());
         return true;
     }
+
+
+    public boolean verificarDependencia(Candidatura candidatura)throws DependenciaException{
+        if(!candidatura.getAgregadofamiliar().findByCandidatura(candidatura.getId()).isEmpty())
+            throw new DependenciaException("Existe familiares associados a esta candidatura");
+
+        return true;
+    }
+
+
+    /*
+    *
+    *
+    * Gestão de Voluntários
+    *
+    *
+    * */
 
 
 
@@ -209,7 +305,7 @@ public class Habitat {
         try {
             voluntario.camposOK();
         } catch (CamposNullException e) {
-           throw e;
+            throw e;
         }
         try{
             this.vRepo.put(voluntario.getId_voluntario(), voluntario);
@@ -226,9 +322,7 @@ public class Habitat {
 
     public boolean removerVoluntario(Voluntario voluntario){
         try{
-
             this.vRepo.remove(voluntario.getId_voluntario());
-
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -258,10 +352,9 @@ public class Habitat {
 
     }
 
-    public boolean removerGrupo(Grupo grupo){
+    public boolean removerGrupo(Grupo grupo) {
         try{
             this.gRepo.remove(grupo.getId_grupo());
-
             return true;
 
         }catch (Exception e){
@@ -271,6 +364,20 @@ public class Habitat {
         return false;
 
     }
+
+    public boolean verificarDependencia(Grupo grupo)throws DependenciaException{
+        if(!grupo.getElementos().findByGrupo(grupo.getId_grupo()).isEmpty())
+            throw new DependenciaException("Os voluntarios associados a este grupo serão tambem removidos");
+        return false;
+    }
+
+    /*
+    *
+    *
+    * Gestão de Eventos e Fundos
+    *
+    *
+    * */
 
     public boolean adicionarEvento(Evento evento) throws CamposNullException
     {
@@ -310,6 +417,7 @@ public class Habitat {
         } catch (CamposNullException e) {
             throw e;
         }
+
         try{
             this.ddRepo.put(doador.getId(),doador);
 
@@ -364,9 +472,29 @@ public class Habitat {
 
         return false;
     }
+/*
+    public boolean verificarDependencia(Doador doador)throws DependenciaException{
+        if(!do.getElementos().findByGrupo(grupo.getId_grupo()).isEmpty())
+            throw new DependenciaException("Os voluntarios associados a este grupo serão tambem removidos");
+        return false;
+    }
+    */
 
-    public boolean adicionarProjecto(Projecto projecto)
+
+    /*
+    *
+    *   TAB PROJECTOS
+    *
+    * */
+
+    public boolean adicionarProjecto(Projecto projecto) throws CamposNullException
     {
+        try{
+            projecto.camposOK();
+        }catch (CamposNullException e){
+            throw e;
+        }
+
         try{
             this.pRepo.put(projecto.getId(),projecto);
 
@@ -390,6 +518,39 @@ public class Habitat {
 
         return false;
     }
+
+    public boolean iniciarProjecto(Projecto projecto){
+        try{
+            this.pRepo.put(projecto.getId(),projecto);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean adicionarMaterialProjecto(Material material, Projecto projecto) throws CamposNullException
+    {
+        try{
+            material.camposOK();
+            this.getmRepo().put(material.getId_material(), material);
+
+            return true;
+        }catch (CamposNullException e){
+            throw e;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 

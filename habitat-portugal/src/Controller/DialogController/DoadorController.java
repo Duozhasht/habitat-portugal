@@ -13,6 +13,7 @@ import org.controlsfx.dialog.Dialogs;
 /**
  * Created by Tiago on 30/12/14.
  */
+@SuppressWarnings("deprecation")
 public class DoadorController {
 
     private Stage dialogStage;
@@ -94,6 +95,7 @@ public class DoadorController {
                     .message(e.getMessage())
                     .showInformation();
         }
+
 
     }
 

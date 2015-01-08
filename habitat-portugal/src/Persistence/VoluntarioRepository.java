@@ -308,7 +308,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
         return null;
     }
 
-    public Iterable<Voluntario> findByGrupo(int id) {
+    public List<Voluntario> findByGrupo(int id) {
         List<Voluntario> lista = new ArrayList<>();
         try {
 

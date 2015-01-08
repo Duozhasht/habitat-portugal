@@ -17,6 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Tiago on 30/12/14.
  */
+@SuppressWarnings("deprecation")
 public class DoacaoController {
 
     private Stage dialogStage;
@@ -93,14 +94,16 @@ public class DoacaoController {
     @FXML protected void handleOkAction(){
         RadioButton rb = (RadioButton)this.tipo.getSelectedToggle();
         Doador dd = (Doador)this.doador.getSelectionModel().getSelectedItem();
-        Evento ee = (Evento)this.doador.getSelectionModel().getSelectedItem();
+        Evento ee = (Evento)this.evento.getSelectionModel().getSelectedItem();
         if(this.doacao == null)
             this.doacao = new Doacao();
         this.doacao.setDescricao(this.descricao.getText());
         this.doacao.setQuantidade(this.quantidade.getText());
         this.doacao.setTipo(rb.getText());
-        this.doacao.setDoador(dd.getId());
-        this.doacao.setEvento(ee.getId());
+        if(dd != null)
+            this.doacao.setDoador(dd.getId());
+        if(ee != null)
+            this.doacao.setEvento(ee.getId());
 
 
         try {

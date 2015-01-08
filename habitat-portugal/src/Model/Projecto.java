@@ -33,7 +33,7 @@ public class Projecto {
         this.custo_inicio = new SimpleIntegerProperty();
         this.custo_final = new SimpleIntegerProperty();
         this.classificacao = new SimpleStringProperty();
-        this.estado = new SimpleStringProperty();
+        this.estado = new SimpleStringProperty("Financiamento");
     }
 
     public int getId() {
@@ -163,10 +163,10 @@ public class Projecto {
 
     public void camposOK() throws CamposNullException {
         if (this.getNome_projecto().equals("")) throw new CamposNullException("Campo Nome Projecto não pode ser vazio");
-        if (this.getData_inicio().toString().equals("")) throw new CamposNullException("Campo Data Início não pode ser vazio");
+        if (this.getData_inicio() == null) throw new CamposNullException("Campo Data Início não pode ser vazio");
         if ((Integer.toString(this.getCusto_inicio())).equals("")) throw new CamposNullException("Campo Custo Início não pode ser vazio");
         if (this.getClassificacao().equals("")) throw new CamposNullException("Campo Classificação não pode ser vazio");
         if (this.getEstado().equals("")) throw new CamposNullException("Campo Estado não pode ser vazio");
-        if ((Integer.toString(this.getCandidatura()).equals(""))) throw new CamposNullException("Campo Candidatura não pode ser vazio");
+        if (this.getCandidatura() == -1) throw new CamposNullException("Campo Candidatura não pode ser vazio");
     }
 }

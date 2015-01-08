@@ -12,17 +12,17 @@ import javafx.beans.property.SimpleStringProperty;
 @SuppressWarnings("UnusedDeclaration")
 public class Material {
     private int id_material = -1;
+    private SimpleStringProperty descricao;
     private SimpleStringProperty quant_necessaria;
     private SimpleStringProperty quant_actual;
     private SimpleStringProperty motivo;
     private int projecto_id = -1;
-    private DoacaoRepository doacao;
+    private int stock_id = -1;
 
     public Material() {
         this.quant_necessaria = new SimpleStringProperty();
         this.quant_actual = new SimpleStringProperty();
         this.motivo = new SimpleStringProperty();
-        this.doacao = RepositoryFactory.getDoacaoRepository();
     }
 
     public int getId_material() {
@@ -31,6 +31,18 @@ public class Material {
 
     public void setId_material(int id_material) {
         this.id_material = id_material;
+    }
+
+    public String getDescricao() {
+        return descricao.get();
+    }
+
+    public SimpleStringProperty descricaoProperty() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao.set(descricao);
     }
 
     public String getQuant_necessaria() {
@@ -77,12 +89,12 @@ public class Material {
         this.projecto_id = projecto_id;
     }
 
-    public DoacaoRepository getDoacao() {
-        return doacao;
+    public int getStock_id() {
+        return stock_id;
     }
 
-    public void setDoacao(DoacaoRepository doacao) {
-        this.doacao = doacao;
+    public void setStock_id(int stock_id) {
+        this.stock_id = stock_id;
     }
 
     public void camposOK() throws CamposNullException {

@@ -163,19 +163,7 @@ public class Doador {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Doador{");
-        sb.append("id=").append(id);
-        sb.append(", nome=").append(nome);
-        sb.append(", contacto=").append(contacto);
-        sb.append(", telefone=").append(telefone);
-        sb.append(", morada=").append(morada);
-        sb.append(", email=").append(email);
-        sb.append(", site=").append(site);
-        sb.append(", pessoa_contacto=").append(pessoa_contacto);
-        sb.append(", nif=").append(nif);
-        sb.append(", notas=").append(notas);
-        sb.append('}');
-        return sb.toString();
+        return this.getNome();
     }
 
     public void camposOK() throws CamposNullException {

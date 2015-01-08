@@ -210,7 +210,7 @@ public class Voluntario {
 
     public void camposOK() throws CamposNullException {
         if (this.getNome_voluntario().equals("")) throw new CamposNullException("Campo Nome Voluntário não pode ser vazio");
-        if (this.getData_nascimento().toString().equals("")) throw new CamposNullException("Campo Data Nascimento não pode ser vazio");
+        if (this.getData_nascimento()==null) throw new CamposNullException("Campo Data Nascimento não pode ser vazio");
         if (this.getProfissao().equals("")) throw new CamposNullException("Campo Profissão não pode ser vazio");
         if (this.getMorada().equals("")) throw new CamposNullException("Campo Morada não pode ser vazio");
         if (this.getContacto().equals("")) throw new CamposNullException("Campo Contacto não pode ser vazio");

@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by Tiago on 30/12/14.
  */
+@SuppressWarnings("deprecation")
 public class EventoController {
     private Stage dialogStage;
     private Habitat facade;
@@ -101,7 +102,9 @@ public class EventoController {
         this.evento.setValor_total(this.valor_total.getText());
         this.evento.setNotas(this.notas.getText());
         this.evento.setOrganizador(this.organizador.getText());
-        this.evento.setData_evento(Date.valueOf(this.data_evento.getValue()));
+        if(this.data_evento.getValue() != null)
+            this.evento.setData_evento(Date.valueOf(this.data_evento.getValue()));
+
         try {
             this.facade.adicionarEvento(this.evento);
             dialogStage.close();

@@ -12,6 +12,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;
 
@@ -36,6 +39,8 @@ public class AdminController {
     @FXML TableView<Doacao> dcTable = new TableView<>();
     @FXML TableView<Doador> ddTable = new TableView<>();
     @FXML TableView<Projecto> pfTable = new TableView<>();
+    @FXML TableView<Projecto> pdTable = new TableView<>();
+    @FXML TableView<Projecto> pcTable = new TableView<>();
 
 
     //Listas
@@ -48,6 +53,8 @@ public class AdminController {
     private ObservableList<Doacao> dcList;
     private ObservableList<Doador> ddList;
     private ObservableList<Projecto> pfList;
+    private ObservableList<Projecto> pdList;
+    private ObservableList<Projecto> pcList;
 
 
     public void setFacade(Habitat facade) {
@@ -75,6 +82,9 @@ public class AdminController {
         this.eList = this.facade.getObservableE();
         this.dcList = this.facade.getObservableDC();
         this.ddList = this.facade.getObservableDD();
+        this.pfList = this.facade.getObservablePF();
+        this.pdList = this.facade.getObservablePD();
+        this.pcList = this.facade.getObservablePC();
         this.caTable.setItems(caList);
         this.cnaTable.setItems(cnaList);
         this.fTable.setItems(fList);
@@ -83,6 +93,9 @@ public class AdminController {
         this.eTable.setItems(eList);
         this.dcTable.setItems(dcList);
         this.ddTable.setItems(ddList);
+        this.pfTable.setItems(pfList);
+        this.pdTable.setItems(pdList);
+        this.pcTable.setItems(pcList);
         stage.setTitle("Habitat - Administrador");
         stage.setScene(scene);
         stage.show();
@@ -199,10 +212,34 @@ public class AdminController {
 
     @FXML
     protected void handleRemoverCAction() {
-        if(this.facade.removerCandidatura(this.caTable.getSelectionModel().getSelectedItem()))
-            this.caList.remove(this.caTable.getSelectionModel().getSelectedItem());
-        else
-            System.out.println("Erro!");
+
+        if(this.caTable.getSelectionModel().getSelectedItem()!=null) {
+            if (this.facade.getpRepo().findCandidatura(this.caTable.getSelectionModel().getSelectedItem().getId())) {
+                return ;
+            }
+        }
+
+        try{
+            if(this.caTable.getSelectionModel().getSelectedItem()!=null)
+                this.facade.verificarDependencia(this.caTable.getSelectionModel().getSelectedItem());
+        }catch (DependenciaException e){
+            Action response = Dialogs.create()
+                    .owner(stage)
+                    .title("Aviso")
+                    .message(e.getMessage())
+                    .actions(Dialog.ACTION_OK,Dialog.ACTION_CANCEL)
+                    .showConfirm();
+            if(response == Dialog.ACTION_OK) {
+                if (this.facade.removerCandidatura(this.caTable.getSelectionModel().getSelectedItem()))
+                    this.caList.remove(this.caTable.getSelectionModel().getSelectedItem());
+                return;
+            }
+            else
+            {System.out.println("ERRO ERRO ERRO");
+            return;}
+        }
+            if (this.facade.removerCandidatura(this.caTable.getSelectionModel().getSelectedItem()))
+                this.caList.remove(this.caTable.getSelectionModel().getSelectedItem());
     }
 
 
@@ -385,10 +422,27 @@ public class AdminController {
 
     @FXML
     protected void handleRemoverGAction() {
-        if(this.facade.removerGrupo(this.gTable.getSelectionModel().getSelectedItem()))
-            this.gList.remove(this.gTable.getSelectionModel().getSelectedItem());
-        else
-            System.out.println("Erro!");
+        try{
+            if(this.gTable.getSelectionModel().getSelectedItem()!=null)
+                this.facade.verificarDependencia(this.gTable.getSelectionModel().getSelectedItem());
+        }catch (DependenciaException e){
+            Action response = Dialogs.create()
+                    .owner(stage)
+                    .title("Aviso")
+                    .message(e.getMessage())
+                    .actions(Dialog.ACTION_OK,Dialog.ACTION_CANCEL)
+                    .showConfirm();
+            if(response == Dialog.ACTION_OK){
+                if(this.facade.removerGrupo(this.gTable.getSelectionModel().getSelectedItem()))
+                    this.gList.remove(this.gTable.getSelectionModel().getSelectedItem());
+
+            }
+            else
+                return ;
+        }
+        if(this.gTable.getSelectionModel().getSelectedItem()!=null){
+            this.facade.removerGrupo(this.gTable.getSelectionModel().getSelectedItem());
+        }
     }
 
 
@@ -614,6 +668,12 @@ public class AdminController {
         this.pfList.clear();
         this.pfList.addAll(this.facade.getObservablePF());
         this.pfTable.setItems(pfList);
+        this.pdList.clear();
+        this.pdList.addAll(this.facade.getObservablePD());
+        this.pdTable.setItems(pdList);
+        this.pcList.clear();
+        this.pcList.addAll(this.facade.getObservablePC());
+        this.pcTable.setItems(pcList);
     }
 
     private boolean showProjectFDialog(String modo){
@@ -654,6 +714,74 @@ public class AdminController {
 
     }
 
+    private boolean showMaterialDialog(String modo){
+
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewMaterial.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            MaterialController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            controller.setProjecto(this.pdTable.getSelectionModel().getSelectedItem());
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesProjecto();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    private boolean showTarefaDialog(String modo){
+
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewProjectoF.fxml"));
+            AnchorPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(modo);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.stage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+
+            // Set the person into the controller.
+            MaterialController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFacade(this.facade);
+            controller.setProjecto(this.pdTable.getSelectionModel().getSelectedItem());
+            controller.initializer();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+            this.updateTablesProjecto();
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
 
     @FXML
     protected void handleAdicionarPFAction() {
@@ -675,6 +803,32 @@ public class AdminController {
     protected void handleEditarPFAction() {
         this.showProjectFDialog("Editar Doacao");
     }
+
+    @FXML
+    protected void handleConsultarPFAction() {
+        this.showProjectFDialog("Editar Doacao");
+    }
+
+
+    @FXML
+    protected void handleIniciarPFAction(){
+        if(this.pfTable.getSelectionModel().getSelectedItem()!=null){
+           this.pfTable.getSelectionModel().getSelectedItem().setEstado("Desenvolvimento");
+            this.facade.iniciarProjecto(this.pfTable.getSelectionModel().getSelectedItem());
+            this.updateTablesProjecto();}
+    }
+
+    @FXML
+    protected void handleGMAction(){
+        this.showMaterialDialog("Gestão de Materiais");
+    }
+
+    @FXML
+    protected void handleGTAction(){}
+
+
+
+
 
 
 

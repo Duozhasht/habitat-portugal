@@ -135,6 +135,5 @@ public class Familiar {
         if (this.getEstado_civil().equals("")) throw new CamposNullException("Campo Estado Civil não pode ser vazio");
         if (this.getOcupacao().equals("")) throw new CamposNullException("Campo Ocupação não pode ser vazio");
         if (this.getEscolaridade().equals("")) throw new CamposNullException("Campo Escolaridade não pode ser vazio");
-        if (this.getCandidatura() == -1) throw new CamposNullException("Campo Candidatura não pode ser vazio");
     }
 }

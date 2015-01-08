@@ -59,6 +59,11 @@ public class Stock {
         this.doacao_id = doacao_id;
     }
 
+    @Override
+    public String toString() {
+        return this.getDescricao();
+    }
+
     public void camposOK() throws CamposNullException {
         if (this.getDescricao().equals("")) throw new CamposNullException("Campo Descrição não pode ser vazio");
         if (this.getQuantidade().equals("")) throw new CamposNullException("Campo Quantidade não pode ser vazio");

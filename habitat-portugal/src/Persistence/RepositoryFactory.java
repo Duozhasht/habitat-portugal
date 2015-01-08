@@ -25,6 +25,7 @@ package Persistence;
 
 import Model.Doacao;
 import Model.Voluntario;
+import Model.VoluntarioTarefa;
 
 import java.util.Properties;
 
@@ -55,6 +56,7 @@ public final class RepositoryFactory {
     private static DoacaoRepository doacaoRepository;
     private static MaterialRepository materialRepository;
     private static StockRepository stockRepository;
+    private static VoluntarioTarefaRepository voluntarioTarefaRepository;
 
 
     private RepositoryFactory() { }
@@ -141,6 +143,13 @@ public final class RepositoryFactory {
             stockRepository = new StockRepository(getURL(),USER,PASSWORD);
         }
         return stockRepository;
+    }
+
+    public static VoluntarioTarefaRepository getVoluntarioTarefaRepository(){
+        if(voluntarioRepository == null) {
+            voluntarioTarefaRepository = new VoluntarioTarefaRepository(getURL(),USER,PASSWORD);
+        }
+        return voluntarioTarefaRepository;
     }
 
     public static void setProperties(Properties props) {

@@ -16,12 +16,13 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
     private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? where id_projecto = ?";
 
     private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id_projecto = ?";
-    private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto";
+    private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado, candidatura_id from projecto";
 
     private static final String DELETE_PROJECTO = "delete from projecto where id_projecto = ?";
     private static final String DELETE_PROJECTOS = "delete from projecto";
 
     private static final String COUNT_PROJECTOS = "select count(*) as n from projecto";
+    private static final String COUNT_PROJECTO_CANDIDATURA = "select count(*) as n from projecto WHERE candidatura_id = ?";
     private static final String SELECT_IDS = "select id_projecto from projecto";
 
     private final String url;
@@ -289,6 +290,32 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
     @Override
     public Set<Entry<Integer, Projecto>> entrySet() {
         return null;
+    }
+
+    public boolean findCandidatura(int id) {
+        try {
+            int count;
+
+            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = connection.createStatement();
+
+            try (ResultSet resultSet = statement.executeQuery(COUNT_PROJECTO_CANDIDATURA)) {
+                if (resultSet.next())
+                    count = resultSet.getInt("n");
+                else
+                    count = -1;
+            } finally {
+                statement.close();
+                connection.close();
+            }
+
+            return count != -1;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
 }

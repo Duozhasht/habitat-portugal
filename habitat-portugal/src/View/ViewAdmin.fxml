@@ -175,19 +175,35 @@
                                       <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                 <TableView layoutX="101.0" layoutY="70.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
+                                                 <TableView fx:id="pfTable" layoutX="101.0" layoutY="70.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
                                                      <columns>
-                                                         <TableColumn prefWidth="42.0" text="ID" />
-                                                         <TableColumn prefWidth="273.0" text="Nome do Projecto" />
-                                                         <TableColumn minWidth="0.0" prefWidth="111.0" text="Custo Previsto" />
-                                                         <TableColumn prefWidth="373.0" text="Descrição" />
+                                                         <TableColumn prefWidth="42.0" text="ID">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="id" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="273.0" text="Nome do Projecto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="nome_projecto" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn minWidth="0.0" prefWidth="111.0" text="Custo Previsto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="custo_inicio" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="373.0" text="Classificação">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="classificacao" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
                                                      </columns>
                                                  </TableView>
-                                                 <Button layoutX="863.0" layoutY="64.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Adicionar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
-                                                 <Button layoutX="851.0" layoutY="196.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Iniciar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="330.0" />
-                                                 <Button layoutX="849.0" layoutY="107.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Remover Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
+                                                 <Button layoutX="863.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleAdicionarPFAction" prefHeight="30.0" prefWidth="155.0" text="Adicionar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
+                                                 <Button layoutX="851.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleIniciarPFAction" prefHeight="30.0" prefWidth="155.0" text="Iniciar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="330.0" />
+                                                 <Button layoutX="849.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleRemoverPFAction" prefHeight="30.0" prefWidth="155.0" text="Remover Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
                                                  <Button layoutX="859.0" layoutY="149.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Editar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="280.0" />
-                                                 <Pane layoutX="801.0" prefHeight="200.0" prefWidth="197.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                 <Pane layoutX="801.0" prefHeight="91.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <children>
                                                         <Label layoutX="24.0" layoutY="40.0" text="Gestão de Projectos">
                                                             <font>
@@ -204,21 +220,41 @@
                                       <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                 <TableView layoutX="6.0" prefHeight="458.0" prefWidth="992.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
+                                                 <TableView fx:id="pdTable" layoutX="6.0" prefHeight="458.0" prefWidth="992.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
                                                      <columns>
-                                                         <TableColumn prefWidth="44.0" text="ID" />
-                                                         <TableColumn prefWidth="269.0" text="Nome do Projecto" />
-                                                         <TableColumn prefWidth="126.0" text="Custo Previsto" />
-                                                         <TableColumn prefWidth="142.0" text="Data de Inicio" />
-                                                         <TableColumn prefWidth="155.0" text="Data de Fim Prevista" />
+                                                         <TableColumn prefWidth="44.0" text="ID">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="id" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="269.0" text="Nome do Projecto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="nome_projecto" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="126.0" text="Custo Previsto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="custo_inicio" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="142.0" text="Data de Inicio">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="data_inicio" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="155.0" text="Data de Fim Prevista">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="data_final" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
                                                      </columns>
                                                  </TableView>
-                                                 <Button layoutX="831.0" layoutY="73.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Gestão de Materiais" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="130.0" />
-                                                 <Button layoutX="831.0" layoutY="126.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Gestão de Tarefas" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
+                                                 <Button layoutX="831.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleGMAction" prefHeight="30.0" prefWidth="155.0" text="Gestão de Materiais" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="130.0" />
+                                                 <Button layoutX="831.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleGTAction" prefHeight="30.0" prefWidth="155.0" text="Gestão de Tarefas" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
                                                  <Button layoutX="833.0" layoutY="181.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Gestão do Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
                                                  <Button layoutX="820.0" layoutY="308.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Cancelar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="300.0" />
                                                  <Button layoutX="820.0" layoutY="358.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Finalizar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="350.0" />
-                                                 <Pane layoutX="798.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                 <Pane layoutX="798.0" prefHeight="103.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <children>
                                                         <Label layoutX="24.0" layoutY="40.0" text="Gestão de Projectos">
                                                             <font>
@@ -235,14 +271,38 @@
                                       <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                 <TableView layoutX="6.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
+                                                 <TableView fx:id="pcTable" layoutX="6.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0">
                                                      <columns>
-                                                         <TableColumn prefWidth="32.0" text="ID" />
-                                                         <TableColumn prefWidth="173.0" text="Nome do Projecto" />
-                                                         <TableColumn prefWidth="122.0" text="Data de Inicio" />
-                                                         <TableColumn prefWidth="124.0" text="Data de Fim" />
-                                                         <TableColumn prefWidth="122.0" text="Valor Previsto" />
-                                                         <TableColumn prefWidth="92.0" text="Valor Real" />
+                                                         <TableColumn prefWidth="32.0" text="ID">
+                                                         <cellValueFactory>
+                                                             <PropertyValueFactory property="id" />
+                                                         </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="173.0" text="Nome do Projecto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="nome_projecto" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="122.0" text="Data de Inicio">
+                                                         <cellValueFactory>
+                                                             <PropertyValueFactory property="data_inicio" />
+                                                         </cellValueFactory>
+                                                     </TableColumn>
+                                                         <TableColumn prefWidth="124.0" text="Data de Fim">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="data_final" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="122.0" text="Valor Previsto">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="custo_inicio" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
+                                                         <TableColumn prefWidth="92.0" text="Valor Real">
+                                                             <cellValueFactory>
+                                                                 <PropertyValueFactory property="custo_fim" />
+                                                             </cellValueFactory>
+                                                         </TableColumn>
                                                      </columns>
                                                  </TableView>
                                                  <Button layoutX="833.0" layoutY="212.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Registar Reparação" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />

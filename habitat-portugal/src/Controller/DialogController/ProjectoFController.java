@@ -1,16 +1,14 @@
 package Controller.DialogController;
 
 import Habitat.Habitat;
-import Model.Candidatura;
-import Model.Doador;
-import Model.Projecto;
-import Model.Voluntario;
+import Model.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.controlsfx.dialog.Dialogs;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -122,16 +120,37 @@ public class ProjectoFController {
     protected void handleOkAction(){
         Candidatura cc = (Candidatura)this.candidato.getSelectionModel().getSelectedItem();
 
-        if(this.projecto == null){
-            this.projecto.setNome_projecto(this.nome_projecto.getText());
-            this.projecto.setData_inicio(Date.valueOf(this.data_inicio.getValue()));
-            this.projecto.setData_inicio(Date.valueOf(this.data_final.getValue()));
-            this.projecto.setCusto_inicio(Integer.parseInt(this.custo_inicio.getText()));
-            this.projecto.setCusto_final(Integer.parseInt(this.custo_final.getText()));
-            this.projecto.setClassificacao(this.classificacao.getText());
-            this.projecto.setCandidatura(cc.getId());
+        if(this.projecto == null)
+            this.projecto = new Projecto();
 
+            this.projecto.setNome_projecto(this.nome_projecto.getText());
+            if(this.data_inicio.getValue() != null)
+                this.projecto.setData_inicio(Date.valueOf(this.data_inicio.getValue()));
+            if(this.data_final.getValue() != null)
+                this.projecto.setData_inicio(Date.valueOf(this.data_final.getValue()));
+
+            if(!this.custo_inicio.getText().equals(""))
+                this.projecto.setCusto_inicio(Integer.parseInt(this.custo_inicio.getText()));
+            if(!this.custo_final.getText().equals(""))
+                this.projecto.setCusto_final(Integer.parseInt(this.custo_final.getText()));
+            this.projecto.setClassificacao(this.classificacao.getText());
+            if(this.candidato.getSelectionModel().getSelectedItem() != null)
+                this.projecto.setCandidatura(cc.getId());
+
+        try{
+            this.facade.adicionarProjecto(projecto);
+        }catch (CamposNullException e){
+            Dialogs.create()
+                    .owner(dialogStage)
+                    .title("Erro")
+                    .masthead(null)
+                    .message(e.getMessage())
+                    .showInformation();
         }
+
+
+
+
     }
 
     @FXML

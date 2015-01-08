@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by Tiago on 29/12/14.
  */
+@SuppressWarnings("deprecation")
 public class GrupoController {
 
     private Stage dialogStage;
@@ -122,7 +123,8 @@ public class GrupoController {
         this.nome_grupo.setText(this.grupo.getNome_grupo());
         this.motivo.setText(this.grupo.getMotivo());
         this.data_criacao.setValue(this.grupo.getData_criacao().toLocalDate());
-        this.data_final.setValue(this.grupo.getData_final().toLocalDate());
+        if(this.grupo.getData_final() != null)
+            this.data_final.setValue(this.grupo.getData_final().toLocalDate());
         this.notas.setText(this.grupo.getNotas());
         if(this.grupo.getElementos().findByGrupo(this.grupo.getId_grupo()) != null) {
             for (Voluntario voluntario : this.grupo.getElementos().findByGrupo(this.grupo.getId_grupo())) {
@@ -149,7 +151,6 @@ public class GrupoController {
             this.facade.adicionarGrupo(this.grupo, this.vList);
                     dialogStage.close();
         } catch (CamposNullException e) {
-            e.printStackTrace();
             Dialogs.create()
                     .owner(dialogStage)
                     .title("Erro")
