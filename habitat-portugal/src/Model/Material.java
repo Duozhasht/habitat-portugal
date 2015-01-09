@@ -13,15 +13,14 @@ import javafx.beans.property.SimpleStringProperty;
 public class Material {
     private int id_material = -1;
     private SimpleStringProperty descricao;
-    private SimpleStringProperty quant_necessaria;
-    private SimpleStringProperty quant_actual;
+    private SimpleStringProperty quantidade;
     private SimpleStringProperty motivo;
     private int projecto_id = -1;
     private int stock_id = -1;
 
     public Material() {
-        this.quant_necessaria = new SimpleStringProperty();
-        this.quant_actual = new SimpleStringProperty();
+        this.descricao = new SimpleStringProperty();
+        this.quantidade = new SimpleStringProperty();
         this.motivo = new SimpleStringProperty();
     }
 
@@ -45,28 +44,16 @@ public class Material {
         this.descricao.set(descricao);
     }
 
-    public String getQuant_necessaria() {
-        return quant_necessaria.get();
+    public String getQuantidade() {
+        return quantidade.get();
     }
 
-    public SimpleStringProperty quant_necessariaProperty() {
-        return quant_necessaria;
+    public SimpleStringProperty quantidadeProperty() {
+        return quantidade;
     }
 
-    public void setQuant_necessaria(String quant_necessaria) {
-        this.quant_necessaria.set(quant_necessaria);
-    }
-
-    public String getQuant_actual() {
-        return quant_actual.get();
-    }
-
-    public SimpleStringProperty quant_actualProperty() {
-        return quant_actual;
-    }
-
-    public void setQuant_actual(String quant_actual) {
-        this.quant_actual.set(quant_actual);
+    public void setQuantidade(String quantidade) {
+        this.quantidade.set(quantidade);
     }
 
     public String getMotivo() {

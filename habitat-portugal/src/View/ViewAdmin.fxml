@@ -202,7 +202,7 @@
                                                  <Button layoutX="863.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleAdicionarPFAction" prefHeight="30.0" prefWidth="155.0" text="Adicionar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="180.0" />
                                                  <Button layoutX="851.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleIniciarPFAction" prefHeight="30.0" prefWidth="155.0" text="Iniciar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="330.0" />
                                                  <Button layoutX="849.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleRemoverPFAction" prefHeight="30.0" prefWidth="155.0" text="Remover Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="230.0" />
-                                                 <Button layoutX="859.0" layoutY="149.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="155.0" text="Editar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="280.0" />
+                                                 <Button layoutX="859.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleEditarPFAction" prefHeight="30.0" prefWidth="155.0" text="Editar Projecto" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="280.0" />
                                                  <Pane layoutX="801.0" prefHeight="91.0" prefWidth="200.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <children>
                                                         <Label layoutX="24.0" layoutY="40.0" text="Gestão de Projectos">

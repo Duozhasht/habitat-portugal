@@ -5,7 +5,6 @@ import Persistence.RepositoryFactory;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 /**

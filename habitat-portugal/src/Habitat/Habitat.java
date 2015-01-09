@@ -71,6 +71,18 @@ public class Habitat {
         return mRepo;
     }
 
+    public StockRepository getsRepo() {
+        return sRepo;
+    }
+
+    public TarefaRepository gettRepo() {
+        return tRepo;
+    }
+
+    public VoluntarioTarefaRepository getVtRepo() {
+        return vtRepo;
+    }
+
     public ObservableList<Candidatura> getObservableCA(){
             ObservableList<Candidatura> res = FXCollections.observableArrayList();
             for(Candidatura cand : this.cRepo.values()){
@@ -202,10 +214,13 @@ public class Habitat {
         return res;
     }
     ///////
-    public ObservableList<VoluntarioTarefa> getObservableVT(){
+    public ObservableList<VoluntarioTarefa> getObservableVT(int tarefa){
         ObservableList<VoluntarioTarefa> res = FXCollections.observableArrayList();
-        for(VoluntarioTarefa voluntarioTarefa : this.vtRepo.values()){
-            res.add(voluntarioTarefa);
+
+        for (VoluntarioTarefa v : this.vtRepo.findByTarefa(tarefa))
+        {
+            System.out.println(v.toString());
+            res.add(v);
         }
         return res;
     }
@@ -542,6 +557,35 @@ public class Habitat {
         }
 
     }
+
+
+
+
+
+    public boolean adicionaTarefaProjecto(Tarefa tarefa, Projecto projecto){
+        try{
+            this.gettRepo().put(tarefa.getId(),tarefa);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    public boolean adicionarVoluntarioTarefa(VoluntarioTarefa voluntario){
+        try{
+            this.vtRepo.put(voluntario.getId_voluntario_tarefa(),voluntario);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
 
 
 

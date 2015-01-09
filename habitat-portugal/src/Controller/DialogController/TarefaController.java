@@ -7,11 +7,9 @@ import Model.Voluntario;
 import Model.VoluntarioTarefa;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -33,7 +31,7 @@ public class TarefaController {
     @FXML DatePicker data_inicio;
     @FXML DatePicker data_final;
 
-    @FXML TextField descricao;
+    @FXML TextArea descricao;
     @FXML TextField nr_horas;
     @FXML ComboBox<Voluntario> voluntario;
 
@@ -109,6 +107,18 @@ public class TarefaController {
         this.tTable.setItems(tList);
         this.vtList = FXCollections.observableArrayList();
         this.vtTable.setItems(vtList);
+        this.voluntario.setItems(this.facade.getObservableV());
+    }
+
+    @FXML
+    protected void handleOkAction(){
+        dialogStage.close();
+    }
+
+    @FXML
+    protected void handleCancelarAction(ActionEvent e) {
+
+        dialogStage.close();
     }
 
     @FXML
@@ -119,6 +129,11 @@ public class TarefaController {
         tarefa.setData_final(Date.valueOf(this.data_final.getValue()));
         tarefa.setNome_tarefa(this.nome_tarefa.getText());
         tarefa.setProjecto_id(this.projecto.getId());
+
+        this.facade.adicionaTarefaProjecto(tarefa,this.projecto);
+        this.tList.add(tarefa);
+
+
 
     }
 
@@ -133,16 +148,28 @@ public class TarefaController {
         VoluntarioTarefa voluntarioTarefa = new VoluntarioTarefa();
         voluntarioTarefa.setDescricao(this.descricao.getText());
         voluntarioTarefa.setId_tarefa(this.tTable.getSelectionModel().getSelectedItem().getId());
-        voluntarioTarefa.setId_voluntario(this.voluntario.getSelectionModel().getSelectedItem().getId_voluntario());
+        if(this.voluntario.getSelectionModel().getSelectedItem()!=null){
+            voluntarioTarefa.setId_voluntario(this.voluntario.getSelectionModel().getSelectedItem().getId_voluntario());
+            voluntarioTarefa.setNomeVoluntario(this.voluntario.getSelectionModel().getSelectedItem().getNome_voluntario());
+        }
         voluntarioTarefa.setNr_horas(this.nr_horas.getText());
-
-        //////
+        if(this.facade.adicionarVoluntarioTarefa(voluntarioTarefa));
+            this.vtList.add(voluntarioTarefa);
 
     }
 
     @FXML
     protected void handleRemoverVAction(){
 
+    }
+
+    @FXML
+    protected void handleActualizarAction(){
+        if(this.tTable.getSelectionModel().getSelectedItem() != null){
+            System.out.println(this.tTable.getSelectionModel().getSelectedItem().getId());
+            this.vtList = this.facade.getObservableVT(this.tTable.getSelectionModel().getSelectedItem().getId());
+            this.vtTable.setItems(vtList);
+        }
     }
 
 

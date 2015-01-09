@@ -12,8 +12,8 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class ProjectoRepository implements Map<Integer, Projecto> {
 
-    private static final String INSERT_PROJECTO = "insert into projecto (nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado) values (?,?,?,?,?,?,?)";
-    private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? where id_projecto = ?";
+    private static final String INSERT_PROJECTO = "insert into projecto (nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado, candidatura_id) values (?,?,?,?,?,?,?,?)";
+    private static final String UPDATE_PROJECTO = "update projecto set nome_projecto = ?, data_inicio = ?, data_final = ?, custo_inicio = ?, custo_final  = ?, classificacao = ?, estado = ? , candidatura_id = ? where id_projecto = ?";
 
     private static final String SELECT_PROJECTO = "select nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado from projecto where id_projecto = ?";
     private static final String SELECT_PROJECTOS = "select id_projecto, nome_projecto, data_inicio, data_final, custo_inicio, custo_final , classificacao, estado, candidatura_id from projecto";
@@ -114,6 +114,7 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
                     projecto.setCusto_final(result.getInt("custo_final"));
                     projecto.setClassificacao(result.getString("classificacao"));
                     projecto.setEstado(result.getString("estado"));
+                    projecto.setCandidatura(result.getInt("candidatura_id"));
                 }
             } finally {
                 statement.close();
@@ -153,9 +154,10 @@ public class ProjectoRepository implements Map<Integer, Projecto> {
             statement.setInt(5, (value.getCusto_final()));
             statement.setString(6,(value.getClassificacao()));
             statement.setString(7, (value.getEstado()));
+            statement.setInt(8, (value.getCandidatura()));
 
             if (isUpdate) {
-                statement.setLong(8,key);
+                statement.setLong(9,key);
             }
 
             statement.executeUpdate();

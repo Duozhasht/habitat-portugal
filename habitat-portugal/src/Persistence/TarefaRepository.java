@@ -12,12 +12,12 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class TarefaRepository implements Map<Integer, Tarefa> {
 
-    private static final String INSERT_TAREFA = "insert into tarefa (nome_tarefa, data_inicio, data_final , pessoa_responsavel) values (?,?,?,?)";
-    private static final String UPDATE_TAREFA = "update tarefa set nome_tarefa = ?, data_inicio = ?, data_final = ?, pessoa_responsavel = ? where id_tarefa = ?";
+    private static final String INSERT_TAREFA = "insert into tarefa (nome_tarefa, data_inicio, data_final , pessoa_responsavel, projecto_id) values (?,?,?,?,?)";
+    private static final String UPDATE_TAREFA = "update tarefa set nome_tarefa = ?, data_inicio = ?, data_final = ?, pessoa_responsavel = ?, projecto_id = ? where id_tarefa = ?";
 
-    private static final String SELECT_TAREFA = "select nome_tarefa, data_inicio, data_final, pessoa_responsavel from tarefa where id_tarefa = ?";
-    private static final String SELECT_TAREFAS = "select id_tarefa, nome_tarefa, data_inicio, data_final, pessoa_responsavel from tarefa";
-    private static final String SELECT_BY_VOLUNTARIO = "select id_tarefa from voluntario_tarefa where id_voluntario = ?";
+    private static final String SELECT_TAREFA = "select nome_tarefa, data_inicio, data_final, pessoa_responsavel,projecto_id  from tarefa where id_tarefa = ?";
+    private static final String SELECT_TAREFAS = "select id_tarefa, nome_tarefa, data_inicio, data_final, pessoa_responsavel,projecto_idt from tarefa";
+    private static final String SELECT_BY_VOLUNTARIO = "select tarefa_id from voluntario_tarefa where voluntario_id = ?";
     private static final String SELECT_BY_PROJECTO = "select * from tarefa where projecto_id = ?";
 
     private static final String DELETE_TAREFA = "delete from tarefa where id_tarefa = ?";
@@ -112,6 +112,7 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
                     tarefa.setData_inicio(result.getDate("data_inicio"));
                     tarefa.setData_final(result.getDate("data_final"));
                     tarefa.setEncarregado(result.getString("pessoa_responsavel"));
+                    tarefa.setProjecto_id(result.getInt("projecto_id"));
                 }
             } finally {
                 statement.close();
@@ -148,9 +149,11 @@ public class TarefaRepository implements Map<Integer, Tarefa> {
             statement.setDate(2,(value.getData_inicio()));
             statement.setDate(3,(value.getData_final()));
             statement.setString(4, (value.getEncarregado()));
+            statement.setInt(5, (value.getProjecto_id()));
+
 
             if (isUpdate) {
-                statement.setLong(5,key);
+                statement.setLong(6,key);
             }
 
             statement.executeUpdate();

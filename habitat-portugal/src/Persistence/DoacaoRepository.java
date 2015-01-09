@@ -19,6 +19,7 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
     private static final String UPDATE_DOACAO = "update doacao set descricao = ?, quantidade = ?, tipo = ?, doador_id = ? where id_doacao = ?";
 
     private static final String SELECT_DOACAO = "select * from doacao where id_doacao = ?";
+    /*private static final String SELECT_DOACOES = "select id_doacao, descricao, sum(quantidade) as quantidade, tipo, doador_id, evento_id from doacao group by descricao order by id_doacao;";*/
     private static final String SELECT_DOACOES = "select * from doacao";
     private static final String SELECT_BY_DOADOR = "select * from doacao where doador_id = ?";
 
@@ -168,9 +169,10 @@ public class DoacaoRepository implements Map<Integer, Doacao> {
             if (isUpdate && isEvento) {
                 statement.setInt(6,value.getId_doacao());
             }
-            else {
+            else if (isUpdate) {
                 statement.setInt(5,value.getId_doacao());
             }
+
 
             statement.executeUpdate();
 

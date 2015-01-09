@@ -11,11 +11,11 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class DoadorRepository implements Map<Integer, Doador> {
 
-    private static final String INSERT_DOADOR = "insert into doador (nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas) values (?,?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_DOADOR = "update doador set nome = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas = ? where id_doador = ?";
+    private static final String INSERT_DOADOR = "insert into doador (nome_doador, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas) values (?,?,?,?,?,?,?,?,?)";
+    private static final String UPDATE_DOADOR = "update doador set nome_doador = ?, contacto = ?, telefone = ?, morada = ?, email = ?, site = ?, pessoa_contacto = ?, nif = ?, notas = ? where id_doador = ?";
 
-    private static final String SELECT_DOADOR = "select nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador where id_doador = ?";
-    private static final String SELECT_DOADORES = "select id_doador, nome, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador";
+    private static final String SELECT_DOADOR = "select nome_doador, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador where id_doador = ?";
+    private static final String SELECT_DOADORES = "select id_doador, nome_doador, contacto, telefone, morada, email, site, pessoa_contacto, nif, notas from doador";
 
     private static final String DELETE_DOADOR = "delete from doador where id_doador = ?";
     private static final String DELETE_DOADORES = "delete from doador";
@@ -100,7 +100,7 @@ public class DoadorRepository implements Map<Integer, Doador> {
                 if (result.next()) {
                     doador = new Doador();
                     doador.setId((int)key);
-                    doador.setNome(result.getString("nome"));
+                    doador.setNome(result.getString("nome_doador"));
                     doador.setContacto(result.getString("contacto"));
                     doador.setTelefone(result.getString("telefone"));
                     doador.setMorada(result.getString("morada"));
@@ -258,7 +258,7 @@ public class DoadorRepository implements Map<Integer, Doador> {
                 while (result.next()) {
                     d = new Doador();
                     d.setId(result.getInt("id_doador"));
-                    d.setNome(result.getString("nome"));
+                    d.setNome(result.getString("nome_doador"));
                     d.setContacto(result.getString("contacto"));
                     d.setTelefone(result.getString("telefone"));
                     d.setMorada(result.getString("morada"));

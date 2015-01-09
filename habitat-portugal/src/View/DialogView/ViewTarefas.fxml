@@ -32,15 +32,19 @@
            </TableColumn>
           <TableColumn prefWidth="149.0" text="Nome do Voluntário">
              <cellValueFactory>
-                <PropertyValueFactory property="nome_voluntario" />
+                <PropertyValueFactory property="nomeVoluntario" />
              </cellValueFactory>
           </TableColumn>
             <TableColumn prefWidth="330.0" text="Descrição">
                <cellValueFactory>
-                  <PropertyValueFactory property="contacto" />
+                  <PropertyValueFactory property="descricao" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="97.0" text="Nº de Horas" />
+            <TableColumn prefWidth="97.0" text="Nº de Horas">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nr_horas" />
+                </cellValueFactory>
+                    </TableColumn>
         </columns>
       </TableView>
       <Label layoutX="30.0" layoutY="465.0" text="Voluntários da Tarefa" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="465.0">
@@ -53,11 +57,31 @@
       <Button layoutX="710.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleRemoverTAction" prefHeight="26.0" prefWidth="163.0" text="Remover" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="380.0" />
       <TableView fx:id="tTable" layoutX="15.0" layoutY="138.0" prefHeight="310.0" prefWidth="652.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="100.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="152.0" text="Nome" />
-            <TableColumn prefWidth="137.0" text="Data de Inicio" />
-            <TableColumn prefWidth="136.0" text="Data de Fim" />
-            <TableColumn prefWidth="151.0" text="Pessoa Responsavel" />
+          <TableColumn prefWidth="75.0" text="Id">
+              <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+              </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="152.0" text="Nome">
+              <cellValueFactory>
+                  <PropertyValueFactory property="nome_tarefa" />
+              </cellValueFactory>
+          </TableColumn>
+            <TableColumn prefWidth="137.0" text="Data de Inicio">
+                <cellValueFactory>
+                    <PropertyValueFactory property="data_inicio" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="136.0" text="Data de Fim">
+                <cellValueFactory>
+                    <PropertyValueFactory property="data_final" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="151.0" text="Pessoa Responsavel">
+                <cellValueFactory>
+                    <PropertyValueFactory property="encarregado" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <TextField fx:id="nr_horas" layoutX="710.0" layoutY="576.0" promptText="Nº de Horas" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" />
@@ -69,5 +93,6 @@
       <Button layoutX="710.0" layoutY="723.0" mnemonicParsing="false" onAction="#handleAdicionarVAction" text="Adicionar" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="710.0" layoutY="766.0" mnemonicParsing="false" onAction="#handleRemoverVAction" text="Remover" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="766.0" />
       <Separator layoutX="14.0" layoutY="441.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="445.0" />
+      <Button layoutX="761.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleActualizarAction" text="Refresh" AnchorPane.leftAnchor="760.0" AnchorPane.rightAnchor="75.0" />
    </children>
 </AnchorPane>

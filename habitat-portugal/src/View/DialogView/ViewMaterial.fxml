@@ -22,15 +22,31 @@
       <Button fx:id="remover" layoutX="570.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleRemoverMAction" prefHeight="26.0" prefWidth="121.0" text="Remover" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
       <TableView fx:id="mTable" layoutX="15.0" layoutY="138.0" prefHeight="310.0" prefWidth="515.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="100.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="170.0" text="Descrição" />
-            <TableColumn minWidth="2.0" prefWidth="134.0" text="Qtd Actual" />
-            <TableColumn prefWidth="134.0" text="Qtd Necessária" />
+          <TableColumn prefWidth="75.0" text="Id">
+              <cellValueFactory>
+                  <PropertyValueFactory property="id_material" />
+              </cellValueFactory>
+
+          </TableColumn>
+          <TableColumn prefWidth="170.0" text="Descrição">
+              <cellValueFactory>
+                  <PropertyValueFactory property="descricao" />
+              </cellValueFactory>
+          </TableColumn>
+            <TableColumn minWidth="2.0" prefWidth="134.0" text="Qtd Actual">
+                <cellValueFactory>
+                    <PropertyValueFactory property="quant_actual" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="134.0" text="Qtd Necessária">
+                <cellValueFactory>
+                    <PropertyValueFactory property="quant_necess" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
-      <TextField fx:id="quant_actual" layoutX="570.0" layoutY="169.0" prefHeight="26.0" prefWidth="253.0" promptText="Quantidade Actual" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="169.0" />
+      <TextField fx:id="quantidade" layoutX="570.0" layoutY="169.0" prefHeight="26.0" prefWidth="253.0" promptText="Quantidade" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="169.0" />
       <ComboBox fx:id="materiais" layoutX="575.0" layoutY="130.0" prefHeight="26.0" prefWidth="244.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="125.0" />
       <Button layoutX="572.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleActualizarMAction" prefHeight="26.0" prefWidth="155.0" text="Actualizar" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
-      <TextField fx:id="quant_necessaria" layoutX="566.0" layoutY="209.0" promptText="Quantidade Necessária" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="210.0" />
    </children>
 </AnchorPane>

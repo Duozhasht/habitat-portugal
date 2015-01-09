@@ -5,7 +5,6 @@ import Persistence.VoluntarioRepository;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

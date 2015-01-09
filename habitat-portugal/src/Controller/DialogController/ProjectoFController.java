@@ -101,8 +101,10 @@ public class ProjectoFController {
     public void setData(){
         this.nome_projecto.setText(this.projecto.getNome_projecto());
         this.data_inicio.setValue(this.projecto.getData_inicio().toLocalDate());
-        this.data_final.setValue(this.projecto.getData_final().toLocalDate());
-        this.custo_inicio.setText(Integer.toString(this.projecto.getCusto_inicio()));
+        if(this.projecto.getData_final() != null)
+            this.data_final.setValue(this.projecto.getData_final().toLocalDate());
+        if(this.projecto.getData_inicio() != null)
+            this.custo_inicio.setText(Integer.toString(this.projecto.getCusto_inicio()));
         this.custo_final.setText(Integer.toString(this.projecto.getCusto_final()));
         this.classificacao.setText(this.projecto.getClassificacao());
         ObservableList<Candidatura> candidaturas = this.candidato.getItems();
@@ -136,6 +138,7 @@ public class ProjectoFController {
             this.projecto.setClassificacao(this.classificacao.getText());
             if(this.candidato.getSelectionModel().getSelectedItem() != null)
                 this.projecto.setCandidatura(cc.getId());
+            dialogStage.close();
 
         try{
             this.facade.adicionarProjecto(projecto);

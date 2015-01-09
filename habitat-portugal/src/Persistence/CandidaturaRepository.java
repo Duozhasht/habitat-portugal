@@ -1,7 +1,6 @@
 package Persistence;
 
 import Model.Candidatura;
-import Model.Familiar;
 
 import java.sql.*;
 import java.util.*;

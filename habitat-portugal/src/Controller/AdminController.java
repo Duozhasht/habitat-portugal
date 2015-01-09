@@ -620,8 +620,9 @@ public class AdminController {
 
     @FXML
     protected void handleRemoverDCAction() {
-        if(this.facade.removerDoacao(this.dcTable.getSelectionModel().getSelectedItem()))
+        if(this.facade.removerDoacao(this.dcTable.getSelectionModel().getSelectedItem())){
             this.dcList.remove(this.eTable.getSelectionModel().getSelectedItem());
+        }
         else
             System.out.println("Erro!");
     }
@@ -697,9 +698,9 @@ public class AdminController {
             ProjectoFController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setFacade(this.facade);
-            if(modo.equals("Editar Doador"))
+            if(modo.equals("Editar Projecto"))
                 controller.setProjecto(this.pfTable.getSelectionModel().getSelectedItem());
-            if(modo.equals("Consultar Doador")) {
+            if(modo.equals("Consultar Projecto")) {
                 controller.setProjecto(this.pfTable.getSelectionModel().getSelectedItem());
             }
             controller.initializer();
@@ -753,7 +754,7 @@ public class AdminController {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewProjectoF.fxml"));
+            loader.setLocation(AdminController.class.getResource("/View/DialogView/ViewTarefas.fxml"));
             AnchorPane page = loader.load();
 
             // Create the dialog Stage.
@@ -766,7 +767,7 @@ public class AdminController {
 
 
             // Set the person into the controller.
-            MaterialController controller = loader.getController();
+            TarefaController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setFacade(this.facade);
             controller.setProjecto(this.pdTable.getSelectionModel().getSelectedItem());
@@ -801,12 +802,12 @@ public class AdminController {
 
     @FXML
     protected void handleEditarPFAction() {
-        this.showProjectFDialog("Editar Doacao");
+        this.showProjectFDialog("Editar Projecto");
     }
 
     @FXML
     protected void handleConsultarPFAction() {
-        this.showProjectFDialog("Editar Doacao");
+        this.showProjectFDialog("Editar Projecto");
     }
 
 
@@ -824,7 +825,9 @@ public class AdminController {
     }
 
     @FXML
-    protected void handleGTAction(){}
+    protected void handleGTAction(){
+        this.showTarefaDialog("Gestão de Tarefas");
+    }
 
 
 

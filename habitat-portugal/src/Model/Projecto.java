@@ -1,6 +1,5 @@
 package Model;
 
-import Persistence.CandidaturaRepository;
 import Persistence.MaterialRepository;
 import Persistence.TarefaRepository;
 import javafx.beans.property.SimpleIntegerProperty;

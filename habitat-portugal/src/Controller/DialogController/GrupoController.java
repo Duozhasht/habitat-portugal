@@ -143,8 +143,10 @@ public class GrupoController {
 
         this.grupo.setNome_grupo(this.nome_grupo.getText());
         this.grupo.setMotivo(this.motivo.getText());
-        this.grupo.setData_criacao(Date.valueOf(this.data_criacao.getValue()));
-        this.grupo.setData_final(Date.valueOf(this.data_final.getValue()));
+        if(this.data_criacao.getValue()!=null)
+            this.grupo.setData_criacao(Date.valueOf(this.data_criacao.getValue()));
+        if(this.data_final.getValue()!=null)
+            this.grupo.setData_final(Date.valueOf(this.data_final.getValue()));
         this.grupo.setNotas(this.notas.getText());
 
         try {

@@ -16,7 +16,7 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
 
     private static final String SELECT_VOLUNTARIO = "select * from voluntario where id_voluntario = ?";
     private static final String SELECT_VOLUNTARIOS = "select * from voluntario";
-    private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where id_grupo = ?";
+    private static final String SELECT_BY_GRUPO = "select * from grupo_voluntario where grupo_id = ?";
 
     private static final String DELETE_VOLUNTARIO = "delete from voluntario where id_voluntario = ?";
     private static final String DELETE_VOLUNTARIOS = "delete from voluntario";

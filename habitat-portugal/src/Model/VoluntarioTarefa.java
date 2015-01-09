@@ -80,4 +80,16 @@ public class VoluntarioTarefa {
     public void setNr_horas(String nr_horas) {
         this.nr_horas.set(nr_horas);
     }
+
+    @Override
+    public String toString() {
+        return "VoluntarioTarefa{" +
+                "id_voluntario_tarefa=" + id_voluntario_tarefa +
+                ", id_voluntario=" + id_voluntario +
+                ", id_tarefa=" + id_tarefa +
+                ", nomeVoluntario=" + nomeVoluntario +
+                ", descricao=" + descricao +
+                ", nr_horas=" + nr_horas +
+                '}';
+    }
 }

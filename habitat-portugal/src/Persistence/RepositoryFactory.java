@@ -146,7 +146,7 @@ public final class RepositoryFactory {
     }
 
     public static VoluntarioTarefaRepository getVoluntarioTarefaRepository(){
-        if(voluntarioRepository == null) {
+        if(voluntarioTarefaRepository == null) {
             voluntarioTarefaRepository = new VoluntarioTarefaRepository(getURL(),USER,PASSWORD);
         }
         return voluntarioTarefaRepository;

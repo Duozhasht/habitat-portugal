@@ -25,19 +25,13 @@ public class MaterialController {
     private Projecto projecto;
     private boolean okClicked = false;
 
-    @FXML TextField quant_necessaria;
-    @FXML TextField quant_actual;
+    @FXML TextField quantidade;
     @FXML ComboBox materiais;
 
     @FXML
     TableView<Material> mTable = new TableView<>();
 
     ObservableList<Material> mList;
-
-
-
-
-
 
 
     public void setProjecto(Projecto projecto) {
@@ -81,16 +75,18 @@ public class MaterialController {
     @FXML
     protected void handleAdicionarMAction(){
         Stock mm = (Stock) this.materiais.getSelectionModel().getSelectedItem();
-
         Material material = new Material();
+        System.out.println(mm.getDescricao());
         material.setDescricao(mm.getDescricao());
         material.setStock_id(mm.getId_stock());
-        material.setQuant_actual(this.quant_actual.getText());
-        material.setQuant_necessaria(this.quant_necessaria.getText());
+
+        material.setProjecto_id(this.projecto.getId());
         try{
-            this.facade.adicionarMaterialProjecto(material,this.projecto);
+            if(this.facade.adicionarMaterialProjecto(material,this.projecto))
+                this.mList.add(material);
+
         }catch (CamposNullException e){
-            System.out.println("asdasd");
+            System.out.println("asda");
         }
     }
 

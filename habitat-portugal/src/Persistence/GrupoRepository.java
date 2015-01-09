@@ -24,8 +24,8 @@ public class GrupoRepository implements Map<Integer, Grupo> {
     private static final String COUNT_GRUPOS = "select count(*) as n from grupo";
     private static final String SELECT_IDS = "select id_grupo from grupo";
 
-    private static final String INSERE_VOLUNTARIO_GRUPO = "insert into grupo_voluntario (id_voluntario, id_grupo) values (?,?)";
-    private static final String REMOVE_VOLUNTARIO_GRUPO = "delete from grupo_voluntario where id_voluntario = ? and id_grupo = ?";
+    private static final String INSERE_VOLUNTARIO_GRUPO = "insert into grupo_voluntario (voluntario_id, grupo_id) values (?,?)";
+    private static final String REMOVE_VOLUNTARIO_GRUPO = "delete from grupo_voluntario where voluntario_id = ? and grupo_id = ?";
 
     private final String url;
     private final String user;
