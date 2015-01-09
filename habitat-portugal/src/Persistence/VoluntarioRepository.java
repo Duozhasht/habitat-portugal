@@ -319,8 +319,8 @@ public class VoluntarioRepository implements Map<Integer, Voluntario> {
 
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
-                    if (containsKey(result.getInt("id_voluntario"))) {
-                        Voluntario voluntario = get(result.getInt("id_voluntario"));
+                    if (containsKey(result.getInt("voluntario_id"))) {
+                        Voluntario voluntario = get(result.getInt("voluntario_id"));
                         lista.add(voluntario);
                     }
                 }
